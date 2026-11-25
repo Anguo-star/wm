@@ -1,0 +1,20 @@
+{
+  "id": "ego4d",
+  "checked_at": "2026-11-25T09:51:24.732047+00:00",
+  "source_urls": [
+    "https://ego4d-data.org/docs/start-here/",
+    "https://www.lab22.ai/ego4d",
+    "https://ego4d-data.org/docs/benchmarks/hands-and-objects/"
+  ],
+  "checks": [
+    {
+      "url": "https://ego4d-consortium-sharing.s3.amazonaws.com/public/v2_1/full_scale/manifest.csv",
+      "method": "GET",
+      "response_body_bytes_read": 0,
+      "status": 403,
+      "content_type": "application/xml",
+      "content_length": null
+    }
+  ],
+  "training_file_body_bytes_read": 0
+}

@@ -1,0 +1,76 @@
+{
+  "checked_at": "2026-11-25T09:54:48.164842+00:00",
+  "checks": [
+    {
+      "url": "https://www.rocq.inria.fr/cluster-willow/amiech/howto100m/HowTo100M.zip",
+      "method": "HEAD",
+      "status": 404,
+      "content_length": null,
+      "content_type": "text/html; charset=iso-8859-1"
+    },
+    {
+      "url": "http://www.rocq.inria.fr/cluster-willow/amiech/howto100m/HowTo100M.zip",
+      "method": "HEAD",
+      "status": 404,
+      "content_length": null,
+      "content_type": "text/html; charset=iso-8859-1"
+    },
+    {
+      "url": "https://www.di.ens.fr/willow/research/howto100m/HowTo100M.zip",
+      "method": "HEAD",
+      "status": 404,
+      "content_length": null,
+      "content_type": "text/html; charset=iso-8859-1"
+    },
+    {
+      "url": "https://www.rocq.inria.fr/cluster-willow/amiech/howto100m/howto100m_captions.zip",
+      "method": "HEAD",
+      "status": 404,
+      "content_length": null,
+      "content_type": "text/html; charset=iso-8859-1"
+    },
+    {
+      "url": "https://forms.gle/hztrfnFQUJWBtiki8",
+      "method": "GET metadata",
+      "status": 200,
+      "content_length": null,
+      "content_type": "text/html; charset=utf-8"
+    },
+    {
+      "url": "https://ego4d-consortium-sharing.s3.amazonaws.com/public/v2_1/full_scale/manifest.csv",
+      "method": "GET metadata",
+      "status": 403,
+      "content_length": null,
+      "content_type": "application/xml"
+    },
+    {
+      "url": "https://ego4d-consortium-sharing.s3.amazonaws.com/egoexo-public/v2/downscaled_takes/448/manifest.json",
+      "method": "GET metadata",
+      "status": 403,
+      "content_length": null,
+      "content_type": "application/xml"
+    },
+    {
+      "url": "https://ego4d-consortium-sharing.s3.amazonaws.com/egoexo-public/v2/metadata/manifest.json",
+      "method": "GET metadata",
+      "status": 403,
+      "content_length": null,
+      "content_type": "application/xml"
+    },
+    {
+      "url": "https://ego4d-consortium-sharing.s3.amazonaws.com/egoexo-public/v2/annotations/manifest.json",
+      "method": "GET metadata",
+      "status": 403,
+      "content_length": null,
+      "content_type": "application/xml"
+    },
+    {
+      "url": "https://dataverse.tdl.org/api/datasets/:persistentId/?persistentId=doi:10.18738/T8/0PRYRH",
+      "method": "GET metadata",
+      "status": 403,
+      "content_length": "919",
+      "content_type": "text/html"
+    }
+  ],
+  "training_file_body_bytes_read": 0
+}

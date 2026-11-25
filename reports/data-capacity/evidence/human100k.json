@@ -1,0 +1,13 @@
+{
+  "id": "human100k",
+  "checked_at": "2026-11-25T09:39:20.321865+00:00",
+  "bucket": "nvidia/human-1m-100k-oss",
+  "selected_prefix": "release-staging/oss_100k_v1/vendors/vendor_ee4c2f1e8a8c7b31e5903881ac5a000d/batch_161726fd35f2ee66c44db668f5d2f7df",
+  "official_batch_metadata": {
+    "vendor_id": "vendor_ee4c2f1e8a8c7b31e5903881ac5a000d",
+    "date": "20260908",
+    "hours": 1
+  },
+  "source_url": "https://huggingface.co/buckets/nvidia/human-1m-100k-oss/resolve/release-staging/oss_100k_v1/batches.json",
+  "note": "Only the selected complete data/meta/videos batch is counted; no whole-bucket training-size inference."
+}

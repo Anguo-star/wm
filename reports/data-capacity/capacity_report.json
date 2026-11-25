@@ -1,6 +1,6 @@
 {
   "schema": "wm-data-report-v1",
-  "created_at": "2026-11-25T09:09:42.577104+00:00",
+  "created_at": "2026-11-25T10:01:40.418482+00:00",
   "metadata_only": true,
   "data_bytes_downloaded": 0,
   "datasets": [
@@ -8,19 +8,21 @@
       "id": "ego4d",
       "name": "Ego4D",
       "phase": "starter",
-      "status": "pending",
+      "status": "blocked",
       "scope_bytes": null,
       "scope_files": null,
       "selected_bytes": null,
       "files": 0,
-      "version": null,
-      "note": "操作相关 train 片段 + narration/手物标注；授权后按视频 UID 选取。",
+      "version": "v2_1",
+      "note": "无法核验逐文件容量：官方 v2_1 full_scale 清单返回 HTTP 403，需已获授权的 Ego4D AWS 凭据。未将视频时长或预算换算成文件容量。",
       "source_urls": [
         "https://ego4d-data.org/docs/start-here/",
         "https://www.lab22.ai/ego4d",
         "https://ego4d-data.org/docs/benchmarks/hands-and-objects/"
       ],
-      "checked_at": "2026-11-25T08:59:25.282299+00:00"
+      "checked_at": "2026-11-25T09:51:24.609436+00:00",
+      "evidence_file": "evidence/ego4d.json",
+      "evidence_sha256": "165b40bfff58e63a0b7fbfbafe9346d9580f2bd44b7cde1e2984df1a8d0623eb"
     },
     {
       "id": "egodex",
@@ -44,75 +46,88 @@
       "id": "epic100",
       "name": "EPIC-KITCHENS-100",
       "phase": "starter",
-      "status": "pending",
-      "scope_bytes": null,
-      "scope_files": null,
-      "selected_bytes": null,
-      "files": 0,
-      "version": null,
-      "note": "只取 train 原视频与动作/叙述标注；不取重复 RGB/光流。",
+      "status": "planned",
+      "scope_bytes": 1247074216627,
+      "scope_files": 701,
+      "selected_bytes": 99993581503,
+      "files": 68,
+      "version": "EPIC-55 + EPIC-100 extension / published video manifests",
+      "note": "首批：官方 AR train 视频按固定种子在 100 GB 上限内选完整原始 MP4，加配套完整 train 标注；训练时按选中 video_id 过滤标注。全 700 个视频的精确长度来自发布方推荐的两份 torrent 元数据，不连接 peers、不下载视频；另对选中视频执行 HTTP HEAD 交叉核验。",
       "source_urls": [
         "https://epic-kitchens.github.io/2025",
         "https://github.com/epic-kitchens/epic-kitchens-100-annotations/blob/master/license.txt",
         "https://epic-kitchens.github.io/2026"
       ],
-      "checked_at": "2026-11-25T08:59:26.876303+00:00"
+      "checked_at": "2026-11-25T09:39:20.321967+00:00",
+      "inventory_file": "inventories/epic100.json.gz",
+      "inventory_sha256": "5389dda23e6e590c96de3a8367577c4866d2609c5dac692f70dc8a0cc481b423",
+      "evidence_file": "evidence/epic-head-checks.json",
+      "evidence_sha256": "8bd0c359ecf47ac81c99b741b2143af34508aaa8a2a1ebda00b375bbe48d9e89"
     },
     {
       "id": "human100k",
       "name": "Human-1M-100K",
       "phase": "expansion",
-      "status": "pending",
-      "scope_bytes": null,
-      "scope_files": null,
-      "selected_bytes": null,
-      "files": 0,
-      "version": null,
-      "note": "扩展：先按已授权的任务、episode 与相机选取完整 MP4 + Parquet + meta；不扫描/下载全桶。",
+      "status": "planned",
+      "scope_bytes": 4641341142,
+      "scope_files": 29,
+      "selected_bytes": 4641341142,
+      "files": 29,
+      "version": "HF mutable bucket / release-staging/oss_100k_v1/vendors/vendor_ee4c2f1e8a8c7b31e5903881ac5a000d/batch_161726fd35f2ee66c44db668f5d2f7df",
+      "note": "扩展验证包：固定 oss_100k_v1 的完整 batch_161726fd35f2ee66c44db668f5d2f7df（官方批次索引记为 1 小时），包含全部 data/meta/videos，不按单个 MP4 拆散。精确容量只代表该完整批次；桶聚合容量单独展示，不冒充 100K 小时有效容量。下载前校验可变 bucket 的 Xet 身份。",
       "source_urls": [
         "https://huggingface.co/datasets/nvidia/PhysicalAI-Human-1M-100K",
         "https://huggingface.co/buckets/nvidia/human-1m-100k-oss/tree/release-staging",
         "https://huggingface.co/datasets/nvidia/PhysicalAI-Human-1M-100K/blob/main/data/schema.json",
         "https://huggingface.co/buckets/nvidia/human-1m-100k-oss"
       ],
-      "checked_at": "2026-11-25T08:59:26.876324+00:00"
+      "checked_at": "2026-11-25T09:39:20.321865+00:00",
+      "inventory_file": "inventories/human100k.json.gz",
+      "inventory_sha256": "6402d1e61638ca76636d10114a25c23f97f9729b8fe6a0e7212105cbc277ec23",
+      "evidence_file": "evidence/human100k.json",
+      "evidence_sha256": "28348608ccdb4caad6c61a0f7f06349f332dc50d1a5b88500a3193429ffb41c0"
     },
     {
       "id": "egoexo4d",
       "name": "Ego-Exo4D",
       "phase": "expansion",
-      "status": "pending",
+      "status": "blocked",
       "scope_bytes": null,
       "scope_files": null,
       "selected_bytes": null,
       "files": 0,
-      "version": null,
-      "note": "扩展：448px train、ego 视角或最佳 exo 视角，随所需标注；完整 448px+标注+metadata 为官方 449.135 GB（含所有 split）。",
+      "version": "v2 / 448px",
+      "note": "无法核验逐文件容量：官方 v2 的 448px、metadata、annotations 三份清单均返回 HTTP 403，需已获授权的 Ego4D AWS 凭据；449.135 GB 仍仅为官方发布值。",
       "source_urls": [
         "https://ego-exo4d-data.org/",
         "https://docs.ego-exo4d-data.org/data/takes/",
         "https://www.lab22.ai/ego4d",
         "https://docs.ego-exo4d-data.org/download/"
       ],
-      "checked_at": "2026-11-25T08:59:26.876333+00:00"
+      "checked_at": "2026-11-25T09:51:27.310688+00:00",
+      "evidence_file": "evidence/egoexo4d.json",
+      "evidence_sha256": "5d8eae0682ea5a4e920f98bc872cd2d6f550b135d0f5549d75e7229130f30211"
     },
     {
       "id": "ssv2",
       "name": "Something-Something V2",
       "phase": "starter",
-      "status": "error",
-      "scope_bytes": null,
-      "scope_files": null,
-      "selected_bytes": null,
-      "files": 0,
-      "version": null,
-      "note": "源站返回 HTTP 403（可能为权限或访问限制）；未读取数据文件。",
+      "status": "planned",
+      "scope_bytes": 19450115851,
+      "scope_files": 3,
+      "selected_bytes": 19450115851,
+      "files": 3,
+      "version": "HTTP validators 94ec56d994f820d9",
+      "note": "首批：两份官方视频分卷和 labels ZIP 全部保留；训练只用 train。源站 HEAD 返回 403，但 GET 响应头可读；显式发送 Range bytes=0-0，只读 Content-Range 后关闭连接，不读取正文。不得将响应 Content-Length=1 误作文件总量。",
       "source_urls": [
         "https://www.qualcomm.com/developer/software/something-something-v-2-dataset",
         "https://www.qualcomm.com/developer/software/something-something-v-2-dataset/downloads"
       ],
-      "checked_at": "2026-11-25T09:08:47.493796+00:00",
-      "error_code": "access_required"
+      "checked_at": "2026-11-25T09:44:04.508332+00:00",
+      "inventory_file": "inventories/ssv2.json.gz",
+      "inventory_sha256": "4d0eb0294a333b3e33e4bade527e554e942d56ef7f3d17040eb7470dd8d5c8dc",
+      "evidence_file": "evidence/ssv2-header-probes.json",
+      "evidence_sha256": "1823e0438ad4050cf4e4bf0f2c911ee59de7173949b789e9def298658514c91f"
     },
     {
       "id": "assembly101",
@@ -140,36 +155,44 @@
       "id": "kinetics",
       "name": "Kinetics",
       "phase": "expansion",
-      "status": "pending",
-      "scope_bytes": null,
-      "scope_files": null,
-      "selected_bytes": null,
-      "files": 0,
-      "version": null,
-      "note": "扩展低优先级；先用已发布训练归档或根据动作类选择。",
+      "status": "planned",
+      "scope_bytes": 930126188528,
+      "scope_files": 1464,
+      "selected_bytes": 733142617258,
+      "files": 701,
+      "version": "S3 listing / 700_2020/",
+      "note": "扩展：固定 CVDF Kinetics-700-2020 的全部 train 归档和 train.csv；已排除 val/test、2019 标注和其他下游任务。容量来自完整 S3 对象清单，下载前重新检查对象 ETag。",
       "source_urls": [
         "https://github.com/cvdfoundation/kinetics-dataset",
         "https://github.com/google-deepmind/tapnet/blob/main/README.md",
         "https://docs.voxel51.com/dataset_zoo/datasets/kinetics_700_2020.html"
       ],
-      "checked_at": "2026-11-25T08:59:31.891782+00:00"
+      "checked_at": "2026-11-25T09:39:20.321810+00:00",
+      "inventory_file": "inventories/kinetics.json.gz",
+      "inventory_sha256": "27532ac437f5762bf354bd23e2088ebe4326b0529410fd2861d305fcd6a0bb37"
     },
     {
       "id": "howto100m",
       "name": "HowTo100M",
       "phase": "expansion",
-      "status": "pending",
+      "status": "published",
       "scope_bytes": null,
       "scope_files": null,
       "selected_bytes": null,
       "files": 0,
-      "version": null,
-      "note": "按需；只有合法可访问的原视频才纳入训练，先记录实际成功取回文件。",
+      "version": "Author-published preprocessed release",
+      "note": "已核对作者提供的预处理视频发布量约 12 TB（原文 12Tb，视频无音频）；下载需通过作者表单申请账号。公开旧索引/字幕 ZIP 链接本次均返回 404，尚无可公开读取的逐文件精确字节清单；12 TB 不计入精确容量。",
       "source_urls": [
         "https://www.di.ens.fr/willow/research/howto100m/",
-        "https://github.com/antoine77340/howto100m"
+        "https://github.com/antoine77340/howto100m",
+        "https://github.com/antoine77340/MIL-NCE_HowTo100M",
+        "https://forms.gle/hztrfnFQUJWBtiki8"
       ],
-      "checked_at": "2026-11-25T08:59:31.891807+00:00"
+      "checked_at": "2026-11-25T09:51:39.914929+00:00",
+      "published_bytes_approx": 12000000000000,
+      "verification_label": "公开发布容量已核对（舍入值）",
+      "evidence_file": "evidence/howto100m.json",
+      "evidence_sha256": "691e21a7203a03146d8892e9c4a21428c05e64a977e0df0e0442b7069c573a02"
     },
     {
       "id": "finevideo",
@@ -215,18 +238,23 @@
       "id": "panda",
       "name": "Panda-70M",
       "phase": "expansion",
-      "status": "pending",
+      "status": "partial",
       "scope_bytes": null,
       "scope_files": null,
       "selected_bytes": null,
       "files": 0,
-      "version": null,
-      "note": "扩展：优先官方 2M 索引，核对源视频条款；先取回已选片段，实际字节统计后入库。",
+      "version": "Official index HTTP validators",
+      "note": "已选官方 2M 索引 ZIP（2.4M clips），HTTP HEAD 核验为 114,255,340 bytes；这是索引容量，不是视频容量。源视频来自 YouTube，下载可用性、分辨率与裁剪结果决定实际视频字节，发布方没有统一的视频归档清单。",
       "source_urls": [
         "https://github.com/snap-research/Panda-70M",
         "https://github.com/snap-research/Panda-70M/blob/main/dataset_dataloading/README.md"
       ],
-      "checked_at": "2026-11-25T08:59:34.270875+00:00"
+      "checked_at": "2026-11-25T09:51:37.627811+00:00",
+      "auxiliary_bytes": 114255340,
+      "auxiliary_files": 1,
+      "verification_label": "索引容量已核验",
+      "evidence_file": "evidence/panda.json",
+      "evidence_sha256": "3279530f722bbc4901d05d66c715de51ff86cd5f8f766d62bbfaa573fdaa4fe2"
     },
     {
       "id": "bridgev2",
@@ -275,19 +303,21 @@
       "id": "oxe",
       "name": "Open X-Embodiment",
       "phase": "expansion",
-      "status": "pending",
-      "scope_bytes": null,
-      "scope_files": null,
-      "selected_bytes": null,
-      "files": 0,
-      "version": null,
-      "note": "扩展：按 embodiment 选择官方 GCS 子集/版本，去除已下载 Bridge/DROID 等重复轨迹；先列对象字节。",
+      "status": "planned",
+      "scope_bytes": 599221149593,
+      "scope_files": 2105,
+      "selected_bytes": 165409784703,
+      "files": 1541,
+      "version": "GCS generations / selected version prefixes",
+      "note": "扩展选择：官方 Colab 所列 RT-1/fractal 0.1.0、Language Table 0.0.1、TACO Play 0.1.0 的 train 分片及格式元数据。避开已有 Bridge、DROID、RECON；版本路径及每个 GCS object generation 已固定，不再以“未选 embodiment”为由留空。",
       "source_urls": [
         "https://robotics-transformer-x.github.io/",
         "https://github.com/google-deepmind/open_x_embodiment",
         "https://github.com/mishmish66/oxe_downloader"
       ],
-      "checked_at": "2026-11-25T08:59:36.171574+00:00"
+      "checked_at": "2026-11-25T09:39:20.321920+00:00",
+      "inventory_file": "inventories/oxe.json.gz",
+      "inventory_sha256": "8fe686c05f46e7d7f88a026e1552bbde3b6433d120ba9d3b2638fd3f45341da1"
     },
     {
       "id": "libero",
@@ -394,37 +424,43 @@
       "id": "scand",
       "name": "SCAND",
       "phase": "starter",
-      "status": "error",
+      "status": "partial",
       "scope_bytes": null,
       "scope_files": null,
       "selected_bytes": null,
       "files": 0,
-      "version": null,
-      "note": "源站返回 HTTP 403（可能为权限或访问限制）；未读取数据文件，训练轨迹尚未选择。",
+      "version": "DataCite registered version 5.2",
+      "note": "已核验 DataCite 官方 DOI 登记 v5.2：284 个文件容量值，共 344,324,920,157 bytes。主站 Dataverse API 返回 403；登记容量没有路径对应关系，不能按 DOI 顺序配对，也不能充当当前可下载的 train 清单。",
       "source_urls": [
         "https://www.cs.utexas.edu/~xiao/SCAND/SCAND.html",
         "https://doi.org/10.18738/T8/0PRYRH"
       ],
-      "checked_at": "2026-11-25T08:59:45.073953+00:00",
-      "error_code": "access_required"
+      "checked_at": "2026-11-25T09:51:33.268484+00:00",
+      "registered_bytes": 344324920157,
+      "registered_files": 284,
+      "verification_label": "登记容量已核验",
+      "evidence_file": "evidence/scand.json",
+      "evidence_sha256": "2426d390d49297e8e7a371e305847115a025c7cb2611d569b680878a652c7b8f"
     },
     {
       "id": "rxr",
       "name": "RxR + Matterport3D",
       "phase": "expansion",
-      "status": "pending",
-      "scope_bytes": null,
-      "scope_files": null,
+      "status": "inventoried",
+      "scope_bytes": 31882527315,
+      "scope_files": 158937,
       "selected_bytes": null,
       "files": 0,
-      "version": null,
-      "note": "扩展：train guide/follower 标注与 pose traces + 获授权的场景包；无需全量 BERT 特征。",
+      "version": "GCS generations / pose_traces/rxr_train/",
+      "note": "已固定并逐文件核验完整 RxR train pose traces、train guide/follower 标注及 Matterport3D Habitat 场景包；全部范围清单见 inventories/rxr.json.gz。作为扩展资源单列，不计入首批小计。场景包含共享场景，训练仍按 RxR train scan 划分；下载场景前须遵守 Matterport3D 条款。",
       "source_urls": [
         "https://github.com/google-research-datasets/RxR",
         "https://niessner.github.io/Matterport/",
         "https://github.com/facebookresearch/habitat-lab/blob/main/DATASETS.md"
       ],
-      "checked_at": "2026-11-25T08:59:46.621558+00:00"
+      "checked_at": "2026-11-25T09:39:20.321748+00:00",
+      "inventory_file": "inventories/rxr.json.gz",
+      "inventory_sha256": "c8556ef74d7b9e4af822b63510a91a0afb0142bd4a487041ed64ac68c0579b70"
     },
     {
       "id": "recon",
@@ -436,13 +472,16 @@
       "selected_bytes": 53235196027,
       "files": 1,
       "version": "HTTP validators 55d9bb505277f9dc",
-      "note": "首批：作者完整数据包；检查是否包含可作为控制条件的真实命令，缺失则仅做观测/里程计预测。 原站为 .tar.gz 返回 gzip/x-gzip 编码头，按原始响应字节保存，禁止自动解压。",
+      "note": "首批：作者完整数据包。官方 GNM 处理代码读取 images/rgb_left、jackal/position、jackal/yaw；本方案使用观测与里程计预测，位置/朝向不等同底层控制命令。原站 gzip/x-gzip 头按归档原始字节处理，不自动解压。",
       "source_urls": [
-        "https://rail.eecs.berkeley.edu/datasets/recon-navigation/"
+        "https://rail.eecs.berkeley.edu/datasets/recon-navigation/",
+        "https://github.com/robodhruv/drive-any-robot/blob/main/train/process_recon.py"
       ],
       "checked_at": "2026-11-25T09:01:34.865652+00:00",
       "inventory_file": "inventories/recon.json.gz",
-      "inventory_sha256": "a021e11af1f23bea1bc0740cfbfe8cb869b6a45cf689c53244cc9d0c8076980b"
+      "inventory_sha256": "a021e11af1f23bea1bc0740cfbfe8cb869b6a45cf689c53244cc9d0c8076980b",
+      "evidence_file": "evidence/recon-fields.json",
+      "evidence_sha256": "0acc1666cbccc70db26e7842f9d66520b4cfd97378576065c0fd0220a5bfc005"
     },
     {
       "id": "omniedit",
@@ -538,39 +577,37 @@
       "id": "selfsim",
       "name": "自建多动力学仿真",
       "phase": "starter",
-      "status": "pending",
+      "status": "not_generated",
       "scope_bytes": null,
       "scope_files": null,
       "selected_bytes": null,
       "files": 0,
       "version": null,
-      "note": "首批：按同状态分支、历史反事实及失败轨迹生成；生成后按文件 stat 汇总。",
+      "note": "尚未生成：这是计划中的自建仿真数据，没有现成远端文件；生成后统计文件 stat。此项不标为访问失败，也不记成已核验的 0 bytes。",
       "source_urls": [],
-      "checked_at": "2026-11-25T09:08:43.356312+00:00"
+      "checked_at": "2026-11-25T09:51:56.641842+00:00",
+      "evidence_file": "evidence/selfsim.json",
+      "evidence_sha256": "24df2f900d7f71e9fce1460f840f9cc2d74b19e7c3ecec39e30d6a64b6993711"
     }
   ],
-  "selected_bytes": 1534120202186,
-  "transfer_bytes": 1534120202186,
-  "starter_selected_bytes": 1534120202186,
-  "pending": [
+  "selected_bytes": 2556757642643,
+  "transfer_bytes": 2556757642643,
+  "starter_selected_bytes": 1653563899540,
+  "download_unresolved": [
     "ego4d",
-    "epic100",
-    "human100k",
     "egoexo4d",
-    "ssv2",
-    "assembly101",
-    "kinetics",
     "howto100m",
     "panda",
-    "oxe",
-    "llavavideo",
-    "molmodata",
     "scand",
-    "rxr",
-    "agibotbeta",
-    "agibot2026",
-    "robocasa-mg",
     "selfsim"
   ],
-  "manifest_sha256": "a2ebb5b2e535f0dcbc7723bed7a9d61b1e70e8985eb728ac4b8ac67baaacee7b"
+  "audit_counts": {
+    "blocked": 2,
+    "inventoried": 7,
+    "not_generated": 1,
+    "partial": 2,
+    "planned": 16,
+    "published": 1
+  },
+  "manifest_sha256": "e2088d476a116bb5aff1649928b0e45eefd6715bd49b7a6de3d13c9e830a2d4b"
 }

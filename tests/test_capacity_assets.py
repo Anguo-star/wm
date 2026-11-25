@@ -19,14 +19,22 @@ def test_published_report_matches_manifest_and_all_inventories():
     report = json.loads((REPORTS / 'capacity_report.json').read_text())
     assert report['datasets'] == manifest['datasets']
     assert len(report['datasets']) == 29
-    assert report['selected_bytes'] == sum(x['bytes'] for x in manifest['files']) == 1534120202186
-    assert len(manifest['files']) == 2560
-    assert sum(x['selected_bytes'] is not None for x in report['datasets']) == 11
-    assert sum(x['status'] == 'inventoried' for x in report['datasets']) == 6
+    assert report['selected_bytes'] == sum(x['bytes'] for x in manifest['files']) == 2556757642643
+    assert len(manifest['files']) == 4902
+    assert sum(x['selected_bytes'] is not None for x in report['datasets']) == 16
+    assert sum(x['status'] == 'inventoried' for x in report['datasets']) == 7
+    assert report['starter_selected_bytes'] == 1653563899540
+    assert report['audit_counts'] == {'blocked':2,'inventoried':7,'not_generated':1,'partial':2,'planned':16,'published':1}
+    assert not any(x['status'] in ('pending','error') for x in report['datasets'])
+    assert set(report['download_unresolved']) == {'ego4d','egoexo4d','scand','panda','howto100m','selfsim'}
     lock = {x['id']:x for x in json.loads((ROOT/'tools/data/datasets.lock.json').read_text())['datasets']}
     selected = {}
     for f in manifest['files']: selected.setdefault(f['dataset'], {})[f['path']] = f
     for row in report['datasets']:
+        if row.get('evidence_file'):
+            evidence=json.loads((REPORTS/row['evidence_file']).read_text())
+            raw=json.dumps(evidence,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode()
+            assert hashlib.sha256(raw).hexdigest()==row['evidence_sha256']
         if not row.get('inventory_file'): continue
         raw = gzip.decompress((REPORTS/row['inventory_file']).read_bytes())
         assert hashlib.sha256(raw).hexdigest() == row['inventory_sha256']
@@ -56,5 +64,7 @@ def test_html_embedded_assets_match_maintained_source():
             if path.is_file(): assert archive.read(path.name) == path.read_bytes()
         assert json.loads(archive.read('audit/capacity_report.json')) == json.loads((REPORTS/'capacity_report.json').read_text())
         assert archive.read('audit/manifest.json') == (REPORTS/'manifest.json').read_bytes()
+        for path in (REPORTS/'evidence').glob('*.json'):
+            assert archive.read('audit/evidence/'+path.name)==path.read_bytes()
     assert '首批选中文件 · 精确字节小计' in page
     assert '恢复内置核验结果' in page

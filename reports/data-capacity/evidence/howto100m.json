@@ -1,0 +1,33 @@
+{
+  "id": "howto100m",
+  "checked_at": "2026-11-25T09:51:39.914967+00:00",
+  "source_urls": [
+    "https://www.di.ens.fr/willow/research/howto100m/",
+    "https://github.com/antoine77340/howto100m",
+    "https://github.com/antoine77340/MIL-NCE_HowTo100M",
+    "https://forms.gle/hztrfnFQUJWBtiki8"
+  ],
+  "checks": [
+    {
+      "url": "https://www.rocq.inria.fr/cluster-willow/amiech/howto100m/HowTo100M.zip",
+      "method": "HEAD",
+      "response_body_bytes_read": 0,
+      "status": 404,
+      "content_type": "text/html; charset=iso-8859-1",
+      "content_length": null
+    },
+    {
+      "url": "https://www.rocq.inria.fr/cluster-willow/amiech/howto100m/howto100m_captions.zip",
+      "method": "HEAD",
+      "response_body_bytes_read": 0,
+      "status": 404,
+      "content_type": "text/html; charset=iso-8859-1",
+      "content_length": null
+    }
+  ],
+  "training_file_body_bytes_read": 0,
+  "publication_url": "https://raw.githubusercontent.com/antoine77340/MIL-NCE_HowTo100M/b282b1534324b3ac9960eebf89312c9a8a912eec/README.md",
+  "publication_quote": "preprocessed HowTo100M videos (12Tb in total)",
+  "publication_sha256": "c1b24709e3ee6ad9dcbceec6b932242d20249c782bae49e9556f4c47ad375d8a",
+  "published_bytes_approx": 12000000000000
+}

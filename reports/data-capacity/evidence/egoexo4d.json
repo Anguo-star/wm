@@ -1,0 +1,37 @@
+{
+  "id": "egoexo4d",
+  "checked_at": "2026-11-25T09:51:27.310737+00:00",
+  "source_urls": [
+    "https://ego-exo4d-data.org/",
+    "https://docs.ego-exo4d-data.org/data/takes/",
+    "https://www.lab22.ai/ego4d",
+    "https://docs.ego-exo4d-data.org/download/"
+  ],
+  "checks": [
+    {
+      "url": "https://ego4d-consortium-sharing.s3.amazonaws.com/egoexo-public/v2/downscaled_takes/448/manifest.json",
+      "method": "GET",
+      "response_body_bytes_read": 0,
+      "status": 403,
+      "content_type": "application/xml",
+      "content_length": null
+    },
+    {
+      "url": "https://ego4d-consortium-sharing.s3.amazonaws.com/egoexo-public/v2/metadata/manifest.json",
+      "method": "GET",
+      "response_body_bytes_read": 0,
+      "status": 403,
+      "content_type": "application/xml",
+      "content_length": null
+    },
+    {
+      "url": "https://ego4d-consortium-sharing.s3.amazonaws.com/egoexo-public/v2/annotations/manifest.json",
+      "method": "GET",
+      "response_body_bytes_read": 0,
+      "status": 403,
+      "content_type": "application/xml",
+      "content_length": null
+    }
+  ],
+  "training_file_body_bytes_read": 0
+}

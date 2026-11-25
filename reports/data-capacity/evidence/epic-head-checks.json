@@ -1,0 +1,619 @@
+{
+  "id": "epic100",
+  "checked_at": "2026-11-25T09:39:20.321967+00:00",
+  "checks": [
+    {
+      "path": "2g1n6qdydwa9u22shpxqzp0t8m/P01/videos/P01_102.MP4",
+      "status": 200,
+      "expected": 833486131,
+      "head_bytes": 833486131,
+      "etag": "\"5ea72b2a-31adfd33\"",
+      "last_modified": "Mon, 27 Apr 2020 18:57:46 GMT",
+      "content_type": "video/mp4"
+    },
+    {
+      "path": "2g1n6qdydwa9u22shpxqzp0t8m/P01/videos/P01_103.MP4",
+      "status": 200,
+      "expected": 539901275,
+      "head_bytes": 539901275,
+      "etag": "\"5ea72b05-202e3d5b\"",
+      "last_modified": "Mon, 27 Apr 2020 18:57:09 GMT",
+      "content_type": "video/mp4"
+    },
+    {
+      "path": "2g1n6qdydwa9u22shpxqzp0t8m/P01/videos/P01_104.MP4",
+      "status": 200,
+      "expected": 744742945,
+      "head_bytes": 744742945,
+      "etag": "\"5ea72cb4-2c63e021\"",
+      "last_modified": "Mon, 27 Apr 2020 19:04:20 GMT",
+      "content_type": "video/mp4"
+    },
+    {
+      "path": "2g1n6qdydwa9u22shpxqzp0t8m/P02/videos/P02_101.MP4",
+      "status": 200,
+      "expected": 738525987,
+      "head_bytes": 738525987,
+      "etag": "\"5ea738ae-2c050323\"",
+      "last_modified": "Mon, 27 Apr 2020 19:55:26 GMT",
+      "content_type": "video/mp4"
+    },
+    {
+      "path": "2g1n6qdydwa9u22shpxqzp0t8m/P02/videos/P02_108.MP4",
+      "status": 200,
+      "expected": 3912956555,
+      "head_bytes": 3912956555,
+      "etag": "\"5ea7374a-e93afa8b\"",
+      "last_modified": "Mon, 27 Apr 2020 19:49:30 GMT",
+      "content_type": "video/mp4"
+    },
+    {
+      "path": "2g1n6qdydwa9u22shpxqzp0t8m/P02/videos/P02_109.MP4",
+      "status": 200,
+      "expected": 2764699975,
+      "head_bytes": 2764699975,
+      "etag": "\"5ea73422-a4c9f947\"",
+      "last_modified": "Mon, 27 Apr 2020 19:36:02 GMT",
+      "content_type": "video/mp4"
+    },
+    {
+      "path": "2g1n6qdydwa9u22shpxqzp0t8m/P02/videos/P02_126.MP4",
+      "status": 200,
+      "expected": 450445664,
+      "head_bytes": 450445664,
+      "etag": "\"5ea73465-1ad94160\"",
+      "last_modified": "Mon, 27 Apr 2020 19:37:09 GMT",
+      "content_type": "video/mp4"
+    },
+    {
+      "path": "2g1n6qdydwa9u22shpxqzp0t8m/P02/videos/P02_130.MP4",
+      "status": 200,
+      "expected": 3281563054,
+      "head_bytes": 3281563054,
+      "etag": "\"5ea739f5-c398adae\"",
+      "last_modified": "Mon, 27 Apr 2020 20:00:53 GMT",
+      "content_type": "video/mp4"
+    },
+    {
+      "path": "2g1n6qdydwa9u22shpxqzp0t8m/P03/videos/P03_114.MP4",
+      "status": 200,
+      "expected": 83935990,
+      "head_bytes": 83935990,
+      "etag": "\"5ea740c7-500c2f6\"",
+      "last_modified": "Mon, 27 Apr 2020 20:29:59 GMT",
+      "content_type": "video/mp4"
+    },
+    {
+      "path": "2g1n6qdydwa9u22shpxqzp0t8m/P03/videos/P03_116.MP4",
+      "status": 200,
+      "expected": 172985741,
+      "head_bytes": 172985741,
+      "etag": "\"5ea73fdd-a4f8d8d\"",
+      "last_modified": "Mon, 27 Apr 2020 20:26:05 GMT",
+      "content_type": "video/mp4"
+    },
+    {
+      "path": "2g1n6qdydwa9u22shpxqzp0t8m/P04/videos/P04_103.MP4",
+      "status": 200,
+      "expected": 203827292,
+      "head_bytes": 203827292,
+      "etag": "\"5ea74c9a-c26285c\"",
+      "last_modified": "Mon, 27 Apr 2020 21:20:26 GMT",
+      "content_type": "video/mp4"
+    },
+    {
+      "path": "2g1n6qdydwa9u22shpxqzp0t8m/P04/videos/P04_104.MP4",
+      "status": 200,
+      "expected": 2074288282,
+      "head_bytes": 2074288282,
+      "etag": "\"5ea74c90-7ba3209a\"",
+      "last_modified": "Mon, 27 Apr 2020 21:20:16 GMT",
+      "content_type": "video/mp4"
+    },
+    {
+      "path": "2g1n6qdydwa9u22shpxqzp0t8m/P04/videos/P04_112.MP4",
+      "status": 200,
+      "expected": 1488241835,
+      "head_bytes": 1488241835,
+      "etag": "\"5ea74e0c-58b4c4ab\"",
+      "last_modified": "Mon, 27 Apr 2020 21:26:36 GMT",
+      "content_type": "video/mp4"
+    },
+    {
+      "path": "2g1n6qdydwa9u22shpxqzp0t8m/P06/videos/P06_103.MP4",
+      "status": 200,
+      "expected": 2543440993,
+      "head_bytes": 2543440993,
+      "etag": "\"5ea756da-9799d461\"",
+      "last_modified": "Mon, 27 Apr 2020 22:04:10 GMT",
+      "content_type": "video/mp4"
+    },
+    {
+      "path": "2g1n6qdydwa9u22shpxqzp0t8m/P06/videos/P06_104.MP4",
+      "status": 200,
+      "expected": 461489146,
+      "head_bytes": 461489146,
+      "etag": "\"5ea7566a-1b81c3fa\"",
+      "last_modified": "Mon, 27 Apr 2020 22:02:18 GMT",
+      "content_type": "video/mp4"
+    },
+    {
+      "path": "2g1n6qdydwa9u22shpxqzp0t8m/P06/videos/P06_105.MP4",
+      "status": 200,
+      "expected": 326220427,
+      "head_bytes": 326220427,
+      "etag": "\"5ea754d7-1371ba8b\"",
+      "last_modified": "Mon, 27 Apr 2020 21:55:35 GMT",
+      "content_type": "video/mp4"
+    },
+    {
+      "path": "2g1n6qdydwa9u22shpxqzp0t8m/P06/videos/P06_107.MP4",
+      "status": 200,
+      "expected": 882363458,
+      "head_bytes": 882363458,
+      "etag": "\"5ea754c8-3497cc42\"",
+      "last_modified": "Mon, 27 Apr 2020 21:55:20 GMT",
+      "content_type": "video/mp4"
+    },
+    {
+      "path": "2g1n6qdydwa9u22shpxqzp0t8m/P06/videos/P06_109.MP4",
+      "status": 200,
+      "expected": 116144444,
+      "head_bytes": 116144444,
+      "etag": "\"5ea753a2-6ec393c\"",
+      "last_modified": "Mon, 27 Apr 2020 21:50:26 GMT",
+      "content_type": "video/mp4"
+    },
+    {
+      "path": "2g1n6qdydwa9u22shpxqzp0t8m/P07/videos/P07_106.MP4",
+      "status": 200,
+      "expected": 47917136,
+      "head_bytes": 47917136,
+      "etag": "\"5ea75932-2db2850\"",
+      "last_modified": "Mon, 27 Apr 2020 22:14:10 GMT",
+      "content_type": "video/mp4"
+    },
+    {
+      "path": "2g1n6qdydwa9u22shpxqzp0t8m/P07/videos/P07_107.MP4",
+      "status": 200,
+      "expected": 532857266,
+      "head_bytes": 532857266,
+      "etag": "\"5ea7594a-1fc2c1b2\"",
+      "last_modified": "Mon, 27 Apr 2020 22:14:34 GMT",
+      "content_type": "video/mp4"
+    },
+    {
+      "path": "2g1n6qdydwa9u22shpxqzp0t8m/P11/videos/P11_101.MP4",
+      "status": 200,
+      "expected": 557698322,
+      "head_bytes": 557698322,
+      "etag": "\"5ea75e56-213dcd12\"",
+      "last_modified": "Mon, 27 Apr 2020 22:36:06 GMT",
+      "content_type": "video/mp4"
+    },
+    {
+      "path": "2g1n6qdydwa9u22shpxqzp0t8m/P12/videos/P12_104.MP4",
+      "status": 200,
+      "expected": 3443641236,
+      "head_bytes": 3443641236,
+      "etag": "\"5ea762c8-cd41cb94\"",
+      "last_modified": "Mon, 27 Apr 2020 22:55:04 GMT",
+      "content_type": "video/mp4"
+    },
+    {
+      "path": "2g1n6qdydwa9u22shpxqzp0t8m/P25/videos/P25_101.MP4",
+      "status": 200,
+      "expected": 1320309145,
+      "head_bytes": 1320309145,
+      "etag": "\"5ea7751f-4eb25199\"",
+      "last_modified": "Tue, 28 Apr 2020 00:13:19 GMT",
+      "content_type": "video/mp4"
+    },
+    {
+      "path": "2g1n6qdydwa9u22shpxqzp0t8m/P26/videos/P26_103.MP4",
+      "status": 200,
+      "expected": 1816050951,
+      "head_bytes": 1816050951,
+      "etag": "\"5ea77edc-6c3ebd07\"",
+      "last_modified": "Tue, 28 Apr 2020 00:54:52 GMT",
+      "content_type": "video/mp4"
+    },
+    {
+      "path": "2g1n6qdydwa9u22shpxqzp0t8m/P26/videos/P26_110.MP4",
+      "status": 200,
+      "expected": 802006207,
+      "head_bytes": 802006207,
+      "etag": "\"5ea77e28-2fcda4bf\"",
+      "last_modified": "Tue, 28 Apr 2020 00:51:52 GMT",
+      "content_type": "video/mp4"
+    },
+    {
+      "path": "2g1n6qdydwa9u22shpxqzp0t8m/P26/videos/P26_112.MP4",
+      "status": 200,
+      "expected": 1204229526,
+      "head_bytes": 1204229526,
+      "etag": "\"5ea77cbb-47c71596\"",
+      "last_modified": "Tue, 28 Apr 2020 00:45:47 GMT",
+      "content_type": "video/mp4"
+    },
+    {
+      "path": "2g1n6qdydwa9u22shpxqzp0t8m/P26/videos/P26_113.MP4",
+      "status": 200,
+      "expected": 208675320,
+      "head_bytes": 208675320,
+      "etag": "\"5ea77e04-c7021f8\"",
+      "last_modified": "Tue, 28 Apr 2020 00:51:16 GMT",
+      "content_type": "video/mp4"
+    },
+    {
+      "path": "2g1n6qdydwa9u22shpxqzp0t8m/P26/videos/P26_118.MP4",
+      "status": 200,
+      "expected": 1254752235,
+      "head_bytes": 1254752235,
+      "etag": "\"5ea77cf2-4ac9ffeb\"",
+      "last_modified": "Tue, 28 Apr 2020 00:46:42 GMT",
+      "content_type": "video/mp4"
+    },
+    {
+      "path": "2g1n6qdydwa9u22shpxqzp0t8m/P28/videos/P28_104.MP4",
+      "status": 200,
+      "expected": 2179165389,
+      "head_bytes": 2179165389,
+      "etag": "\"5ea7f65f-81e36ccd\"",
+      "last_modified": "Tue, 28 Apr 2020 09:24:47 GMT",
+      "content_type": "video/mp4"
+    },
+    {
+      "path": "2g1n6qdydwa9u22shpxqzp0t8m/P30/videos/P30_103.MP4",
+      "status": 200,
+      "expected": 558538414,
+      "head_bytes": 558538414,
+      "etag": "\"5ea7ff56-214a9eae\"",
+      "last_modified": "Tue, 28 Apr 2020 10:03:02 GMT",
+      "content_type": "video/mp4"
+    },
+    {
+      "path": "3h91syskeag572hl6tvuovwv4d/videos/test/P09/P09_01.MP4",
+      "status": 200,
+      "expected": 54214497,
+      "head_bytes": 54214497,
+      "etag": "\"591ecf67-33b3f61\"",
+      "last_modified": "Fri, 19 May 2017 10:56:39 GMT",
+      "content_type": "video/mp4"
+    },
+    {
+      "path": "3h91syskeag572hl6tvuovwv4d/videos/test/P11/P11_09.MP4",
+      "status": 200,
+      "expected": 1309067265,
+      "head_bytes": 1309067265,
+      "etag": "\"592e95c4-4e06c801\"",
+      "last_modified": "Wed, 31 May 2017 10:07:00 GMT",
+      "content_type": "video/mp4"
+    },
+    {
+      "path": "3h91syskeag572hl6tvuovwv4d/videos/train/P01/P01_04.MP4",
+      "status": 200,
+      "expected": 396790033,
+      "head_bytes": 396790033,
+      "etag": "\"591485e1-17a68911\"",
+      "last_modified": "Thu, 11 May 2017 15:40:17 GMT",
+      "content_type": "video/mp4"
+    },
+    {
+      "path": "3h91syskeag572hl6tvuovwv4d/videos/train/P01/P01_06.MP4",
+      "status": 200,
+      "expected": 1856143016,
+      "head_bytes": 1856143016,
+      "etag": "\"5914870f-6ea27ea8\"",
+      "last_modified": "Thu, 11 May 2017 15:45:19 GMT",
+      "content_type": "video/mp4"
+    },
+    {
+      "path": "3h91syskeag572hl6tvuovwv4d/videos/train/P01/P01_16.MP4",
+      "status": 200,
+      "expected": 658773269,
+      "head_bytes": 658773269,
+      "etag": "\"59198109-27441515\"",
+      "last_modified": "Mon, 15 May 2017 10:20:57 GMT",
+      "content_type": "video/mp4"
+    },
+    {
+      "path": "3h91syskeag572hl6tvuovwv4d/videos/train/P02/P02_06.MP4",
+      "status": 200,
+      "expected": 3904006913,
+      "head_bytes": 3904006913,
+      "etag": "\"59148a64-e8b26b01\"",
+      "last_modified": "Thu, 11 May 2017 15:59:32 GMT",
+      "content_type": "video/mp4"
+    },
+    {
+      "path": "3h91syskeag572hl6tvuovwv4d/videos/train/P03/P03_12.MP4",
+      "status": 200,
+      "expected": 81467589,
+      "head_bytes": 81467589,
+      "etag": "\"59159e08-4db18c5\"",
+      "last_modified": "Fri, 12 May 2017 11:35:36 GMT",
+      "content_type": "video/mp4"
+    },
+    {
+      "path": "3h91syskeag572hl6tvuovwv4d/videos/train/P04/P04_02.MP4",
+      "status": 200,
+      "expected": 5410923434,
+      "head_bytes": 5410923434,
+      "etag": "\"59156d9d-1428423aa\"",
+      "last_modified": "Fri, 12 May 2017 08:09:01 GMT",
+      "content_type": "video/mp4"
+    },
+    {
+      "path": "3h91syskeag572hl6tvuovwv4d/videos/train/P04/P04_09.MP4",
+      "status": 200,
+      "expected": 1550720133,
+      "head_bytes": 1550720133,
+      "etag": "\"5915a370-5c6e1c85\"",
+      "last_modified": "Fri, 12 May 2017 11:58:40 GMT",
+      "content_type": "video/mp4"
+    },
+    {
+      "path": "3h91syskeag572hl6tvuovwv4d/videos/train/P04/P04_16.MP4",
+      "status": 200,
+      "expected": 818265210,
+      "head_bytes": 818265210,
+      "etag": "\"5915a581-30c5bc7a\"",
+      "last_modified": "Fri, 12 May 2017 12:07:29 GMT",
+      "content_type": "video/mp4"
+    },
+    {
+      "path": "3h91syskeag572hl6tvuovwv4d/videos/train/P04/P04_22.MP4",
+      "status": 200,
+      "expected": 646349062,
+      "head_bytes": 646349062,
+      "etag": "\"5915a633-26868106\"",
+      "last_modified": "Fri, 12 May 2017 12:10:27 GMT",
+      "content_type": "video/mp4"
+    },
+    {
+      "path": "3h91syskeag572hl6tvuovwv4d/videos/train/P05/P05_02.MP4",
+      "status": 200,
+      "expected": 1276441101,
+      "head_bytes": 1276441101,
+      "etag": "\"59197369-4c14f20d\"",
+      "last_modified": "Mon, 15 May 2017 09:22:49 GMT",
+      "content_type": "video/mp4"
+    },
+    {
+      "path": "3h91syskeag572hl6tvuovwv4d/videos/train/P06/P06_01.MP4",
+      "status": 200,
+      "expected": 341314787,
+      "head_bytes": 341314787,
+      "etag": "\"5919bd06-14580ce3\"",
+      "last_modified": "Mon, 15 May 2017 14:36:54 GMT",
+      "content_type": "video/mp4"
+    },
+    {
+      "path": "3h91syskeag572hl6tvuovwv4d/videos/train/P06/P06_09.MP4",
+      "status": 200,
+      "expected": 5061065160,
+      "head_bytes": 5061065160,
+      "etag": "\"591ed9da-12da9b9c8\"",
+      "last_modified": "Fri, 19 May 2017 11:41:14 GMT",
+      "content_type": "video/mp4"
+    },
+    {
+      "path": "3h91syskeag572hl6tvuovwv4d/videos/train/P08/P08_18.MP4",
+      "status": 200,
+      "expected": 1883699486,
+      "head_bytes": 1883699486,
+      "etag": "\"5922cd42-7046f91e\"",
+      "last_modified": "Mon, 22 May 2017 11:36:34 GMT",
+      "content_type": "video/mp4"
+    },
+    {
+      "path": "3h91syskeag572hl6tvuovwv4d/videos/train/P12/P12_04.MP4",
+      "status": 200,
+      "expected": 7197767539,
+      "head_bytes": 7197767539,
+      "etag": "\"592da826-1ad053773\"",
+      "last_modified": "Tue, 30 May 2017 17:13:10 GMT",
+      "content_type": "video/mp4"
+    },
+    {
+      "path": "3h91syskeag572hl6tvuovwv4d/videos/train/P12/P12_06.MP4",
+      "status": 200,
+      "expected": 960697748,
+      "head_bytes": 960697748,
+      "etag": "\"592da879-39431594\"",
+      "last_modified": "Tue, 30 May 2017 17:14:33 GMT",
+      "content_type": "video/mp4"
+    },
+    {
+      "path": "3h91syskeag572hl6tvuovwv4d/videos/train/P13/P13_06.MP4",
+      "status": 200,
+      "expected": 420496827,
+      "head_bytes": 420496827,
+      "etag": "\"5941594e-191045bb\"",
+      "last_modified": "Wed, 14 Jun 2017 15:42:06 GMT",
+      "content_type": "video/mp4"
+    },
+    {
+      "path": "3h91syskeag572hl6tvuovwv4d/videos/train/P13/P13_09.MP4",
+      "status": 200,
+      "expected": 2039482775,
+      "head_bytes": 2039482775,
+      "etag": "\"59415b72-79900997\"",
+      "last_modified": "Wed, 14 Jun 2017 15:51:14 GMT",
+      "content_type": "video/mp4"
+    },
+    {
+      "path": "3h91syskeag572hl6tvuovwv4d/videos/train/P14/P14_01.MP4",
+      "status": 200,
+      "expected": 393915721,
+      "head_bytes": 393915721,
+      "etag": "\"594d3ead-177aad49\"",
+      "last_modified": "Fri, 23 Jun 2017 16:15:41 GMT",
+      "content_type": "video/mp4"
+    },
+    {
+      "path": "3h91syskeag572hl6tvuovwv4d/videos/train/P15/P15_11.MP4",
+      "status": 200,
+      "expected": 104172401,
+      "head_bytes": 104172401,
+      "etag": "\"595cf650-6358b71\"",
+      "last_modified": "Wed, 05 Jul 2017 14:23:12 GMT",
+      "content_type": "video/mp4"
+    },
+    {
+      "path": "3h91syskeag572hl6tvuovwv4d/videos/train/P15/P15_13.MP4",
+      "status": 200,
+      "expected": 3630459409,
+      "head_bytes": 3630459409,
+      "etag": "\"595cf6a3-d8646a11\"",
+      "last_modified": "Wed, 05 Jul 2017 14:24:35 GMT",
+      "content_type": "video/mp4"
+    },
+    {
+      "path": "3h91syskeag572hl6tvuovwv4d/videos/train/P17/P17_03.MP4",
+      "status": 200,
+      "expected": 3683943054,
+      "head_bytes": 3683943054,
+      "etag": "\"597f5237-db94828e\"",
+      "last_modified": "Mon, 31 Jul 2017 15:52:23 GMT",
+      "content_type": "video/mp4"
+    },
+    {
+      "path": "3h91syskeag572hl6tvuovwv4d/videos/train/P25/P25_11.MP4",
+      "status": 200,
+      "expected": 1425435245,
+      "head_bytes": 1425435245,
+      "etag": "\"59e0dd04-54f66a6d\"",
+      "last_modified": "Fri, 13 Oct 2017 15:34:28 GMT",
+      "content_type": "video/mp4"
+    },
+    {
+      "path": "3h91syskeag572hl6tvuovwv4d/videos/train/P26/P26_04.MP4",
+      "status": 200,
+      "expected": 548347352,
+      "head_bytes": 548347352,
+      "etag": "\"59e5bc5c-20af1dd8\"",
+      "last_modified": "Tue, 17 Oct 2017 08:16:28 GMT",
+      "content_type": "video/mp4"
+    },
+    {
+      "path": "3h91syskeag572hl6tvuovwv4d/videos/train/P26/P26_07.MP4",
+      "status": 200,
+      "expected": 92314191,
+      "head_bytes": 92314191,
+      "etag": "\"59e5bcf6-5809a4f\"",
+      "last_modified": "Tue, 17 Oct 2017 08:19:02 GMT",
+      "content_type": "video/mp4"
+    },
+    {
+      "path": "3h91syskeag572hl6tvuovwv4d/videos/train/P26/P26_14.MP4",
+      "status": 200,
+      "expected": 122877998,
+      "head_bytes": 122877998,
+      "etag": "\"59e5bb56-752f82e\"",
+      "last_modified": "Tue, 17 Oct 2017 08:12:06 GMT",
+      "content_type": "video/mp4"
+    },
+    {
+      "path": "3h91syskeag572hl6tvuovwv4d/videos/train/P26/P26_16.MP4",
+      "status": 200,
+      "expected": 245929093,
+      "head_bytes": 245929093,
+      "etag": "\"59e5bb45-ea89485\"",
+      "last_modified": "Tue, 17 Oct 2017 08:11:49 GMT",
+      "content_type": "video/mp4"
+    },
+    {
+      "path": "3h91syskeag572hl6tvuovwv4d/videos/train/P26/P26_23.MP4",
+      "status": 200,
+      "expected": 322877290,
+      "head_bytes": 322877290,
+      "etag": "\"59e5bae3-133eb76a\"",
+      "last_modified": "Tue, 17 Oct 2017 08:10:11 GMT",
+      "content_type": "video/mp4"
+    },
+    {
+      "path": "3h91syskeag572hl6tvuovwv4d/videos/train/P26/P26_29.MP4",
+      "status": 200,
+      "expected": 209644715,
+      "head_bytes": 209644715,
+      "etag": "\"59e5bcaa-c7eecab\"",
+      "last_modified": "Tue, 17 Oct 2017 08:17:46 GMT",
+      "content_type": "video/mp4"
+    },
+    {
+      "path": "3h91syskeag572hl6tvuovwv4d/videos/train/P27/P27_03.MP4",
+      "status": 200,
+      "expected": 369563270,
+      "head_bytes": 369563270,
+      "etag": "\"59e5c04b-16071686\"",
+      "last_modified": "Tue, 17 Oct 2017 08:33:15 GMT",
+      "content_type": "video/mp4"
+    },
+    {
+      "path": "3h91syskeag572hl6tvuovwv4d/videos/train/P28/P28_08.MP4",
+      "status": 200,
+      "expected": 1270538843,
+      "head_bytes": 1270538843,
+      "etag": "\"5a14319b-4bbae25b\"",
+      "last_modified": "Tue, 21 Nov 2017 14:00:59 GMT",
+      "content_type": "video/mp4"
+    },
+    {
+      "path": "3h91syskeag572hl6tvuovwv4d/videos/train/P28/P28_10.MP4",
+      "status": 200,
+      "expected": 229845313,
+      "head_bytes": 229845313,
+      "etag": "\"5a1431a7-db32941\"",
+      "last_modified": "Tue, 21 Nov 2017 14:01:11 GMT",
+      "content_type": "video/mp4"
+    },
+    {
+      "path": "3h91syskeag572hl6tvuovwv4d/videos/train/P29/P29_03.MP4",
+      "status": 200,
+      "expected": 11695708821,
+      "head_bytes": 11695708821,
+      "etag": "\"5a170ea9-2b91e5a95\"",
+      "last_modified": "Thu, 23 Nov 2017 18:08:41 GMT",
+      "content_type": "video/mp4"
+    },
+    {
+      "path": "3h91syskeag572hl6tvuovwv4d/videos/train/P31/P31_04.MP4",
+      "status": 200,
+      "expected": 364407267,
+      "head_bytes": 364407267,
+      "etag": "\"5a0577ac-15b869e3\"",
+      "last_modified": "Fri, 10 Nov 2017 09:55:56 GMT",
+      "content_type": "video/mp4"
+    },
+    {
+      "path": "3h91syskeag572hl6tvuovwv4d/videos/train/P31/P31_06.MP4",
+      "status": 200,
+      "expected": 706680077,
+      "head_bytes": 706680077,
+      "etag": "\"5a0577ea-2a1f150d\"",
+      "last_modified": "Fri, 10 Nov 2017 09:56:58 GMT",
+      "content_type": "video/mp4"
+    },
+    {
+      "path": "3h91syskeag572hl6tvuovwv4d/videos/train/P31/P31_08.MP4",
+      "status": 200,
+      "expected": 3155719386,
+      "head_bytes": 3155719386,
+      "etag": "\"5a057c79-bc1874da\"",
+      "last_modified": "Fri, 10 Nov 2017 10:16:25 GMT",
+      "content_type": "video/mp4"
+    },
+    {
+      "path": "annotations/EPIC_100_train.csv",
+      "status": 200,
+      "expected": 8415872,
+      "head_bytes": 8415872,
+      "etag": "\"f3f08ce7e095b64839436c45cd5a5640e936f114c9314e45821a7ff85d01d0ec\"",
+      "last_modified": null,
+      "content_type": "text/plain; charset=utf-8"
+    }
+  ],
+  "training_file_body_bytes_read": 0
+}

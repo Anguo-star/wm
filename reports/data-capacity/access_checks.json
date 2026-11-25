@@ -1,50 +1,120 @@
 {
-  "schema": "wm-data-access-checks-v1",
-  "recorded_at": "2026-11-25T09:08:47.421764+00:00",
-  "data_bytes_downloaded": 0,
+  "checked_at": "2026-11-25T09:54:48.185320+00:00",
+  "metadata_only": true,
+  "note": "Current outcomes supersede earlier HEAD-only failures. SSv2 is verified using streamed response headers; no training body was read.",
   "checks": [
     {
+      "id": "ego4d",
+      "status": "blocked",
+      "note": "无法核验逐文件容量：官方 v2_1 full_scale 清单返回 HTTP 403，需已获授权的 Ego4D AWS 凭据。未将视频时长或预算换算成文件容量。",
+      "evidence_file": "evidence/ego4d.json",
+      "evidence_sha256": "165b40bfff58e63a0b7fbfbafe9346d9580f2bd44b7cde1e2984df1a8d0623eb"
+    },
+    {
+      "id": "epic100",
+      "status": "planned",
+      "note": "首批：官方 AR train 视频按固定种子在 100 GB 上限内选完整原始 MP4，加配套完整 train 标注；训练时按选中 video_id 过滤标注。全 700 个视频的精确长度来自发布方推荐的两份 torrent 元数据，不连接 peers、不下载视频；另对选中视频执行 HTTP HEAD 交叉核验。",
+      "evidence_file": "evidence/epic-head-checks.json",
+      "evidence_sha256": "8bd0c359ecf47ac81c99b741b2143af34508aaa8a2a1ebda00b375bbe48d9e89"
+    },
+    {
+      "id": "human100k",
+      "status": "planned",
+      "note": "扩展验证包：固定 oss_100k_v1 的完整 batch_161726fd35f2ee66c44db668f5d2f7df（官方批次索引记为 1 小时），包含全部 data/meta/videos，不按单个 MP4 拆散。精确容量只代表该完整批次；桶聚合容量单独展示，不冒充 100K 小时有效容量。下载前校验可变 bucket 的 Xet 身份。",
+      "evidence_file": "evidence/human100k.json",
+      "evidence_sha256": "28348608ccdb4caad6c61a0f7f06349f332dc50d1a5b88500a3193429ffb41c0"
+    },
+    {
+      "id": "egoexo4d",
+      "status": "blocked",
+      "note": "无法核验逐文件容量：官方 v2 的 448px、metadata、annotations 三份清单均返回 HTTP 403，需已获授权的 Ego4D AWS 凭据；449.135 GB 仍仅为官方发布值。",
+      "evidence_file": "evidence/egoexo4d.json",
+      "evidence_sha256": "5d8eae0682ea5a4e920f98bc872cd2d6f550b135d0f5549d75e7229130f30211"
+    },
+    {
+      "id": "ssv2",
+      "status": "planned",
+      "note": "首批：两份官方视频分卷和 labels ZIP 全部保留；训练只用 train。源站 HEAD 返回 403，但 GET 响应头可读；显式发送 Range bytes=0-0，只读 Content-Range 后关闭连接，不读取正文。不得将响应 Content-Length=1 误作文件总量。",
+      "evidence_file": "evidence/ssv2-header-probes.json",
+      "evidence_sha256": "1823e0438ad4050cf4e4bf0f2c911ee59de7173949b789e9def298658514c91f"
+    },
+    {
+      "id": "howto100m",
+      "status": "published",
+      "note": "已核对作者提供的预处理视频发布量约 12 TB（原文 12Tb，视频无音频）；下载需通过作者表单申请账号。公开旧索引/字幕 ZIP 链接本次均返回 404，尚无可公开读取的逐文件精确字节清单；12 TB 不计入精确容量。",
+      "evidence_file": "evidence/howto100m.json",
+      "evidence_sha256": "691e21a7203a03146d8892e9c4a21428c05e64a977e0df0e0442b7069c573a02"
+    },
+    {
+      "id": "panda",
+      "status": "partial",
+      "note": "已选官方 2M 索引 ZIP（2.4M clips），HTTP HEAD 核验为 114,255,340 bytes；这是索引容量，不是视频容量。源视频来自 YouTube，下载可用性、分辨率与裁剪结果决定实际视频字节，发布方没有统一的视频归档清单。",
+      "evidence_file": "evidence/panda.json",
+      "evidence_sha256": "3279530f722bbc4901d05d66c715de51ff86cd5f8f766d62bbfaa573fdaa4fe2"
+    },
+    {
       "id": "scand",
-      "method": "GET metadata API",
-      "url": "https://dataverse.tdl.org/api/datasets/:persistentId/?persistentId=doi:10.18738/T8/0PRYRH",
-      "http_status": 403,
-      "note": "CloudFront returned access denied; public dataset page also returned 403. No payload requested."
+      "status": "partial",
+      "note": "已核验 DataCite 官方 DOI 登记 v5.2：284 个文件容量值，共 344,324,920,157 bytes。主站 Dataverse API 返回 403；登记容量没有路径对应关系，不能按 DOI 顺序配对，也不能充当当前可下载的 train 清单。",
+      "evidence_file": "evidence/scand.json",
+      "evidence_sha256": "2426d390d49297e8e7a371e305847115a025c7cb2611d569b680878a652c7b8f"
     },
     {
-      "id": "ssv2",
-      "method": "HEAD",
-      "url": "https://apigwx-aws.qualcomm.com/qsc/public/v1/api/download/software/dataset/AIDataset/Something-Something-V2/20bn-something-something-v2-00",
-      "http_status": 403,
-      "source_page": "https://www.qualcomm.com/developer/software/something-something-v-2-dataset/downloads"
-    },
-    {
-      "id": "ssv2",
-      "method": "HEAD",
-      "url": "https://apigwx-aws.qualcomm.com/qsc/public/v1/api/download/software/dataset/AIDataset/Something-Something-V2/20bn-something-something-v2-01",
-      "http_status": 403,
-      "source_page": "https://www.qualcomm.com/developer/software/something-something-v-2-dataset/downloads"
-    },
-    {
-      "id": "ssv2",
-      "method": "HEAD",
-      "url": "https://softwarecenter.qualcomm.com/api/download/software/dataset/AIDataset/Something-Something-V2/20bn-something-something-download-package-labels.zip",
-      "http_status": 403,
-      "source_page": "https://www.qualcomm.com/developer/software/something-something-v-2-dataset/downloads"
-    },
-    {
-      "id": "images",
-      "method": "HEAD",
-      "url": "https://images.cocodataset.org/zips/train2017.zip",
-      "result": "TLS certificate validation failed",
-      "replacement": "https://s3.amazonaws.com/images.cocodataset.org/zips/train2017.zip",
-      "note": "Same official S3 bucket; TLS validation remains enabled. Exact headers are in images inventory."
-    },
-    {
-      "id": "agibot2026",
-      "method": "GET dataset metadata",
-      "url": "https://huggingface.co/api/datasets/agibot-world/AgiBotWorld2026",
-      "siblings_returned": 100000,
-      "note": "Repository-info siblings list is capped; must use paginated tree API, not this count as a complete inventory."
+      "id": "selfsim",
+      "status": "not_generated",
+      "note": "尚未生成：这是计划中的自建仿真数据，没有现成远端文件；生成后统计文件 stat。此项不标为访问失败，也不记成已核验的 0 bytes。",
+      "evidence_file": "evidence/selfsim.json",
+      "evidence_sha256": "24df2f900d7f71e9fce1460f840f9cc2d74b19e7c3ecec39e30d6a64b6993711"
     }
-  ]
+  ],
+  "previous_audit": {
+    "schema": "wm-data-access-checks-v1",
+    "recorded_at": "2026-11-25T09:08:47.421764+00:00",
+    "data_bytes_downloaded": 0,
+    "checks": [
+      {
+        "id": "scand",
+        "method": "GET metadata API",
+        "url": "https://dataverse.tdl.org/api/datasets/:persistentId/?persistentId=doi:10.18738/T8/0PRYRH",
+        "http_status": 403,
+        "note": "CloudFront returned access denied; public dataset page also returned 403. No payload requested."
+      },
+      {
+        "id": "ssv2",
+        "method": "HEAD",
+        "url": "https://apigwx-aws.qualcomm.com/qsc/public/v1/api/download/software/dataset/AIDataset/Something-Something-V2/20bn-something-something-v2-00",
+        "http_status": 403,
+        "source_page": "https://www.qualcomm.com/developer/software/something-something-v-2-dataset/downloads"
+      },
+      {
+        "id": "ssv2",
+        "method": "HEAD",
+        "url": "https://apigwx-aws.qualcomm.com/qsc/public/v1/api/download/software/dataset/AIDataset/Something-Something-V2/20bn-something-something-v2-01",
+        "http_status": 403,
+        "source_page": "https://www.qualcomm.com/developer/software/something-something-v-2-dataset/downloads"
+      },
+      {
+        "id": "ssv2",
+        "method": "HEAD",
+        "url": "https://softwarecenter.qualcomm.com/api/download/software/dataset/AIDataset/Something-Something-V2/20bn-something-something-download-package-labels.zip",
+        "http_status": 403,
+        "source_page": "https://www.qualcomm.com/developer/software/something-something-v-2-dataset/downloads"
+      },
+      {
+        "id": "images",
+        "method": "HEAD",
+        "url": "https://images.cocodataset.org/zips/train2017.zip",
+        "result": "TLS certificate validation failed",
+        "replacement": "https://s3.amazonaws.com/images.cocodataset.org/zips/train2017.zip",
+        "note": "Same official S3 bucket; TLS validation remains enabled. Exact headers are in images inventory."
+      },
+      {
+        "id": "agibot2026",
+        "method": "GET dataset metadata",
+        "url": "https://huggingface.co/api/datasets/agibot-world/AgiBotWorld2026",
+        "siblings_returned": 100000,
+        "note": "Repository-info siblings list is capped; must use paginated tree API, not this count as a complete inventory."
+      }
+    ]
+  }
 }

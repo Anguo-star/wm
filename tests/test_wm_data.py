@@ -3,12 +3,14 @@ import gzip
 import importlib.util
 import io
 import json
+import sys
 from pathlib import Path
 from unittest.mock import Mock
 
 import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0,str(ROOT / 'tools/data'))
 spec = importlib.util.spec_from_file_location('wm_data', ROOT / 'tools/data/wm_data.py')
 wm = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(wm)
@@ -55,7 +57,7 @@ def test_inventory_does_not_become_selected_training_data(tmp_path, monkeypatch)
     monkeypatch.setattr(wm, 'hf_entries', lambda s: (entries,'a' * 40))
     args = args_for(tmp_path, [{'id':'extra','name':'Extra','phase':'expansion',
         'provider':'hf','repo':'owner/data','mode':'inventory'}])
-    assert wm.plan(args) == 2
+    assert wm.plan(args) == 0
     report = json.loads((Path(args.out) / 'capacity_report.json').read_text())
     row = report['datasets'][0]
     assert row['status'] == 'inventoried' and row['selected_bytes'] is None
@@ -133,7 +135,7 @@ def test_recon_gzip_header_keeps_archive_bytes(tmp_path, monkeypatch):
     compressed = gzip.compress(b'local synthetic fixture, not dataset content')
     row = {'url':'https://example.test/file.tar.gz','path':'file.tar.gz','bytes':len(compressed),
            'etag':'"v1"','last_modified':'today','allowed_content_encodings':['gzip','x-gzip']}
-    monkeypatch.setattr(wm,'http_metadata',lambda url, allowed: (len(compressed),'"v1"','today'))
+    monkeypatch.setattr(wm,'http_metadata',lambda url, allowed, allow_get_headers=False: (len(compressed),'"v1"','today'))
     response = Mock(status_code=200,headers={'Content-Encoding':'x-gzip','Content-Type':'application/x-gzip','ETag':'"v1"'})
     response.__enter__ = Mock(return_value=response);response.__exit__ = Mock(return_value=None)
     response.raw.stream.return_value = iter([compressed])

@@ -1,0 +1,12 @@
+{
+  "id": "recon",
+  "checked_at": "2026-11-25T10:00:39.235576+00:00",
+  "source_url": "https://github.com/robodhruv/drive-any-robot/blob/main/train/process_recon.py",
+  "git_blob_id": "b83e3df8095fa8daa776261d997fe17ba52242d2",
+  "verified_fields": [
+    "images/rgb_left",
+    "jackal/position",
+    "jackal/yaw"
+  ],
+  "scope": "Author-provided GNM processing code; no raw HDF5 data opened. These fields do not establish low-level command availability."
+}

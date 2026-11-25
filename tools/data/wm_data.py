@@ -24,21 +24,33 @@ def write_json(path,data):
     path=Path(path); path.parent.mkdir(parents=True,exist_ok=True)
     tmp=path.with_suffix(path.suffix+'.tmp'); tmp.write_text(json.dumps(data,ensure_ascii=False,indent=2),encoding='utf-8'); tmp.replace(path)
 
-def http_metadata(url,allowed_content_encodings=()):
+def http_metadata(url,allowed_content_encodings=(),allow_get_headers=False):
     import requests
     if urlsplit(url).scheme not in ('http','https'): raise ValueError('HTTP(S) URL required; use official CLI for s3/gs')
     headers={'Accept-Encoding':'identity'}
-    # HEAD only: planning never requests a data-file response body, even one byte.
+    # HEAD first. A named source may explicitly allow a streamed GET header probe.
+    # In both cases no response body is read, iterated or saved.
     with requests.head(url,headers=headers,allow_redirects=True,timeout=(15,60)) as r:
         encoding=r.headers.get('Content-Encoding','').lower()
         if r.ok and r.status_code==200 and r.headers.get('Content-Length','').isdigit() and (not encoding or encoding in allowed_content_encodings) and 'text/html' not in r.headers.get('Content-Type','').lower():
             return int(r.headers['Content-Length']),r.headers.get('ETag'),r.headers.get('Last-Modified')
-        r.raise_for_status()
-    raise ValueError('HEAD did not provide a reliable whole-file Content-Length; no data GET attempted')
+        if not allow_get_headers: r.raise_for_status()
+    if allow_get_headers:
+        with requests.get(url,headers={**headers,'Range':'bytes=0-0'},stream=True,allow_redirects=True,timeout=(15,60)) as r:
+            r.raise_for_status()
+            encoding=r.headers.get('Content-Encoding','').lower()
+            if (encoding and encoding not in allowed_content_encodings) or 'text/html' in r.headers.get('Content-Type','').lower():
+                raise ValueError('unexpected encoding or HTML in header probe')
+            match=re.fullmatch(r'bytes 0-0/(\d+)',r.headers.get('Content-Range',''))
+            if r.status_code==206 and match:
+                return int(match[1]),r.headers.get('ETag'),r.headers.get('Last-Modified')
+            if r.status_code==200 and r.headers.get('Content-Length','').isdigit():
+                return int(r.headers['Content-Length']),r.headers.get('ETag'),r.headers.get('Last-Modified')
+    raise ValueError('HEAD/header probe did not provide a reliable whole-file size; response body not read')
 
-def http_item(dataset,path,url,allowed_content_encodings=()):
-    n,etag,lm=http_metadata(url,allowed_content_encodings)
-    return {'dataset':dataset,'path':safe_path(path),'bytes':exact_size(n),'kind':'http','url':url,'etag':etag,'last_modified':lm,'allowed_content_encodings':list(allowed_content_encodings),'size_source':'HTTP HEAD Content-Length (raw representation bytes)'}
+def http_item(dataset,path,url,allowed_content_encodings=(),allow_get_headers=False):
+    n,etag,lm=http_metadata(url,allowed_content_encodings,allow_get_headers)
+    return {'dataset':dataset,'path':safe_path(path),'bytes':exact_size(n),'kind':'http','url':url,'etag':etag,'last_modified':lm,'allowed_content_encodings':list(allowed_content_encodings),'allow_get_headers':allow_get_headers,'size_source':'HTTP response headers; body not read' if allow_get_headers else 'HTTP HEAD Content-Length (raw representation bytes)'}
 
 def hf_entries(spec):
     from huggingface_hub import HfApi
@@ -66,9 +78,12 @@ def select_hf(entries,spec):
     if missing: raise ValueError(f'expected files absent at current commit: {missing}')
     selected=[names[p] for p in fixed]
     if mode=='fixed': return selected
-    if mode!='budget': raise ValueError('unknown selection mode')
+    if mode not in ('budget','filtered'): raise ValueError('unknown selection mode')
     pattern=re.compile(spec['include_regex']); candidates=[f for f in entries if pattern.fullmatch(f['path']) and f['path'] not in fixed]
+    if spec.get('allowed_video_ids'):
+        allowed=set(spec['allowed_video_ids']); candidates=[f for f in candidates if PurePosixPath(f['path']).stem in allowed]
     if not candidates: raise ValueError('no eligible files matched; inspect repository tree and update selection regex')
+    if mode=='filtered': return sorted(selected+candidates,key=lambda x:x['path'])
     cap=exact_size(spec['budget_bytes']); total=sum(f['bytes'] for f in selected)
     if total>cap: raise ValueError('required metadata alone exceeds budget')
     # Stable randomized selection of complete archives/shards. Not a semantic sample.
@@ -151,6 +166,12 @@ def plan(args):
                 selected=local_entries(k,local[k]); base.update(status='local',version='local files; '+utc(),note='实际本地文件字节数（仅所选目录；确认不含测试/重复数据）')
             elif k in manual:
                 selected=[http_item(k,r['path'],r['url']) for r in manual[k]]; base.update(status='planned',note='用户指定文件清单；确保配套文件及授权完整')
+            elif s['provider']=='audit':
+                from metadata_sources import audit_metadata
+                result,evidence=audit_metadata(s,http_item)
+                path=out/'evidence'/(k+'.json');write_json(path,evidence)
+                base.update(result,evidence_file=path.relative_to(out).as_posix(),evidence_sha256=digest(evidence))
+                reports.append(base);print(f'{k}: {base["status"].upper()} — {base["note"]}',flush=True);continue
             elif s['provider']=='manual':
                 base.update(status='pending',note=s['note']); reports.append(base); print(f'{k}: PENDING — {s["note"]}'); continue
             elif s['provider']=='hf':
@@ -162,13 +183,32 @@ def plan(args):
             elif s['provider']=='dataverse':
                 entries,rev=dataverse_entries(s); base.update(save_inventory(out,s,entries,rev),status='inventoried')
                 reports.append(base);print(f'{k}: INVENTORY {human(base["scope_bytes"])} / {len(entries)} files; select train trajectories separately',flush=True);continue
+            elif s['provider'] in ('s3','gcs','hf_bucket','epic'):
+                from metadata_sources import PROVIDERS
+                entries,rev=PROVIDERS[s['provider']](s)
+                for f in entries: safe_path(f['path']);exact_size(f['bytes'])
+                for item in s.get('extra_http_items',[]):
+                    entries.append(http_item(k,item['path'],item['url'],item.get('allowed_content_encodings',())))
+                base.update(save_inventory(out,s,entries,rev))
+                if s.get('mode')=='inventory':
+                    base.update(status='inventoried');reports.append(base);continue
+                selected=select_hf(entries,s);base.update(status='planned')
+                if s.get('verify_selected_headers'):
+                    from concurrent.futures import ThreadPoolExecutor
+                    def verify_header(f):
+                        n,etag,lm=http_metadata(f['url'])
+                        if n!=f['bytes']: raise ValueError('publisher manifest and HTTP size disagree')
+                        f.update(etag=etag,last_modified=lm,header_verified=True)
+                    with ThreadPoolExecutor(max_workers=4) as pool:
+                        list(pool.map(verify_header,selected))
+                    base.update(save_inventory(out,s,entries,rev))
             elif s['provider']=='http':
-                selected=[http_item(k,x['path'],x['url'],x.get('allowed_content_encodings',())) for x in s['items']]; base.update(status='planned',version='HTTP headers '+utc())
+                selected=[http_item(k,x['path'],x['url'],x.get('allowed_content_encodings',()),x.get('allow_get_headers',False)) for x in s['items']]; base.update(status='planned',version='HTTP headers '+utc())
             else: raise ValueError('unsupported provider')
             if not selected: raise ValueError('empty selection')
             if len({x['path'] for x in selected})!=len(selected): raise ValueError('duplicate path')
             base.update(selected_bytes=sum(exact_size(x['bytes']) for x in selected),files=len(selected))
-            if selected[0]['kind']=='http':
+            if selected[0]['kind']=='http' and not base.get('inventory_file'):
                 base.update(save_inventory(out,s,selected,'HTTP validators '+digest(selected)[:16]))
             files.extend(selected); print(f'{k}: {human(base["selected_bytes"])} / {len(selected)} files',flush=True)
         except Exception as e:
@@ -177,16 +217,24 @@ def plan(args):
             base.update(status='error',selected_bytes=None,files=0,error_code=reason,note=note)
             print(f'{k}: ERROR ({type(e).__name__}); see provider, credentials and file selectors',file=sys.stderr)
         reports.append(base)
-    total=sum(x['selected_bytes'] for x in reports if isinstance(x['selected_bytes'],int)); transfer=sum(f['bytes'] for f in files if f['kind']!='local')
-    payload={'schema':'wm-data-manifest-v1','created_at':utc(),'metadata_only':True,'data_bytes_downloaded':0,'datasets':reports,'files':files,'selected_bytes':total,'transfer_bytes':transfer,'starter_selected_bytes':sum(x['selected_bytes'] or 0 for x in reports if x['phase']=='starter'),'pending':[x['id'] for x in reports if x['selected_bytes'] is None]}
+    payload=make_manifest(reports,files)
+    write_plan(out,payload)
+    print(f'\nVerified selected-file subtotal: {human(payload["selected_bytes"])}; new transfer: {human(payload["transfer_bytes"])}; unresolved file selections: {len(payload["download_unresolved"])}')
+    print('This is NOT effective training data size. Import capacity_report.json into the HTML. No payload downloaded.')
+    return 2 if payload['download_unresolved'] else 0
+
+def make_manifest(reports,files):
+    total=sum(x['selected_bytes'] for x in reports if isinstance(x['selected_bytes'],int));transfer=sum(f['bytes'] for f in files if f['kind']!='local')
+    payload={'schema':'wm-data-manifest-v1','created_at':utc(),'metadata_only':True,'data_bytes_downloaded':0,'datasets':reports,'files':files,'selected_bytes':total,'transfer_bytes':transfer,'starter_selected_bytes':sum(x['selected_bytes'] or 0 for x in reports if x['phase']=='starter'),'download_unresolved':[x['id'] for x in reports if x['status'] not in ('planned','local','inventoried')], 'audit_counts':{s:sum(x['status']==s for x in reports) for s in sorted({x['status'] for x in reports})}}
     payload['manifest_sha256']=digest(payload)
+    return payload
+
+def write_plan(out,payload):
+    out=Path(out);out.mkdir(parents=True,exist_ok=True)
     write_json(out/'manifest.json',payload)
     public={k:v for k,v in payload.items() if k!='files'};public['schema']='wm-data-report-v1';write_json(out/'capacity_report.json',public)
     with (out/'files.csv').open('w',encoding='utf-8-sig',newline='') as f:
-        w=csv.DictWriter(f,fieldnames=['dataset','path','bytes','kind','revision','size_source','sha256'],extrasaction='ignore',lineterminator='\n');w.writeheader();w.writerows(files)
-    print(f'\nVerified selected-file subtotal: {human(total)}; new transfer: {human(transfer)}; unresolved: {len(payload["pending"])}')
-    print('This is NOT effective training data size. Import capacity_report.json into the HTML. No payload downloaded.')
-    return 2 if payload['pending'] else 0
+        w=csv.DictWriter(f,fieldnames=['dataset','path','bytes','kind','revision','size_source','sha256'],extrasaction='ignore',lineterminator='\n');w.writeheader();w.writerows(payload['files'])
 
 def verify_local(p,row,sha=False):
     if not p.is_file() or p.stat().st_size!=row['bytes']: return False
@@ -199,8 +247,11 @@ def verify_local(p,row,sha=False):
 
 def fetch_http(row,target):
     import requests
+    if row.get('bucket') and row.get('xet_hash'):
+        from metadata_sources import verify_bucket_identity
+        verify_bucket_identity(row)
     allowed=row.get('allowed_content_encodings',())
-    n,e,lm=http_metadata(row['url'],allowed)
+    n,e,lm=http_metadata(row['url'],allowed,row.get('allow_get_headers',False))
     if n!=row['bytes'] or (row.get('etag') and e!=row['etag']) or (row.get('last_modified') and lm!=row['last_modified']): raise RuntimeError('remote file changed; re-plan before download')
     tmp=target.with_name(target.name+'.part'); meta=target.with_name(target.name+'.part.json')
     identity=digest({'url':row['url'],'bytes':n,'etag':e,'last_modified':lm})
@@ -216,7 +267,7 @@ def fetch_http(row,target):
             r.raise_for_status()
             encoding=r.headers.get('Content-Encoding','').lower()
             if (encoding and encoding not in allowed) or 'text/html' in r.headers.get('Content-Type','').lower(): raise RuntimeError('unexpected HTTP compression or HTML response')
-            if row.get('etag') and r.headers.get('ETag') and r.headers['ETag']!=row['etag']: raise RuntimeError('remote ETag changed')
+            if e and r.headers.get('ETag') and r.headers['ETag']!=e: raise RuntimeError('remote ETag changed')
             if row.get('last_modified') and r.headers.get('Last-Modified') and r.headers['Last-Modified']!=row['last_modified']: raise RuntimeError('remote Last-Modified changed')
             if size and r.status_code==206:
                 m=re.fullmatch(r'bytes (\d+)-(\d+)/(\d+)',r.headers.get('Content-Range',''))
@@ -243,7 +294,7 @@ def load_manifest(path):
 def download(args):
     m=load_manifest(args.manifest); root=Path(args.dest).resolve();root.mkdir(parents=True,exist_ok=True)
     rows=[x for x in m['files'] if x['kind']!='local']; approved=set(args.approved or [])
-    if m['pending'] and not args.allow_partial: raise ValueError('unresolved datasets; re-plan or explicitly --allow-partial')
+    if m.get('download_unresolved',m.get('pending',[])) and not args.allow_partial: raise ValueError('unresolved datasets; re-plan or explicitly --allow-partial')
     missing_approval={r['dataset'] for r in rows}-approved
     if missing_approval: raise ValueError('missing --approved for '+', '.join(sorted(missing_approval)))
     expected=sum(exact_size(r['bytes']) for r in rows)

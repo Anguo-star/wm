@@ -1,0 +1,24 @@
+{
+  "id": "panda",
+  "checked_at": "2026-11-25T09:51:37.627877+00:00",
+  "source_urls": [
+    "https://github.com/snap-research/Panda-70M",
+    "https://github.com/snap-research/Panda-70M/blob/main/dataset_dataloading/README.md"
+  ],
+  "checks": [],
+  "training_file_body_bytes_read": 0,
+  "components": [
+    {
+      "dataset": "panda",
+      "path": "panda70m_training_2m_with_additional_annotation.zip",
+      "bytes": 114255340,
+      "kind": "http",
+      "url": "https://drive.usercontent.google.com/download?id=1k7NzU6wVNZYl6NxOhLXE7Hz7OrpzNLgB&export=download&confirm=t",
+      "etag": null,
+      "last_modified": "Tue, 15 Oct 2024 18:08:02 GMT",
+      "allowed_content_encodings": [],
+      "allow_get_headers": false,
+      "size_source": "HTTP HEAD Content-Length (raw representation bytes)"
+    }
+  ]
+}

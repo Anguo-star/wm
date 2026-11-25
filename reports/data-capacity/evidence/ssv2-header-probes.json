@@ -1,0 +1,49 @@
+{
+  "id": "ssv2",
+  "checked_at": "2026-11-25T09:44:04.508332+00:00",
+  "checks": [
+    {
+      "path": "20bn-something-something-v2-00",
+      "url": "https://apigwx-aws.qualcomm.com/qsc/public/v1/api/download/software/dataset/AIDataset/Something-Something-V2/20bn-something-something-v2-00",
+      "method": "GET response headers only; Range bytes=0-0; body not read",
+      "status": 206,
+      "headers": {
+        "Content-Type": "binary/octet-stream",
+        "Content-Length": "1",
+        "Last-Modified": "Tue, 27 Aug 2024 03:46:26 GMT",
+        "ETag": "\"6e29113d1ed81ee0a2a2fe03fea6b7fb-1193\"",
+        "Content-Range": "bytes 0-0/10000000000"
+      },
+      "body_bytes_read": 0
+    },
+    {
+      "path": "20bn-something-something-v2-01",
+      "url": "https://apigwx-aws.qualcomm.com/qsc/public/v1/api/download/software/dataset/AIDataset/Something-Something-V2/20bn-something-something-v2-01",
+      "method": "GET response headers only; Range bytes=0-0; body not read",
+      "status": 206,
+      "headers": {
+        "Content-Type": "binary/octet-stream",
+        "Content-Length": "1",
+        "Last-Modified": "Tue, 27 Aug 2024 03:47:42 GMT",
+        "ETag": "\"c70f57e03a596f045c5d1fa8efb10201-1126\"",
+        "Content-Range": "bytes 0-0/9444975475"
+      },
+      "body_bytes_read": 0
+    },
+    {
+      "path": "20bn-something-something-download-package-labels.zip",
+      "url": "https://softwarecenter.qualcomm.com/api/download/software/dataset/AIDataset/Something-Something-V2/20bn-something-something-download-package-labels.zip",
+      "method": "GET response headers only; Range bytes=0-0; body not read",
+      "status": 206,
+      "headers": {
+        "Content-Type": "application/zip",
+        "Content-Length": "1",
+        "Last-Modified": "Mon, 23 Sep 2024 15:19:25 GMT",
+        "ETag": "\"0f1197a8de0bec5ac57e9ffd426b9bb5\"",
+        "Content-Range": "bytes 0-0/5140376"
+      },
+      "body_bytes_read": 0
+    }
+  ],
+  "training_file_body_bytes_read": 0
+}
