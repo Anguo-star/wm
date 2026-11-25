@@ -1,0 +1,440 @@
+{
+  "schema": "wm-data-config-v1",
+  "datasets": [
+    {
+      "id": "ego4d",
+      "provider": "manual",
+      "name": "Ego4D",
+      "phase": "starter",
+      "note": "操作相关 train 片段 + narration/手物标注；授权后按视频 UID 选取。",
+      "source_urls": [
+        "https://ego4d-data.org/docs/start-here/",
+        "https://www.lab22.ai/ego4d",
+        "https://ego4d-data.org/docs/benchmarks/hands-and-objects/"
+      ]
+    },
+    {
+      "id": "egodex",
+      "provider": "http",
+      "items": [
+        {
+          "path": "part2.zip",
+          "url": "https://ml-site.cdn-apple.com/datasets/egodex/part2.zip"
+        }
+      ],
+      "name": "EgoDex",
+      "phase": "starter",
+      "note": "训练 Part 2（含 basic_pick_place），后续扩展 Part 1/3/4/5；不将 test 用于训练。",
+      "source_urls": [
+        "https://github.com/apple-aiml-research/ml-egodex"
+      ]
+    },
+    {
+      "id": "epic100",
+      "provider": "manual",
+      "name": "EPIC-KITCHENS-100",
+      "phase": "starter",
+      "note": "只取 train 原视频与动作/叙述标注；不取重复 RGB/光流。",
+      "source_urls": [
+        "https://epic-kitchens.github.io/2025",
+        "https://github.com/epic-kitchens/epic-kitchens-100-annotations/blob/master/license.txt",
+        "https://epic-kitchens.github.io/2026"
+      ]
+    },
+    {
+      "id": "human100k",
+      "provider": "manual",
+      "name": "Human-1M-100K",
+      "phase": "expansion",
+      "note": "扩展：先按已授权的任务、episode 与相机选取完整 MP4 + Parquet + meta；不扫描/下载全桶。",
+      "source_urls": [
+        "https://huggingface.co/datasets/nvidia/PhysicalAI-Human-1M-100K",
+        "https://huggingface.co/buckets/nvidia/human-1m-100k-oss/tree/release-staging",
+        "https://huggingface.co/datasets/nvidia/PhysicalAI-Human-1M-100K/blob/main/data/schema.json",
+        "https://huggingface.co/buckets/nvidia/human-1m-100k-oss"
+      ]
+    },
+    {
+      "id": "egoexo4d",
+      "provider": "manual",
+      "name": "Ego-Exo4D",
+      "phase": "expansion",
+      "note": "扩展：448px train、ego 视角或最佳 exo 视角，随所需标注；完整 448px+标注+metadata 为官方 449.135 GB（含所有 split）。",
+      "source_urls": [
+        "https://ego-exo4d-data.org/",
+        "https://docs.ego-exo4d-data.org/data/takes/",
+        "https://www.lab22.ai/ego4d",
+        "https://docs.ego-exo4d-data.org/download/"
+      ]
+    },
+    {
+      "id": "ssv2",
+      "provider": "http",
+      "name": "Something-Something V2",
+      "phase": "starter",
+      "note": "全部视频归档（分卷须齐全）+ 官方 labels；训练只用 train。 官方下载页三个入口本次 HEAD 均返回 HTTP 403；需解决访问条件后重新核验完整分卷。",
+      "source_urls": [
+        "https://www.qualcomm.com/developer/software/something-something-v-2-dataset",
+        "https://www.qualcomm.com/developer/software/something-something-v-2-dataset/downloads"
+      ],
+      "items": [
+        {
+          "path": "20bn-something-something-v2-00",
+          "url": "https://apigwx-aws.qualcomm.com/qsc/public/v1/api/download/software/dataset/AIDataset/Something-Something-V2/20bn-something-something-v2-00"
+        },
+        {
+          "path": "20bn-something-something-v2-01",
+          "url": "https://apigwx-aws.qualcomm.com/qsc/public/v1/api/download/software/dataset/AIDataset/Something-Something-V2/20bn-something-something-v2-01"
+        },
+        {
+          "path": "20bn-something-something-download-package-labels.zip",
+          "url": "https://softwarecenter.qualcomm.com/api/download/software/dataset/AIDataset/Something-Something-V2/20bn-something-something-download-package-labels.zip"
+        }
+      ]
+    },
+    {
+      "id": "assembly101",
+      "provider": "hf",
+      "name": "Assembly101",
+      "phase": "expansion",
+      "note": "扩展：按 train take 与必要机位获取官方 recordings、对应标注；第三方 720p 仅备选。 本次只核验发布仓库文件树，未选定训练子集。",
+      "source_urls": [
+        "https://assembly-101.github.io/",
+        "https://huggingface.co/datasets/cvml-nus/assembly101",
+        "https://huggingface.co/datasets/cvml-nus/assembly101/tree/main",
+        "https://huggingface.co/buckets/wsndcb/assembly101-bucket",
+        "https://huggingface.co/datasets/pablovela5620/assembly101-720p/tree/main/videos"
+      ],
+      "repo": "cvml-nus/assembly101",
+      "mode": "inventory",
+      "revision": "bfc15ea5e3f0bc8f8c232af6c1b45aa137a9d967"
+    },
+    {
+      "id": "kinetics",
+      "provider": "manual",
+      "name": "Kinetics",
+      "phase": "expansion",
+      "note": "扩展低优先级；先用已发布训练归档或根据动作类选择。",
+      "source_urls": [
+        "https://github.com/cvdfoundation/kinetics-dataset",
+        "https://github.com/google-deepmind/tapnet/blob/main/README.md",
+        "https://docs.voxel51.com/dataset_zoo/datasets/kinetics_700_2020.html"
+      ]
+    },
+    {
+      "id": "howto100m",
+      "provider": "manual",
+      "name": "HowTo100M",
+      "phase": "expansion",
+      "note": "按需；只有合法可访问的原视频才纳入训练，先记录实际成功取回文件。",
+      "source_urls": [
+        "https://www.di.ens.fr/willow/research/howto100m/",
+        "https://github.com/antoine77340/howto100m"
+      ]
+    },
+    {
+      "id": "finevideo",
+      "provider": "hf",
+      "repo": "HuggingFaceFV/finevideo",
+      "mode": "budget",
+      "include_regex": "data/train[^/]*\\.parquet",
+      "budget_bytes": 200000000000,
+      "name": "FineVideo",
+      "phase": "starter",
+      "note": "首批：按真实 Parquet 分片大小、固定种子在上限内选择完整训练分片；下载后筛镜头与动作。",
+      "source_urls": [
+        "https://huggingface.co/datasets/HuggingFaceFV/finevideo",
+        "https://github.com/huggingface/fineVideo"
+      ],
+      "revision": "84c74091e1c6ee7a5dffabfafb5c9033e4718883"
+    },
+    {
+      "id": "openvid",
+      "provider": "hf",
+      "repo": "nkp37/OpenVid-1M",
+      "mode": "budget",
+      "include_regex": "OpenVid_part\\d+\\.zip",
+      "files": [
+        "data/train/OpenVid-1M.csv"
+      ],
+      "budget_bytes": 200000000000,
+      "name": "OpenVid-1M",
+      "phase": "starter",
+      "note": "首批：只选完整 OpenVid_part*.zip（排除拆分分卷和 OpenVidHD），保留主库 CSV；预算内选整包。",
+      "source_urls": [
+        "https://huggingface.co/datasets/nkp37/OpenVid-1M/blob/main/README.md",
+        "https://github.com/NJU-PCALab/OpenVid",
+        "https://huggingface.co/datasets/nkp37/OpenVid-1M/tree/main",
+        "https://huggingface.co/datasets/nkp37/OpenVid-1M"
+      ],
+      "revision": "d8a63bd22989c80b5734ec2bb989f4e1b61a5807"
+    },
+    {
+      "id": "panda",
+      "provider": "manual",
+      "name": "Panda-70M",
+      "phase": "expansion",
+      "note": "扩展：优先官方 2M 索引，核对源视频条款；先取回已选片段，实际字节统计后入库。",
+      "source_urls": [
+        "https://github.com/snap-research/Panda-70M",
+        "https://github.com/snap-research/Panda-70M/blob/main/dataset_dataloading/README.md"
+      ]
+    },
+    {
+      "id": "bridgev2",
+      "provider": "hf",
+      "repo": "nvidia/BridgeData2_LeRobot_v3",
+      "mode": "all",
+      "name": "BridgeData V2",
+      "phase": "starter",
+      "note": "首批：NVIDIA BridgeData2_LeRobot_v3 整个转换仓库；核验轨迹/动作/视角覆盖。",
+      "source_urls": [
+        "https://rail-berkeley.github.io/bridgedata/",
+        "https://github.com/rail-berkeley/bridge_data_v2",
+        "https://rail.eecs.berkeley.edu/datasets/bridge_release/data/",
+        "https://huggingface.co/datasets/nvidia/BridgeData2_LeRobot_v3/tree/main"
+      ],
+      "revision": "b96f7216e3cff58007884656a81584c857c185ae"
+    },
+    {
+      "id": "droid",
+      "provider": "hf",
+      "repo": "lerobot/droid_1.0.1",
+      "mode": "all",
+      "name": "DROID",
+      "phase": "starter",
+      "note": "首批：lerobot/droid_1.0.1 整个仓库；若需要失败轨迹/高清则另选 Cosmos3 或官方 raw，不重复计量。",
+      "source_urls": [
+        "https://droid-dataset.github.io/",
+        "https://droid-dataset.github.io/droid/the-droid-dataset.html",
+        "https://droid-dataset.github.io/droid/the-droid-dataset",
+        "https://huggingface.co/datasets/lerobot/droid_1.0.1/tree/main",
+        "https://huggingface.co/datasets/nvidia/Cosmos3-DROID"
+      ],
+      "revision": "71da9dcba338f53889907ac5762a2ebc6c2e55ff"
+    },
+    {
+      "id": "oxe",
+      "provider": "manual",
+      "name": "Open X-Embodiment",
+      "phase": "expansion",
+      "note": "扩展：按 embodiment 选择官方 GCS 子集/版本，去除已下载 Bridge/DROID 等重复轨迹；先列对象字节。",
+      "source_urls": [
+        "https://robotics-transformer-x.github.io/",
+        "https://github.com/google-deepmind/open_x_embodiment",
+        "https://github.com/mishmish66/oxe_downloader"
+      ]
+    },
+    {
+      "id": "libero",
+      "provider": "hf",
+      "repo": "nvidia/LIBERO_LeRobot_v3",
+      "mode": "all",
+      "name": "LIBERO",
+      "phase": "starter",
+      "note": "首批：整个转换仓库；同轨迹/任务拆分去重，评测集隔离。",
+      "source_urls": [
+        "https://github.com/Lifelong-Robot-Learning/LIBERO",
+        "https://huggingface.co/datasets/nvidia/LIBERO_LeRobot_v3/tree/main"
+      ],
+      "revision": "e5907374380b8f96511957e6ba5582be52a1e179"
+    },
+    {
+      "id": "robocasa",
+      "provider": "hf",
+      "repo": "OpenMOSS-Team/robocasa365-lerobot-v3.0",
+      "mode": "all",
+      "name": "RoboCasa365",
+      "phase": "starter",
+      "note": "首批：OpenMOSS atomic/composite 预训练仓库；MimicGen 单列扩展。",
+      "source_urls": [
+        "https://robocasa.ai/docs/build/html/datasets/datasets_overview.html",
+        "https://robocasa.ai/docs/build/html/datasets/using_datasets.html",
+        "https://github.com/robocasa/robocasa",
+        "https://huggingface.co/datasets/OpenMOSS-Team/robocasa365-lerobot-v3.0/tree/main"
+      ],
+      "revision": "31122ddd21cd12917ac1f481f38ee6aa7f2c7c78"
+    },
+    {
+      "id": "llavavideo",
+      "provider": "hf",
+      "name": "LLaVA-Video-178K",
+      "phase": "expansion",
+      "note": "扩展/语言读出：选有原视频且状态变化明确的 train 文件；问答标注不计作未来预测。 本次只核验发布仓库文件树，未选定训练子集。",
+      "source_urls": [
+        "https://huggingface.co/datasets/lmms-lab/LLaVA-Video-178K",
+        "https://huggingface.co/datasets/lmms-lab/LLaVA-Video-178K/tree/main"
+      ],
+      "repo": "lmms-lab/LLaVA-Video-178K",
+      "mode": "inventory",
+      "revision": "6d8c562dc26d70042a0d9704d1cae58c94b89098"
+    },
+    {
+      "id": "molmodata",
+      "provider": "hf",
+      "name": "Molmo 2 数据系列",
+      "phase": "expansion",
+      "note": "扩展：按 Cap、VideoPoint、VideoTrack 实际使用字段选取标注与对应视频；不全量计入 Predictor。 本次只核验发布仓库文件树，未选定训练子集。 此文件树只覆盖 Molmo2-Cap 标注仓库，不包含原视频或其他 Molmo2 数据集。",
+      "source_urls": [
+        "https://huggingface.co/collections/allenai/molmo2-data",
+        "https://huggingface.co/datasets/allenai/Molmo2-Cap",
+        "https://allenai.org/blog/molmo2"
+      ],
+      "repo": "allenai/Molmo2-Cap",
+      "mode": "inventory",
+      "revision": "b1d59eb784681dff9c7bdc453c7be51582eca209"
+    },
+    {
+      "id": "images",
+      "provider": "http",
+      "items": [
+        {
+          "path": "train2017.zip",
+          "url": "https://s3.amazonaws.com/images.cocodataset.org/zips/train2017.zip"
+        },
+        {
+          "path": "annotations_trainval2017.zip",
+          "url": "https://s3.amazonaws.com/images.cocodataset.org/annotations/annotations_trainval2017.zip"
+        }
+      ],
+      "name": "COCO / PixMo 图像数据",
+      "phase": "starter",
+      "note": "首批：COCO train2017.zip + annotations_trainval2017.zip；仅 train 记录。PixMo 待选原图与标注。 使用官方 images.cocodataset.org 同名 S3 bucket 的 HTTPS 路径式入口，避免域名证书不匹配。",
+      "source_urls": [
+        "https://cocodataset.org/#download",
+        "https://huggingface.co/collections/allenai/pixmo",
+        "https://github.com/cocodataset/cocodataset.github.io/blob/master/dataset/download.htm",
+        "https://huggingface.co/datasets/allenai/pixmo-cap",
+        "https://huggingface.co/datasets/UWGZQ/pixmo_images"
+      ]
+    },
+    {
+      "id": "scand",
+      "provider": "dataverse",
+      "name": "SCAND",
+      "phase": "starter",
+      "note": "首批：选择 train 轨迹完整 bag 和所需配套元数据；提取视觉/里程计/控制后另统计。",
+      "source_urls": [
+        "https://www.cs.utexas.edu/~xiao/SCAND/SCAND.html",
+        "https://doi.org/10.18738/T8/0PRYRH"
+      ],
+      "server": "https://dataverse.tdl.org",
+      "persistent_id": "doi:10.18738/T8/0PRYRH",
+      "mode": "inventory"
+    },
+    {
+      "id": "rxr",
+      "provider": "manual",
+      "name": "RxR + Matterport3D",
+      "phase": "expansion",
+      "note": "扩展：train guide/follower 标注与 pose traces + 获授权的场景包；无需全量 BERT 特征。",
+      "source_urls": [
+        "https://github.com/google-research-datasets/RxR",
+        "https://niessner.github.io/Matterport/",
+        "https://github.com/facebookresearch/habitat-lab/blob/main/DATASETS.md"
+      ]
+    },
+    {
+      "id": "recon",
+      "provider": "http",
+      "items": [
+        {
+          "path": "recon_dataset.tar.gz",
+          "url": "https://rail.eecs.berkeley.edu/datasets/recon-navigation/recon_dataset.tar.gz",
+          "allowed_content_encodings": [
+            "gzip",
+            "x-gzip"
+          ]
+        }
+      ],
+      "name": "RECON",
+      "phase": "starter",
+      "note": "首批：作者完整数据包；检查是否包含可作为控制条件的真实命令，缺失则仅做观测/里程计预测。 原站为 .tar.gz 返回 gzip/x-gzip 编码头，按原始响应字节保存，禁止自动解压。",
+      "source_urls": [
+        "https://rail.eecs.berkeley.edu/datasets/recon-navigation/"
+      ]
+    },
+    {
+      "id": "omniedit",
+      "provider": "hf",
+      "repo": "TIGER-Lab/OmniEdit-Filtered-1.2M",
+      "mode": "budget",
+      "include_regex": "data/train-.*\\.parquet",
+      "budget_bytes": 100000000000,
+      "name": "OmniEdit-Filtered-1.2M",
+      "phase": "starter",
+      "note": "首批：train Parquet 分片按真实文件大小选择；保留源图、指令、目标，下载后筛状态变化。",
+      "source_urls": [
+        "https://huggingface.co/datasets/TIGER-Lab/OmniEdit-Filtered-1.2M/tree/main"
+      ],
+      "revision": "82455c6cd66db7f0e5bfce8d7a236441af59d6df"
+    },
+    {
+      "id": "sharegpt4o",
+      "provider": "hf",
+      "repo": "FreedomIntelligence/ShareGPT-4o-Image",
+      "mode": "fixed",
+      "files": [
+        "text_and_image_to_image.json",
+        "text_and_image_to_image_part_0.tar",
+        "text_and_image_to_image_part_1.tar",
+        "text_to_image.json",
+        "text_to_image_part_0.tar"
+      ],
+      "name": "ShareGPT-4o-Image",
+      "phase": "starter",
+      "note": "首批：编辑 part_0、part_1 及对应 JSON；图文 part_0 及 JSON；根据实际 tar 成员过滤 JSON。",
+      "source_urls": [
+        "https://huggingface.co/datasets/FreedomIntelligence/ShareGPT-4o-Image/tree/main"
+      ],
+      "revision": "f9bcb9494e562f3b6d46585bda0e7f0f0d6ec43f"
+    },
+    {
+      "id": "agibotbeta",
+      "provider": "hf",
+      "name": "AgiBot World Beta",
+      "phase": "expansion",
+      "note": "扩展：选择有完整动作、状态和视频的双臂任务，按任务/episode 清单。 本次只核验发布仓库文件树，未选定训练子集。",
+      "source_urls": [
+        "https://huggingface.co/datasets/agibot-world/AgiBotWorld-Beta"
+      ],
+      "repo": "agibot-world/AgiBotWorld-Beta",
+      "mode": "inventory",
+      "revision": "2252b3fdc88dc67fa5d5e4b771e1b86f5e71c278"
+    },
+    {
+      "id": "agibot2026",
+      "provider": "hf",
+      "name": "AgiBot World 2026",
+      "phase": "expansion",
+      "note": "扩展：优先 ImitationLearning 和可核验的交互轨迹；与 Beta 去重后选择完整任务包。 本次只核验发布仓库文件树，未选定训练子集。",
+      "source_urls": [
+        "https://huggingface.co/datasets/agibot-world/AgiBotWorld2026"
+      ],
+      "repo": "agibot-world/AgiBotWorld2026",
+      "mode": "inventory",
+      "revision": "95b159a10305a0385f369aba5d4b16242526d17b"
+    },
+    {
+      "id": "robocasa-mg",
+      "provider": "hf",
+      "repo": "ember-lab-berkeley/robocasa365-pretrain-mg",
+      "mode": "inventory",
+      "name": "RoboCasa365 MimicGen",
+      "phase": "expansion",
+      "note": "扩展：按所需仿真任务选择；先做完整仓库容量审计，避免与其他 RoboCasa 版本重复。",
+      "source_urls": [
+        "https://huggingface.co/datasets/ember-lab-berkeley/robocasa365-pretrain-mg"
+      ],
+      "revision": "91e741f7b603d75cb17b3caae617a37927842b0c"
+    },
+    {
+      "id": "selfsim",
+      "provider": "manual",
+      "name": "自建多动力学仿真",
+      "phase": "starter",
+      "note": "首批：按同状态分支、历史反事实及失败轨迹生成；生成后按文件 stat 汇总。",
+      "source_urls": []
+    }
+  ]
+}

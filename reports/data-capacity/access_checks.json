@@ -1,0 +1,50 @@
+{
+  "schema": "wm-data-access-checks-v1",
+  "recorded_at": "2026-11-25T09:08:47.421764+00:00",
+  "data_bytes_downloaded": 0,
+  "checks": [
+    {
+      "id": "scand",
+      "method": "GET metadata API",
+      "url": "https://dataverse.tdl.org/api/datasets/:persistentId/?persistentId=doi:10.18738/T8/0PRYRH",
+      "http_status": 403,
+      "note": "CloudFront returned access denied; public dataset page also returned 403. No payload requested."
+    },
+    {
+      "id": "ssv2",
+      "method": "HEAD",
+      "url": "https://apigwx-aws.qualcomm.com/qsc/public/v1/api/download/software/dataset/AIDataset/Something-Something-V2/20bn-something-something-v2-00",
+      "http_status": 403,
+      "source_page": "https://www.qualcomm.com/developer/software/something-something-v-2-dataset/downloads"
+    },
+    {
+      "id": "ssv2",
+      "method": "HEAD",
+      "url": "https://apigwx-aws.qualcomm.com/qsc/public/v1/api/download/software/dataset/AIDataset/Something-Something-V2/20bn-something-something-v2-01",
+      "http_status": 403,
+      "source_page": "https://www.qualcomm.com/developer/software/something-something-v-2-dataset/downloads"
+    },
+    {
+      "id": "ssv2",
+      "method": "HEAD",
+      "url": "https://softwarecenter.qualcomm.com/api/download/software/dataset/AIDataset/Something-Something-V2/20bn-something-something-download-package-labels.zip",
+      "http_status": 403,
+      "source_page": "https://www.qualcomm.com/developer/software/something-something-v-2-dataset/downloads"
+    },
+    {
+      "id": "images",
+      "method": "HEAD",
+      "url": "https://images.cocodataset.org/zips/train2017.zip",
+      "result": "TLS certificate validation failed",
+      "replacement": "https://s3.amazonaws.com/images.cocodataset.org/zips/train2017.zip",
+      "note": "Same official S3 bucket; TLS validation remains enabled. Exact headers are in images inventory."
+    },
+    {
+      "id": "agibot2026",
+      "method": "GET dataset metadata",
+      "url": "https://huggingface.co/api/datasets/agibot-world/AgiBotWorld2026",
+      "siblings_returned": 100000,
+      "note": "Repository-info siblings list is capped; must use paginated tree API, not this count as a complete inventory."
+    }
+  ]
+}
