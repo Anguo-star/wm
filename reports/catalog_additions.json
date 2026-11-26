@@ -1,0 +1,124 @@
+[
+  {
+    "id": "genhumanego",
+    "name": "Gen-HumanEgo",
+    "category": "ego",
+    "scale": "1,847.7 小时 · 44,632 episodes · 6 视角",
+    "use": "默认 S1 主训练：真实人类交互未来、手物运动与空间状态；人体运动与机器人控制分开。",
+    "contents": "MCAP、同步 RGB、DFM 手部重建/深度、分层语义及设备 URDF。",
+    "access": "官方 HF；数据卡 CC BY-SA 4.0，内容自动申请访问。用户表示已下载；本地范围尚未提供。",
+    "publicCapacity": "HF 页面约 62 TB；固定版本精确字节见下方",
+    "capacityEvidence": "完整 HF 分页文件树；模型派生标注须做质量筛选。",
+    "starterSelection": "用户已有数据优先：按完整 episode 分组划分后取主视角窗口；不要求重新下载全库。",
+    "links": [
+      {
+        "label": "官方数据",
+        "url": "https://huggingface.co/datasets/genrobot2025/Gen-HumanEgo"
+      },
+      {
+        "label": "字段与生产流程",
+        "url": "https://www.genrobot.ai/blog/gen-human-ego"
+      },
+      {
+        "label": "WAM 采用证据",
+        "url": "https://arxiv.org/html/2611.06817v3#S2"
+      }
+    ]
+  },
+  {
+    "id": "egomimic",
+    "name": "EgoMimic",
+    "category": "ego",
+    "scale": "人类 / 机器人配套 HDF5 · 小任务域",
+    "use": "验证人机迁移和接口对齐；已有策略迁移证据，本项目 Predictor 收益独立测试。",
+    "contents": "人类与机器人示范 HDF5；视频、手/机器人状态及相关动作字段。",
+    "access": "作者项目直链 gatech/EgoMimic；使用与再发布按原项目和数据说明。",
+    "publicCapacity": "官方 HF 现有发布范围约 242.644 GB",
+    "capacityEvidence": "固定 HF commit 完整文件树；不把窄任务域等同广覆盖主库。",
+    "starterSelection": "对齐消融；整任务/场景留出，不进入 S1 默认混合。",
+    "links": [
+      {
+        "label": "作者项目与实验",
+        "url": "https://egomimic.github.io/"
+      },
+      {
+        "label": "官方数据",
+        "url": "https://huggingface.co/datasets/gatech/EgoMimic"
+      }
+    ]
+  },
+  {
+    "id": "openhumanwam",
+    "name": "Open-HumanWAM-50K",
+    "category": "ego",
+    "scale": "论文整理量 50,000 小时；发布仍在上传",
+    "use": "规模化人类交互补充；包含 Gen-HumanEgo、EgoDex 等，先按 lineage 去重。",
+    "contents": "LeRobot v3 视频/手部运动/语言及分规模子集索引；本次只核验 subsets/ 索引。",
+    "access": "官方 DAGroup-PKU HF；自动申请访问，数据卡列 Apache-2.0，原始来源条款分别保留。",
+    "publicCapacity": "50K 是论文小时数；本次精确容量仅覆盖发布索引",
+    "capacityEvidence": "全库查询触发 HF 限流；已完成固定版本全部 subsets/ 文件核验，不推算视频 TB。",
+    "starterSelection": "先检查完整发布的 100h/500h 子集；与原始人类来源做等预算替换，不重复叠加。",
+    "links": [
+      {
+        "label": "论文 v3",
+        "url": "https://arxiv.org/html/2611.06817v3"
+      },
+      {
+        "label": "官方代码与发布进度",
+        "url": "https://github.com/DAGroup-PKU/HumanNet/tree/Open-HumanWAM"
+      },
+      {
+        "label": "官方 HF",
+        "url": "https://huggingface.co/datasets/DAGroup-PKU/Open-HumanWAM-50K"
+      }
+    ]
+  },
+  {
+    "id": "holoassist",
+    "name": "HoloAssist",
+    "category": "ego",
+    "scale": "官方主页 169 小时 · 7 类同步流",
+    "use": "补语言干预、错误恢复、手部预测；保留官方错误检测/干预评测。",
+    "contents": "本次范围：压缩视频、手/头/眼、相机信息、trainval 标注和 v1.2 划分；不含深度/IMU。",
+    "access": "官方 Azure 发布包，CDLA-Permissive 2.0；采用原始入口，避免混淆 HF 转换版。",
+    "publicCapacity": "本次 7 个官方配套文件约 409.274 GB",
+    "capacityEvidence": "HTTP HEAD 精确长度及版本验证字段；所有 split 包含在归档中。",
+    "starterSelection": "只以官方 train 做增量实验；不得把归档总量作为有效 train 容量。",
+    "links": [
+      {
+        "label": "官方数据与基准",
+        "url": "https://holoassist.github.io/"
+      },
+      {
+        "label": "论文",
+        "url": "https://arxiv.org/abs/2309.17024"
+      }
+    ]
+  },
+  {
+    "id": "hdepic",
+    "name": "HD-EPIC",
+    "category": "ego",
+    "scale": "41 小时 · 9 个厨房 · 高密度状态标注",
+    "use": "整体保留独立评测：对象运动、空间状态、注视和长时记忆；默认训练权重为 0。",
+    "contents": "核验 Videos/ 全部 156 个 MP4 及时间映射/日志；标注由独立官方 GitHub 提供。",
+    "access": "Bristol 原始发布及官方标注；按发布协议使用。HF 镜像的 train 标签不改变评测用途。",
+    "publicCapacity": "官方视频子目录近似 115.5 GB；此次按字节精确复核",
+    "capacityEvidence": "官方 MD5 路径清单 + 全部文件 HEAD；发布 MD5 未做内容校验；不含 VRS/SLAM/数字孪生。",
+    "starterSelection": "独立评测保留；预测只使用截止时刻之前的信息，完整视频 VQA 另列为理解任务。",
+    "links": [
+      {
+        "label": "官方项目",
+        "url": "https://hd-epic.github.io/site/"
+      },
+      {
+        "label": "官方文件清单",
+        "url": "https://github.com/hd-epic/hd-epic-downloader"
+      },
+      {
+        "label": "官方标注",
+        "url": "https://github.com/hd-epic/hd-epic-annotations"
+      }
+    ]
+  }
+]

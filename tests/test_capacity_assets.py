@@ -18,15 +18,15 @@ def test_published_report_matches_manifest_and_all_inventories():
     assert hashlib.sha256(raw).hexdigest() == checksum
     report = json.loads((REPORTS / 'capacity_report.json').read_text())
     assert report['datasets'] == manifest['datasets']
-    assert len(report['datasets']) == 29
+    assert len(report['datasets']) == 34
     assert report['selected_bytes'] == sum(x['bytes'] for x in manifest['files']) == 2556757642643
     assert len(manifest['files']) == 4902
     assert sum(x['selected_bytes'] is not None for x in report['datasets']) == 16
-    assert sum(x['status'] == 'inventoried' for x in report['datasets']) == 7
+    assert sum(x['status'] == 'inventoried' for x in report['datasets']) == 11
     assert report['starter_selected_bytes'] == 1653563899540
-    assert report['audit_counts'] == {'blocked':2,'inventoried':7,'not_generated':1,'partial':2,'planned':16,'published':1}
+    assert report['audit_counts'] == {'blocked':2,'inventoried':11,'not_generated':1,'partial':3,'planned':16,'published':1}
     assert not any(x['status'] in ('pending','error') for x in report['datasets'])
-    assert set(report['download_unresolved']) == {'ego4d','egoexo4d','scand','panda','howto100m','selfsim'}
+    assert set(report['download_unresolved']) == {'ego4d','egoexo4d','scand','panda','howto100m','selfsim','openhumanwam'}
     lock = {x['id']:x for x in json.loads((ROOT/'tools/data/datasets.lock.json').read_text())['datasets']}
     selected = {}
     for f in manifest['files']: selected.setdefault(f['dataset'], {})[f['path']] = f
@@ -54,7 +54,7 @@ def test_html_embedded_assets_match_maintained_source():
         value = re.search(r'<script id="'+attr+r'" type="application/json">(.*?)</script>',page,re.S)[1]
         parsed = json.loads(value)
         if path: assert parsed == json.loads(path.read_text())
-        else: assert len(parsed) == 29
+        else: assert len(parsed) == 34
     script = re.search(r'<script id="capacity-ui">(.*?)</script>',page,re.S)[1]
     assert script == (ROOT/'scripts/capacity-ui.js').read_text()
     blob = re.search(r'href="data:application/zip;base64,([^"]+)"',page)[1]

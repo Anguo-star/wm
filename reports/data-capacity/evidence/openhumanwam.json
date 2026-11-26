@@ -1,0 +1,18 @@
+{
+  "id": "openhumanwam",
+  "checked_at": "2026-11-26T02:17:46.872588+00:00",
+  "source_urls": [
+    "https://huggingface.co/datasets/DAGroup-PKU/Open-HumanWAM-50K",
+    "https://arxiv.org/html/2611.06817v3",
+    "https://github.com/DAGroup-PKU/HumanNet/tree/Open-HumanWAM"
+  ],
+  "scope_note": "已核验固定 commit 的 subsets/ 全部分规模索引（100h 至 50,000h），不是训练视频容量。整库递归超过 637,000 个目录项后遭遇 HF 429，本次停止全库遍历；发布方同时注明数据仍在上传。规模化试验需按索引确认完整视频/动作配套，再与 Gen-HumanEgo、EgoDex 等原始来源去重。",
+  "metadata_only": true,
+  "training_file_body_bytes_read": 0,
+  "whole_corpus_probe": {
+    "outcome": "rate_limited",
+    "http_status": 429,
+    "directory_entries_before_limit": 637000,
+    "followup": "Completed fixed-commit subsets/ metadata inventory; no training-file GET."
+  }
+}

@@ -59,7 +59,9 @@ def hf_entries(spec):
     rev=info.sha
     if not rev: raise ValueError('missing repository commit')
     entries=[]
-    for f in api.list_repo_tree(repo,repo_type='dataset',revision=rev,recursive=True,expand=False):
+    kwargs={'repo_type':'dataset','revision':rev,'recursive':True,'expand':False}
+    if spec.get('path_in_repo'): kwargs['path_in_repo']=safe_path(spec['path_in_repo'])
+    for f in api.list_repo_tree(repo,**kwargs):
         if not isinstance(f,RepoFile): continue
         n=exact_size(f.size)
         sha=getattr(getattr(f,'lfs',None),'sha256',None)
@@ -177,8 +179,11 @@ def plan(args):
             elif s['provider']=='hf':
                 entries,rev=hf_entries(s); base.update(save_inventory(out,s,entries,rev))
                 if s.get('mode')=='inventory':
-                    base.update(status='inventoried'); reports.append(base)
-                    print(f'{k}: INVENTORY {human(base["scope_bytes"])} / {len(entries)} files; no training subset selected',flush=True); continue
+                    base.update(status='inventoried')
+                    if s.get('content_scope')=='index_only':
+                        base.update(status='partial',auxiliary_bytes=base['scope_bytes'],auxiliary_files=base['scope_files'],verification_label='索引容量已核验')
+                    reports.append(base)
+                    print(f'{k}: {base["status"].upper()} {human(base["scope_bytes"])} / {len(entries)} files; complete specified metadata scope',flush=True); continue
                 selected=select_hf(entries,s); base.update(status='planned',note=s.get('note',''))
             elif s['provider']=='dataverse':
                 entries,rev=dataverse_entries(s); base.update(save_inventory(out,s,entries,rev),status='inventoried')
@@ -203,7 +208,17 @@ def plan(args):
                         list(pool.map(verify_header,selected))
                     base.update(save_inventory(out,s,entries,rev))
             elif s['provider']=='http':
-                selected=[http_item(k,x['path'],x['url'],x.get('allowed_content_encodings',()),x.get('allow_get_headers',False)) for x in s['items']]; base.update(status='planned',version='HTTP headers '+utc())
+                from concurrent.futures import ThreadPoolExecutor
+                def inspect_item(x):
+                    row=http_item(k,x['path'],x['url'],x.get('allowed_content_encodings',()),x.get('allow_get_headers',False))
+                    if x.get('expected_md5'): row['publisher_md5']=x['expected_md5']
+                    return row
+                with ThreadPoolExecutor(max_workers=4) as pool:
+                    selected=list(pool.map(inspect_item,s['items']))
+                base.update(status='planned',version='HTTP headers '+utc())
+                if s.get('mode')=='inventory':
+                    base.update(save_inventory(out,s,selected,'HTTP validators '+digest(selected)[:16]),status='inventoried')
+                    reports.append(base);print(f'{k}: INVENTORY {human(base["scope_bytes"])} / {len(selected)} files',flush=True);continue
             else: raise ValueError('unsupported provider')
             if not selected: raise ValueError('empty selection')
             if len({x['path'] for x in selected})!=len(selected): raise ValueError('duplicate path')

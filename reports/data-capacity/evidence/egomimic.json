@@ -1,0 +1,11 @@
+{
+  "id": "egomimic",
+  "checked_at": "2026-11-26T02:07:09.527471+00:00",
+  "source_urls": [
+    "https://egomimic.github.io/",
+    "https://huggingface.co/datasets/gatech/EgoMimic"
+  ],
+  "scope_note": "人类/机器人跨域对齐的小规模验证集候选；原论文支持策略迁移，Predictor 收益需本项目消融。人类手部轨迹与机器人控制分字段，完整任务/轨迹留出；不将整库或重复配对当作新增主训练量。",
+  "metadata_only": true,
+  "training_file_body_bytes_read": 0
+}

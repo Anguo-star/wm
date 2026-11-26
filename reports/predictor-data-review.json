@@ -1,0 +1,23 @@
+{
+  "reviewed_at":"2026-11-26",
+  "scope":"补充人类交互、多模态与人机迁移来源，并复核原数据的主训练优先级；不是完整 HF 或行业数据清单。",
+  "selection_policy":[
+    "与连续交互预测相关：可提供真实时序、动作后果、几何/手物关系、历史或有效语义监督。",
+    "能追溯原发布方、版本、字段、划分和许可；HF 可获取只是接入条件，不等于已验证训练收益。",
+    "分别记录直接世界预测实验、人机迁移实验、数据集基准和发布者说明；不以下载量、点赞或 TB 大小代替证据。",
+    "用户已有且监督适配的数据优先接通；进入目录不等于进入默认混合，评测集也单独收录。",
+    "先用相同控制数据曝光、模型容量与总计算量的消融验证净增益，再扩大；新发布合集必须回溯原来源去重。"
+  ],
+  "reviews":[
+    {"id":"genhumanego","name":"Gen-HumanEgo","decision":"新增；主干人类交互数据","evidence":"Open-HumanWAM v3 §2/表1 明确采用该来源，整理后约 1,814.53 小时；整体 WAM 实验是混合采用证据，不能归因为单源效果。","fit":"同步多视角、手部重建、深度、分层语义；默认主视角未来预测，派生标注仅作质量可控辅助。","availability":"用户表示已下载；官方 HF 为自动申请访问，公开文件树可核验。","sources":["https://huggingface.co/datasets/genrobot2025/Gen-HumanEgo","https://www.genrobot.ai/blog/gen-human-ego","https://arxiv.org/html/2611.06817v3#S2"]},
+    {"id":"openhumanwam","name":"Open-HumanWAM-50K","decision":"新增；规模化增量候选","evidence":"2026-11 新预印本报告人类数据规模/多样性与机器人迁移实验；官方代码、子集和数据上传入口可查。尚不作为已有长期行业共识。","fit":"整理手部可见性、稳定性、活跃片段与跨来源动作表示；本项目保留独立人体/机器人条件，不直接复制生成式 WAM 的训练目标。","availability":"发布仍在上传；固定 commit 的目录容量仅代表现有文件。与 Gen-HumanEgo、EgoDex 等来源重叠。","sources":["https://arxiv.org/html/2611.06817v3","https://github.com/DAGroup-PKU/HumanNet/tree/Open-HumanWAM","https://huggingface.co/datasets/DAGroup-PKU/Open-HumanWAM-50K"]},
+    {"id":"egomimic","name":"EgoMimic","decision":"新增；跨域对齐小实验","evidence":"官方项目给出人类/机器人联合训练及新场景迁移实验；例如同一 Object-in-Bowl 设置下，人类+机器人混合优于增加等时机器人数据。该结论属于策略学习。","fit":"成对领域和小任务集合利于验证人机迁移，不能代表通用物理预测已验证。","availability":"官方项目直接链接 gatech/EgoMimic；保留完整 HDF5 文件，不把窄任务域作为大规模主库。","sources":["https://egomimic.github.io/","https://huggingface.co/datasets/gatech/EgoMimic"]},
+    {"id":"holoassist","name":"HoloAssist","decision":"新增；干预/错误恢复与手部预测补充","evidence":"ICCV 2023 发布，官方设有错误检测、干预类型和手部预测基准；2026 EgoVis 继续设置错误检测挑战。支持特定诊断价值，不代表通用 Predictor 的已测收益。","fit":"真实人类协作、语言指导、手部/头部/注视与相机信息；只用 train 训练，保留官方 val/test。","availability":"官方 Azure 原始/压缩发布包可核验；不优先采用来源不明的 HF 再打包。","sources":["https://holoassist.github.io/","https://arxiv.org/abs/2309.17024"]},
+    {"id":"hdepic","name":"HD-EPIC","decision":"新增；整体保留独立评测","evidence":"CVPR 2025 的高密度验证数据，提供动作、物体运动和 3D 场景诊断及 VQA 基准。","fit":"评测模型是否保持对象状态、运动与空间关系；只有预测时可见的问题用于预测能力测试，完整视频 VQA 单列为理解任务。","availability":"采用作者 Bristol 视频与官方标注入口；镜像标签 train 不改变本项目评测用途。","sources":["https://arxiv.org/abs/2502.04144","https://hd-epic.github.io/site/","https://github.com/hd-epic/hd-epic-downloader","https://github.com/hd-epic/hd-epic-annotations"]},
+    {"id":"droid","name":"DROID / BridgeData V2 / OXE","decision":"保留；真实连续动作主干","evidence":"V-JEPA 2 的 DROID 动作条件后训练提供直接未来预测证据；Bridge/OXE 的跨机器人训练采用属于相邻证据，应在本 Predictor 上验证。","fit":"独立 Action Adapter、本体状态、控制时域和单位；OXE 与独立来源去重。","availability":"沿用已核验版本；测试数据不参与归一化或训练。","sources":["https://arxiv.org/abs/2506.09985","https://github.com/facebookresearch/vjepa2","https://robotics-transformer-x.github.io/","https://rail-berkeley.github.io/bridgedata/"]},
+    {"id":"egodex","name":"EgoDex / 人类交互预训练路线","decision":"保留；与用户已有 Gen-HumanEgo 互补","evidence":"Open-HumanWAM 明确使用 EgoDex；DreamDojo 支持人类视频预训练后接机器人控制的路线，EgoScale 提供人机迁移规模实验。不同工作不是同一数据/目标的直接复现。","fit":"主训练学习真实未来；借鉴数据过滤和跨域评估，不能将从未来提取的 latent action 当作部署可用条件。","availability":"EgoDex 沿用已有发布包；NVIDIA Human-1M-100K 是另一个资源，不能仅凭同属 NVIDIA 就等同 DreamDojo 或 EgoScale 的全部训练数据。","sources":["https://github.com/apple/ml-egodex","https://arxiv.org/html/2611.06817v3","https://dreamdojo-world.github.io/","https://research.nvidia.com/labs/gear/egoscale/"]},
+    {"id":"upstream_ego","name":"HumanNet / EgoSuite-Open100K / EgoVerse","decision":"已搜集；优先经整理合集评估","evidence":"Open-HumanWAM 表1列出三者采用范围，提供有针对性的整理与迁移依据。","fit":"扩大任务/场景覆盖的后续来源；先验证整理合集，再决定是否单独适配原始格式，不把整个发布规模视作已验证有效量。","availability":"与 Open-HumanWAM 重叠，按原 episode 和片段追溯；不新增重复的训练时长统计。","sources":["https://arxiv.org/html/2611.06817v3#S2","https://huggingface.co/blog/LightwheelAI/egosuite-open100k"]},
+    {"id":"rh20t_review","name":"RH20T","decision":"已搜集；触觉/力控需求明确后接入","evidence":"ICRA 2024 的跨机器人、接触丰富操作及人机示范研究。","fit":"适合补接触与力控，但当前优先解决 DROID/Bridge 控制响应和人类数据增益；新增传感器/坐标适配有明确任务时再承担。","availability":"本轮只评估用途与官方发布说明，没有把它计入可下载容量或默认混合。","sources":["https://rh20t.github.io/","https://arxiv.org/abs/2307.00595"]},
+    {"id":"broad_media_review","name":"通用视频、图文与编辑数据","decision":"目录保留；默认主训练权重降为 0","evidence":"原报告已有视觉预训练/语言编辑配方证据，但不等于对冻结 Encoder 后的交互 Predictor 必须高比例加入。","fit":"FineVideo/OpenVid 作为最多 5% 的覆盖增量对照；图文/编辑优先用于 S3 读出或单独消融，固定机器人控制曝光。导航保留单独适配方案。","availability":"保留历史容量证据与工具，不再把“已经列出/容易下载”当作默认训练依据。","sources":["https://github.com/facebookresearch/vjepa2","https://arxiv.org/abs/2506.09985"]}
+  ]
+}

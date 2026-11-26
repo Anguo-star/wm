@@ -153,3 +153,31 @@ def test_download_still_requires_explicit_license_approval(tmp_path):
     args = argparse.Namespace(manifest=str(path),dest=str(tmp_path / 'dest'),approved=None,
         allow_partial=False,execute=False)
     with pytest.raises(ValueError,match='missing --approved'): wm.download(args)
+
+
+def test_hf_index_scope_never_becomes_training_capacity(tmp_path,monkeypatch):
+    import huggingface_hub
+    from huggingface_hub.hf_api import RepoFile
+    api=Mock();api.dataset_info.return_value=Mock(sha='a'*40)
+    api.list_repo_tree.return_value=iter([RepoFile(path='subsets/100h.parquet',size=21,oid='b'*40)])
+    monkeypatch.setattr(huggingface_hub,'HfApi',lambda:api)
+    args=args_for(tmp_path,[{'id':'index','name':'Index','phase':'expansion','provider':'hf','repo':'owner/test',
+        'mode':'inventory','path_in_repo':'subsets','content_scope':'index_only'}])
+    assert wm.plan(args)==2
+    row=json.loads((Path(args.out)/'capacity_report.json').read_text())['datasets'][0]
+    assert row['status']=='partial' and row['auxiliary_bytes']==21 and row['selected_bytes'] is None
+    assert api.list_repo_tree.call_args.kwargs['path_in_repo']=='subsets'
+
+
+def test_http_inventory_does_not_enter_selected_download_manifest(tmp_path,monkeypatch):
+    import requests
+    response=Mock(status_code=200,ok=True,headers={'Content-Length':'123','Content-Type':'application/x-tar'})
+    response.__enter__=Mock(return_value=response);response.__exit__=Mock(return_value=None)
+    monkeypatch.setattr(requests,'head',Mock(return_value=response))
+    monkeypatch.setattr(requests,'get',Mock(side_effect=AssertionError('data body GET forbidden')))
+    args=args_for(tmp_path,[{'id':'extra','name':'Extra','phase':'expansion','provider':'http','mode':'inventory',
+        'items':[{'path':'all.tar','url':'https://example.test/all.tar','expected_md5':'a'*32}]}])
+    assert wm.plan(args)==0
+    m=json.loads((Path(args.out)/'manifest.json').read_text());row=m['datasets'][0]
+    assert row['scope_bytes']==123 and row['status']=='inventoried'
+    assert row['selected_bytes'] is None and m['selected_bytes']==0 and m['files']==[]

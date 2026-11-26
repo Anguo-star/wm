@@ -1,0 +1,14 @@
+{
+  "id": "hdepic",
+  "checked_at": "2026-11-26T02:10:59.599208+00:00",
+  "source_urls": [
+    "https://hd-epic.github.io/site/",
+    "https://github.com/hd-epic/hd-epic-downloader",
+    "https://github.com/hd-epic/hd-epic-annotations",
+    "https://arxiv.org/abs/2502.04144"
+  ],
+  "scope_note": "独立评测保留，不进入主训练混合。核验官方 Videos/ 完整子目录：156 个 MP4 及时间映射/转换日志；不含 VRS、SLAM、数字孪生或独立 GitHub 标注。文件列表来自官方 downloader 的 md5 清单；MD5 为发布者记录，本次未读取视频验证内容哈希。按作者定位作为高密度状态/对象运动诊断，不因 HF 镜像称 train 就用作训练。",
+  "metadata_only": true,
+  "training_file_body_bytes_read": 0,
+  "publisher_manifest_git_blob": "c1cae6ebe87bde65325a2198fc755f1afaaafae8"
+}

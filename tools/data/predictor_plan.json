@@ -1,0 +1,28 @@
+{
+  "schema": "wm-predictor-plan-v1",
+  "version": "2026-11-26-r1",
+  "status": "proposed_not_trained",
+  "objective": "冻结单帧 Encoder，训练有因果历史、语义及独立连续控制接口的 latent Predictor；先建立交互预测能力，再做领域适配。",
+  "sampling_unit": "一个去重 episode 中、单个主视角的一段有效时序窗口；来源概率按窗口采样，不按 TB、帧数、视角数或文本改写数",
+  "architecture": {"encoder_candidates": ["V-JEPA 2.1-L native image", "DINOv3-L"], "encoder_frozen": true, "predictor_parameters_million": [50,150], "resolution": 256, "history_frames": 8, "future_frames": 8, "base_fps": 4, "fast_motion_fps": 8, "history_only_conditioning": true},
+  "stages": [
+    {"id":"S0","name":"数据接通与编码器选型","unique_window_budget":[100000,300000],"default_updates":10000,"global_batch_windows":128,"mixture":{"genhumanego":35,"egodex":15,"droid":20,"bridgev2":10,"epic100":5,"ssv2":5,"libero":5,"robocasa":5},"exit":"解码和时序对齐通过；完成相同清单/分辨率/曝光的 Encoder 对照；有效控制响应优于无动作/错动作基线。"},
+    {"id":"S1","name":"交互主干预训练","unique_window_budget":[1000000,3000000],"default_updates":50000,"global_batch_windows":128,"mixture":{"genhumanego":35,"egodex":15,"droid":20,"bridgev2":10,"epic100":5,"ssv2":5,"libero":5,"robocasa":5},"exit":"跨任务/场景未来预测与接触状态读出改善，真实控制精度不退化；扩大数据优于仅重复小集。"},
+    {"id":"S2","name":"动作响应与多步强化","unique_window_budget":null,"default_updates":20000,"global_batch_windows":128,"mixture":{"genhumanego":10,"egodex":10,"droid":35,"bridgev2":15,"oxe":10,"libero":7.5,"robocasa":7.5,"epic100":2.5,"ssv2":2.5},"exit":"动作反转/幅值响应、多步 rollout、失败检测通过独立留出评测；历史适应仅在真实分支数据上验收。"}
+  ],
+  "update_budget_note": "更新步数是启动预算建议，须先测单步吞吐/显存再换算墙钟；每步实际 token、梯度累积、有效窗口曝光单独记录，不承诺硬件耗时。S0 先做 200 步吞吐检查，再决定是否执行全部预算。",
+  "robot_condition_mix": {"numeric_only":70,"numeric_and_verified_text":20,"verified_text_only":5,"passive":5},
+  "human_condition_rule": "默认被动未来预测；仅对推理时已知、排除事后结果的动作描述或等价操作指令启用语义条件。任务愿望用于策略与评分，固定控制下无关目标措辞不应改变物理预测。人体姿态是独立监督或已观察历史，不当作机器人命令；以全序列重建的姿态不直接作为因果历史输入。",
+  "optional_sources": [
+    {"id":"holoassist","role":"语言干预/错误恢复/手部预测补充","rule":"通过独立增量实验后，最多替换 S1 人类数据的 5 个百分点；只用官方 train。"},
+    {"id":"human100k","role":"人类交互多样性扩展","rule":"与 Gen-HumanEgo/EgoDex 同层替换；当前已核验示例批次不足以支撑大规模配比，接入更多完整批次后再扩大。"},
+    {"id":"openhumanwam","role":"整理后的人类数据规模化扩展","rule":"先从已发布、完整配套的 100h/500h 子集做增量；与 Gen-HumanEgo/EgoDex 原来源去重，不能叠加同一源片段。"},
+    {"id":"egomimic","role":"人类/机器人跨域对齐消融","rule":"任务域较窄，用独立训练/留出任务验证迁移，不替代 DROID 主干。"},
+    {"id":"selfsim","role":"隐藏动力学历史与同初态分支","rule":"生成并验证真实分支后，在 S2 以 5% 替换 LIBERO 与 RoboCasa 各 2.5%；尚未生成时保持默认比例，不能声称完成历史适应训练。"}
+  ],
+  "evaluation_only":["hdepic"],
+  "default_zero_sources":["ego4d","egoexo4d","finevideo","openvid","kinetics","howto100m","panda","omniedit","sharegpt4o","images","llavavideo","molmodata","assembly101","agibotbeta","agibot2026","robocasa-mg","scand","rxr","recon"],
+  "data_gates": ["官方 split 优先；没有 split 时以人物/场景/采集会话分组划分 90/5/5，划分清单固定后才截窗口；人物/会话 ID 缺失时声明仅能验证 episode/任务级泛化，不声称人物 OOD", "同一 episode 的六视角、重编码、重叠窗口与语言改写归同一组", "保存 source lineage；OXE 与原机器人源、Open-HumanWAM 与原人类源交叉去重", "无效时间戳、镜头切换、严重丢帧和动作单位不明样本排除；缺失动作使用 mask，不能补零", "Gen-HumanEgo 的 DFM 深度/手部重建记录为模型派生监督，以可用质量字段和抽样人工检查控制辅助损失", "数据量不足时记录实际窗口数，停止扩大或使用同监督类型替代源，不虚构样本数与有效小时", "独立样本人工检查至少 100 个窗口/来源；校验不同任务、机位和时段，保留问题清单"],
+  "evaluation": {"seeds":3,"metrics":["冻结特征空间内的归一化多步预测误差","统一物理读出：手/物体位移、接触状态与事件时刻","同历史正确/错配/反向动作的未来选择与幅值响应","跨任务、人物、场景的迁移和多步误差增长","下游成功率、碰撞/误干预、实际延迟"],"comparison_rule":"比较不同 Encoder 时使用共同物理与下游指标，不直接横比异空间 latent loss；用 bootstrap 置信区间报告差异。","noninferiority_margin":"动作基线关键指标相对退化超过 2% 则不接入辅助数据；2% 是工程门槛建议，非论文结论。"},
+  "source_notes": {"genhumanego":"用户表示已下载；本次未取得本地路径，远端容量不代表本地到手容量。","hdepic":"作者定义为验证/诊断数据；默认整体保留评测，不把 HF 镜像的 train 标签当作可训练划分。","openhumanwam":"最新预印本与官方仓库提供采用证据；整体混合收益不等于对单一数据集的因果归因。"}
+}

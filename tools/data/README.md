@@ -9,7 +9,7 @@ python wm_data.py plan --datasets egodex droid bridgev2 libero --out wm_plan
 python wm_data.py plan --config datasets.lock.json --all-datasets --out wm_audit
 ```
 
-默认检查首批；`--all-datasets` 包含全部 29 项。公开元数据查询不需要 `--approved`，不接受任何许可；gated 仓库能列出文件也不代表已经取得内容访问权。
+默认检查首批；`--all-datasets` 包含全部 34 项。公开元数据查询不需要 `--approved`，不接受任何许可；gated 仓库能列出文件也不代表已经取得内容访问权。
 
 ## 文件与统计口径
 
@@ -24,14 +24,27 @@ python wm_data.py plan --config datasets.lock.json --all-datasets --out wm_audit
 | --- | --- |
 | `planned` / `local` | 精确选中文件容量 / 本地已有文件 stat |
 | `inventoried` | 完整指定范围已逐文件核验，扩展范围单列，不属于未核验项 |
-| `partial` | SCAND 登记容量或 Panda 索引已核验；这些容量不充当已选训练视频容量 |
+| `partial` | SCAND 登记容量、Panda 索引或 Open-HumanWAM 分规模索引已核验；这些容量不充当已选训练视频容量 |
 | `published` | HowTo100M 作者公布的约 12 TB 已核对，非逐文件精确字节 |
 | `blocked` | 官方清单访问受限；本次为 Ego4D 与 Ego-Exo4D |
 | `not_generated` | 自建仿真尚未生成，无现成文件 |
 
 报告的 `download_unresolved` 表示不能直接组成下载清单的条目，不等同“未核验”；不包含 `inventoried`。下载器仍兼容旧报告的 `pending` 字段。返回码 2 表示这些条目仍需单独处理，已取得的容量统计仍有效。查询失败不会用估算值或零字节替代。
 
+## 新版训练配置
+
+`predictor_plan.json` 记录新版 S0/S1/S2 的来源概率、窗口、预算、条件混合、接入门槛与评测隔离；它是规划，不是已执行训练的结果。HTML 可直接下载此 JSON，工具包 `audit/predictor-data-review.json` 保留本轮证据。
+
+目录“默认主训练”标签以该配置为准；旧容量报告中的 `phase=starter` 是之前的下载选择范围，两者不能混用。Gen-HumanEgo 用户表示已下载，但未提供路径；本次只核验远端版本。不要重复下载已有文件，先以本地 stat 和 episode 清单确认范围。
+
 ## 已固定的范围
+
+- Gen-HumanEgo：完整 HF commit 的 44,636 文件，包含 44,632 个 MCAP；主训练候选，六视角按同一 episode 分组。
+- EgoMimic：作者直链 HF 的完整 HDF5 发布范围；用于跨域对齐消融。
+- HoloAssist：官方 7 个视频/手头眼/相机/标注/划分包；训练须按官方 split 过滤，不含深度和 IMU。
+- HD-EPIC：作者 Videos/ 完整子目录，156 个 MP4 及时间映射/日志，共 487 文件；评测保留，不含 VRS、SLAM、独立 GitHub 标注等其他部分。
+- Open-HumanWAM：整库递归触发 HF 429 后停止；只核验固定 commit 的 `subsets/` 目录 10 个索引文件。报告 `partial` 的索引容量不能当训练视频量；发布方仍在上传，先确认索引对应文件配套再使用。合集与 Gen-HumanEgo/EgoDex 原始数据去重。
+
 
 - EPIC：作者推荐的两个 torrent **清单描述符**提供 700 个原始视频的长度；不连接 tracker/peer。按官方 AR train ID、固定种子、100 GB 上限选出 67 个完整视频，保留固定 commit 的训练标注；68 个选中文件另经 HTTP HEAD 核对。
 - SSv2：两份官方视频分卷和 labels ZIP。服务器 HEAD 返回 403，配置显式允许 `stream=True`、`Range: bytes=0-0` 的响应头查询，读取 **Content-Range 的总长**后立即关闭；不读取正文，不把 Content-Length=1 当作总量。其他 HTTP 源默认不启用此回退。

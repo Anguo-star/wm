@@ -77,6 +77,9 @@ def main():
         f'<span id="cap-selected-detail">首批 {len(selected)} 项 / {files:,} 文件；其他范围与登记/索引容量单列；未下载数据</span>')
     counts=report['audit_counts'];verified=counts.get('planned',0)+counts.get('local',0)+inventory_count
     summary = f'''<div class="lead" id="capacity-audit-summary"><p><strong>{report['created_at'][:10]} 元数据核验：</strong>{verified} 项取得完整指定范围的逐文件容量；其中首批 {len(selected)} 项已固定选择，共 <strong>{total:,} bytes（{total/1e12:.6f} TB）</strong>，{files:,} 个完整文件。扩展范围与首批分别统计，Human-1M 仅指选定完整批次，Molmo2-Cap 仅指该标注仓库。</p><p>SCAND 已核验 DOI 登记的 <strong>344,324,920,157 bytes</strong>，Panda 官方索引已核验 <strong>114,255,340 bytes</strong>；二者均不充当已选训练视频容量。HowTo100M 作者公布预处理视频约 <strong>12 TB</strong>，精确清单需申请账号。Ego4D / Ego-Exo4D 官方清单访问受限；自建仿真尚未生成。</p><p>读取 HF、S3、GCS 文件树、发布清单和 HTTP 响应头，<strong>未读取或保存训练文件正文</strong>。SSv2 的 HEAD 被拒绝，使用流式请求只读 Content-Range 响应头后关闭。公开舍入值、预算和精确文件容量分开显示。</p></div>'''
+    if 'openhumanwam' in by_id:
+        extra=by_id['openhumanwam']
+        summary=summary.replace('；二者均不充当已选训练视频容量。',f'；Open-HumanWAM 的 {extra["auxiliary_files"]} 个分规模索引共 <strong>{extra["auxiliary_bytes"]:,} bytes</strong>。登记/索引均不充当已选训练视频容量，Open-HumanWAM 全库限流未完成遍历。')
     if 'id="capacity-audit-summary"' in page:
         page = replace_once(page, r'<div class="lead" id="capacity-audit-summary">.*?</div>', summary)
     else:
@@ -127,6 +130,8 @@ def main():
     archive_files = [(p.name,p) for p in TOOLKIT.iterdir() if p.is_file()]
     archive_files += [('audit/'+name,REPORTS/name) for name in ['capacity_report.json','manifest.json','files.csv','access_checks.json']]
     archive_files += [('audit/evidence/'+p.name,p) for p in (REPORTS/'evidence').glob('*.json')]
+    if (ROOT/'reports/predictor-data-review.json').exists():
+        archive_files += [('audit/predictor-data-review.json',ROOT/'reports/predictor-data-review.json')]
     buffer = io.BytesIO()
     with zipfile.ZipFile(buffer,'w',compression=zipfile.ZIP_DEFLATED,compresslevel=9) as z:
         for name,path in sorted(archive_files):

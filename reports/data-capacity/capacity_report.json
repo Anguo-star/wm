@@ -1,6 +1,6 @@
 {
   "schema": "wm-data-report-v1",
-  "created_at": "2026-11-25T10:01:40.418482+00:00",
+  "created_at": "2026-11-26T02:22:46.694367+00:00",
   "metadata_only": true,
   "data_bytes_downloaded": 0,
   "datasets": [
@@ -588,6 +588,117 @@
       "checked_at": "2026-11-25T09:51:56.641842+00:00",
       "evidence_file": "evidence/selfsim.json",
       "evidence_sha256": "24df2f900d7f71e9fce1460f840f9cc2d74b19e7c3ecec39e30d6a64b6993711"
+    },
+    {
+      "id": "genhumanego",
+      "name": "Gen-HumanEgo",
+      "phase": "expansion",
+      "status": "inventoried",
+      "scope_bytes": 62035012405416,
+      "scope_files": 44636,
+      "selected_bytes": null,
+      "files": 0,
+      "version": "3cca54aeba0d9af3ebf4995b035d23b41f9387da",
+      "note": "新版主训练候选；用户表示已下载，未提供本地路径，因此本次核验远端固定版本完整文件树。六视角 MCAP、手部重建、深度与分层语义用于被动/语义未来预测；DFM 派生标注按质量 mask 使用，不当作机器人控制或全量人工真值。训练先取一个主视角，完整 episode 分组隔离，多视角作增强。",
+      "source_urls": [
+        "https://huggingface.co/datasets/genrobot2025/Gen-HumanEgo",
+        "https://www.genrobot.ai/blog/gen-human-ego"
+      ],
+      "checked_at": "2026-11-26T02:06:27.061073+00:00",
+      "inventory_file": "inventories/genhumanego.json.gz",
+      "inventory_sha256": "dd53dadb79e06beb01c491ae813b6822a6ddf158a96f604025c314870ad7f057",
+      "evidence_file": "evidence/genhumanego.json",
+      "evidence_sha256": "4e1f36ccfb9fbf0a002fa6dd13c7762c920d1730a99b4922777418ad7dcc44ba"
+    },
+    {
+      "id": "egomimic",
+      "name": "EgoMimic",
+      "phase": "expansion",
+      "status": "inventoried",
+      "scope_bytes": 242644486193,
+      "scope_files": 7,
+      "selected_bytes": null,
+      "files": 0,
+      "version": "065ffc0c697069982d58b695db38d9943a28d54a",
+      "note": "人类/机器人跨域对齐的小规模验证集候选；原论文支持策略迁移，Predictor 收益需本项目消融。人类手部轨迹与机器人控制分字段，完整任务/轨迹留出；不将整库或重复配对当作新增主训练量。",
+      "source_urls": [
+        "https://egomimic.github.io/",
+        "https://huggingface.co/datasets/gatech/EgoMimic"
+      ],
+      "checked_at": "2026-11-26T02:07:09.527471+00:00",
+      "inventory_file": "inventories/egomimic.json.gz",
+      "inventory_sha256": "e24b2fc67d9670760b86df98dbaaefc9a218579d089a54d9ff8522a1139b2dd8",
+      "evidence_file": "evidence/egomimic.json",
+      "evidence_sha256": "8006c166dfc4482eb9ffa97297b05dbe7089bc0b7a0951ff941e20d9bdadcfc7"
+    },
+    {
+      "id": "openhumanwam",
+      "name": "Open-HumanWAM-50K",
+      "phase": "expansion",
+      "status": "partial",
+      "scope_bytes": 1538777125,
+      "scope_files": 10,
+      "selected_bytes": null,
+      "files": 0,
+      "version": "9da483ca2e22fcd936e9f92da91806cf4de7a899",
+      "note": "已核验固定 commit 的 subsets/ 全部分规模索引（100h 至 50,000h），不是训练视频容量。整库递归超过 637,000 个目录项后遭遇 HF 429，本次停止全库遍历；发布方同时注明数据仍在上传。规模化试验需按索引确认完整视频/动作配套，再与 Gen-HumanEgo、EgoDex 等原始来源去重。",
+      "source_urls": [
+        "https://huggingface.co/datasets/DAGroup-PKU/Open-HumanWAM-50K",
+        "https://arxiv.org/html/2611.06817v3",
+        "https://github.com/DAGroup-PKU/HumanNet/tree/Open-HumanWAM"
+      ],
+      "checked_at": "2026-11-26T02:17:46.872588+00:00",
+      "inventory_file": "inventories/openhumanwam.json.gz",
+      "inventory_sha256": "040c9fcdd6e05d9a2f3e409f1e87bd9439b0605639d56c0d22cecfa68a369c7c",
+      "auxiliary_bytes": 1538777125,
+      "auxiliary_files": 10,
+      "verification_label": "索引容量已核验",
+      "evidence_file": "evidence/openhumanwam.json",
+      "evidence_sha256": "5e8b2099ef6d30f9c5c232949286d69264314d36c96dd01504c5de14bc34f4c7"
+    },
+    {
+      "id": "holoassist",
+      "name": "HoloAssist",
+      "phase": "expansion",
+      "status": "inventoried",
+      "scope_bytes": 409273547649,
+      "scope_files": 7,
+      "selected_bytes": null,
+      "files": 0,
+      "version": "HTTP validators 356e49ce2c430ad1",
+      "note": "高质量补充候选：完整压缩视频、手部/头部/注视、相机配套包及 trainval 标签/官方划分；不含深度和 IMU。包内按官方 split 过滤，仅 train 用于训练；val/test 保留错误检测、干预与手部预测评测。不是机器人命令数据。",
+      "source_urls": [
+        "https://holoassist.github.io/",
+        "https://arxiv.org/abs/2309.17024"
+      ],
+      "checked_at": "2026-11-26T02:10:22.524883+00:00",
+      "inventory_file": "inventories/holoassist.json.gz",
+      "inventory_sha256": "65ca34bbaf0a3f6864829ef49ee3484994d8f083d1e4a06e1cdfa958ccea9e9b",
+      "evidence_file": "evidence/holoassist.json",
+      "evidence_sha256": "1a71a4175dc96e7dcfdf2d1846d61aa9d6f4d03aab8efd933e9d0dd1cf6883f0"
+    },
+    {
+      "id": "hdepic",
+      "name": "HD-EPIC",
+      "phase": "expansion",
+      "status": "inventoried",
+      "scope_bytes": 123759889636,
+      "scope_files": 487,
+      "selected_bytes": null,
+      "files": 0,
+      "version": "HTTP validators 9a56e45c28a9605b",
+      "note": "独立评测保留，不进入主训练混合。核验官方 Videos/ 完整子目录：156 个 MP4 及时间映射/转换日志；不含 VRS、SLAM、数字孪生或独立 GitHub 标注。文件列表来自官方 downloader 的 md5 清单；MD5 为发布者记录，本次未读取视频验证内容哈希。按作者定位作为高密度状态/对象运动诊断，不因 HF 镜像称 train 就用作训练。",
+      "source_urls": [
+        "https://hd-epic.github.io/site/",
+        "https://github.com/hd-epic/hd-epic-downloader",
+        "https://github.com/hd-epic/hd-epic-annotations",
+        "https://arxiv.org/abs/2502.04144"
+      ],
+      "checked_at": "2026-11-26T02:10:59.599208+00:00",
+      "inventory_file": "inventories/hdepic.json.gz",
+      "inventory_sha256": "f4ba93572011f82f84483c9cb2162d4a5e11738a8b2e9dbfa1ed5728a604678e",
+      "evidence_file": "evidence/hdepic.json",
+      "evidence_sha256": "159a601ca400c7688278aa631c3a64a9b640190a56a4cf0cd75b5594a81d46fe"
     }
   ],
   "selected_bytes": 2556757642643,
@@ -599,15 +710,16 @@
     "howto100m",
     "panda",
     "scand",
-    "selfsim"
+    "selfsim",
+    "openhumanwam"
   ],
   "audit_counts": {
     "blocked": 2,
-    "inventoried": 7,
+    "inventoried": 11,
     "not_generated": 1,
-    "partial": 2,
+    "partial": 3,
     "planned": 16,
     "published": 1
   },
-  "manifest_sha256": "e2088d476a116bb5aff1649928b0e45eefd6715bd49b7a6de3d13c9e830a2d4b"
+  "manifest_sha256": "f490d7aac6dcaaeb596b6866f5bef46c2a68291743dbff7d08475027f99da7ec"
 }

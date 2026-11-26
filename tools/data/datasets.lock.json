@@ -1032,6 +1032,2545 @@
       "note": "尚未生成：这是计划中的自建仿真数据，没有现成远端文件；生成后统计文件 stat。此项不标为访问失败，也不记成已核验的 0 bytes。",
       "source_urls": [],
       "audit_kind": "not_generated"
+    },
+    {
+      "id": "genhumanego",
+      "name": "Gen-HumanEgo",
+      "phase": "expansion",
+      "provider": "hf",
+      "repo": "genrobot2025/Gen-HumanEgo",
+      "mode": "inventory",
+      "note": "新版主训练候选；用户表示已下载，未提供本地路径，因此本次核验远端固定版本完整文件树。六视角 MCAP、手部重建、深度与分层语义用于被动/语义未来预测；DFM 派生标注按质量 mask 使用，不当作机器人控制或全量人工真值。训练先取一个主视角，完整 episode 分组隔离，多视角作增强。",
+      "source_urls": [
+        "https://huggingface.co/datasets/genrobot2025/Gen-HumanEgo",
+        "https://www.genrobot.ai/blog/gen-human-ego"
+      ],
+      "revision": "3cca54aeba0d9af3ebf4995b035d23b41f9387da"
+    },
+    {
+      "id": "egomimic",
+      "name": "EgoMimic",
+      "phase": "expansion",
+      "provider": "hf",
+      "repo": "gatech/EgoMimic",
+      "mode": "inventory",
+      "note": "人类/机器人跨域对齐的小规模验证集候选；原论文支持策略迁移，Predictor 收益需本项目消融。人类手部轨迹与机器人控制分字段，完整任务/轨迹留出；不将整库或重复配对当作新增主训练量。",
+      "source_urls": [
+        "https://egomimic.github.io/",
+        "https://huggingface.co/datasets/gatech/EgoMimic"
+      ],
+      "revision": "065ffc0c697069982d58b695db38d9943a28d54a"
+    },
+    {
+      "id": "openhumanwam",
+      "name": "Open-HumanWAM-50K",
+      "phase": "expansion",
+      "provider": "hf",
+      "repo": "DAGroup-PKU/Open-HumanWAM-50K",
+      "mode": "inventory",
+      "revision": "9da483ca2e22fcd936e9f92da91806cf4de7a899",
+      "note": "已核验固定 commit 的 subsets/ 全部分规模索引（100h 至 50,000h），不是训练视频容量。整库递归超过 637,000 个目录项后遭遇 HF 429，本次停止全库遍历；发布方同时注明数据仍在上传。规模化试验需按索引确认完整视频/动作配套，再与 Gen-HumanEgo、EgoDex 等原始来源去重。",
+      "source_urls": [
+        "https://huggingface.co/datasets/DAGroup-PKU/Open-HumanWAM-50K",
+        "https://arxiv.org/html/2611.06817v3",
+        "https://github.com/DAGroup-PKU/HumanNet/tree/Open-HumanWAM"
+      ],
+      "path_in_repo": "subsets",
+      "content_scope": "index_only"
+    },
+    {
+      "id": "holoassist",
+      "name": "HoloAssist",
+      "phase": "expansion",
+      "provider": "http",
+      "mode": "inventory",
+      "items": [
+        {
+          "path": "video_compress.tar",
+          "url": "https://hl2data.z5.web.core.windows.net/holoassist-data-release/video_compress.tar"
+        },
+        {
+          "path": "hands.tar",
+          "url": "https://hl2data.z5.web.core.windows.net/holoassist-data-release/hands.tar"
+        },
+        {
+          "path": "head.tar",
+          "url": "https://hl2data.z5.web.core.windows.net/holoassist-data-release/head.tar"
+        },
+        {
+          "path": "cam_info.tar",
+          "url": "https://hl2data.z5.web.core.windows.net/holoassist-data-release/cam_info.tar"
+        },
+        {
+          "path": "eyes.tar",
+          "url": "https://hl2data.z5.web.core.windows.net/holoassist-data-release/eyes.tar"
+        },
+        {
+          "path": "data-annotation-trainval-v1_1.json",
+          "url": "https://hl2data.z5.web.core.windows.net/holoassist-data-release/data-annotation-trainval-v1_1.json"
+        },
+        {
+          "path": "data-splits-v1_2.zip",
+          "url": "https://holoassist.github.io/label_files/data-splits-v1_2.zip"
+        }
+      ],
+      "note": "高质量补充候选：完整压缩视频、手部/头部/注视、相机配套包及 trainval 标签/官方划分；不含深度和 IMU。包内按官方 split 过滤，仅 train 用于训练；val/test 保留错误检测、干预与手部预测评测。不是机器人命令数据。",
+      "source_urls": [
+        "https://holoassist.github.io/",
+        "https://arxiv.org/abs/2309.17024"
+      ]
+    },
+    {
+      "id": "hdepic",
+      "name": "HD-EPIC",
+      "phase": "expansion",
+      "provider": "http",
+      "mode": "inventory",
+      "items": [
+        {
+          "path": "Videos/P08/P08-20240620-180825_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P08/P08-20240620-180825_vrs_to_mp4_log.json",
+          "expected_md5": "67a609ef79377319ddcd28c41ab5e709"
+        },
+        {
+          "path": "Videos/P08/P08-20240614-085000.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P08/P08-20240614-085000.mp4",
+          "expected_md5": "4474a8a26ec86c91836bad4f8b3989c9"
+        },
+        {
+          "path": "Videos/P08/P08-20240614-125650_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P08/P08-20240614-125650_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "8312328afe539189061712ecc9bb6606"
+        },
+        {
+          "path": "Videos/P08/P08-20240617-184909.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P08/P08-20240617-184909.mp4",
+          "expected_md5": "8eaa65ba98b540266fd0755244988eda"
+        },
+        {
+          "path": "Videos/P08/P08-20240622-141902_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P08/P08-20240622-141902_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "e9cd8b61f0befe87a2e7c34206b3d989"
+        },
+        {
+          "path": "Videos/P08/P08-20240613-123547.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P08/P08-20240613-123547.mp4",
+          "expected_md5": "d618a25d36f8f6d9eac6e42c36b1b2cf"
+        },
+        {
+          "path": "Videos/P08/P08-20240613-122900_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P08/P08-20240613-122900_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "b3abff2b0dca936348452e811eb4fe47"
+        },
+        {
+          "path": "Videos/P08/P08-20240614-125650.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P08/P08-20240614-125650.mp4",
+          "expected_md5": "ff00cc28e7583e1d8be6e6a63c316b7e"
+        },
+        {
+          "path": "Videos/P08/P08-20240618-163547_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P08/P08-20240618-163547_vrs_to_mp4_log.json",
+          "expected_md5": "1b8491e74ab70a79af47c9bcbb6f0f57"
+        },
+        {
+          "path": "Videos/P08/P08-20240614-184945_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P08/P08-20240614-184945_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "3f88b3ffea9b7ee30c77c388de3c0140"
+        },
+        {
+          "path": "Videos/P08/P08-20240614-132938_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P08/P08-20240614-132938_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "9a8910b1c1ff1a907234fbe2e9fb8408"
+        },
+        {
+          "path": "Videos/P08/P08-20240618-163547_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P08/P08-20240618-163547_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "5dbfba830ada9a1644df8947d19f5b34"
+        },
+        {
+          "path": "Videos/P08/P08-20240614-125650_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P08/P08-20240614-125650_vrs_to_mp4_log.json",
+          "expected_md5": "067a8d79bd70ee17db34c17733fffc0d"
+        },
+        {
+          "path": "Videos/P08/P08-20240617-130401_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P08/P08-20240617-130401_vrs_to_mp4_log.json",
+          "expected_md5": "75c09fccf2c69fbd98d9103d7bceca2f"
+        },
+        {
+          "path": "Videos/P08/P08-20240614-132938_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P08/P08-20240614-132938_vrs_to_mp4_log.json",
+          "expected_md5": "9593510d020372438872a8ac4d6a1467"
+        },
+        {
+          "path": "Videos/P08/P08-20240613-122900.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P08/P08-20240613-122900.mp4",
+          "expected_md5": "23aaae13768461558d55161bcab120da"
+        },
+        {
+          "path": "Videos/P08/P08-20240617-184909_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P08/P08-20240617-184909_vrs_to_mp4_log.json",
+          "expected_md5": "e4928dc7708f0c79cd6c99cbf5c57ef9"
+        },
+        {
+          "path": "Videos/P08/durations.txt",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P08/durations.txt",
+          "expected_md5": "a3783ad2184e08cdeefb966bb1592e06"
+        },
+        {
+          "path": "Videos/P08/P08-20240614-184945_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P08/P08-20240614-184945_vrs_to_mp4_log.json",
+          "expected_md5": "c872e3fff251fe321cdb350c4d86e8a2"
+        },
+        {
+          "path": "Videos/P08/P08-20240614-085000_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P08/P08-20240614-085000_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "b69c0be9788616cf364f7f7e5a2044ab"
+        },
+        {
+          "path": "Videos/P08/P08-20240618-171546_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P08/P08-20240618-171546_vrs_to_mp4_log.json",
+          "expected_md5": "8014618d3eac9b2d6ff72968411c7e23"
+        },
+        {
+          "path": "Videos/P08/P08-20240617-130401.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P08/P08-20240617-130401.mp4",
+          "expected_md5": "51847f59c031d313abaf5d65ab009543"
+        },
+        {
+          "path": "Videos/P08/P08-20240613-123547_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P08/P08-20240613-123547_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "c37aaceb7dea8878b35054387ea7c622"
+        },
+        {
+          "path": "Videos/P08/P08-20240613-122900_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P08/P08-20240613-122900_vrs_to_mp4_log.json",
+          "expected_md5": "d627e36aad56eae3b0d1bd119a14c913"
+        },
+        {
+          "path": "Videos/P08/P08-20240622-141902.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P08/P08-20240622-141902.mp4",
+          "expected_md5": "e87e76195daaa4d0a2643dddfd433c92"
+        },
+        {
+          "path": "Videos/P08/frames.txt",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P08/frames.txt",
+          "expected_md5": "8a61030705daea5419374eb3cea6a1f2"
+        },
+        {
+          "path": "Videos/P08/P08-20240620-180825_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P08/P08-20240620-180825_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "5acabc75fe0d42f5e5245116df863ad7"
+        },
+        {
+          "path": "Videos/P08/P08-20240618-171546.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P08/P08-20240618-171546.mp4",
+          "expected_md5": "57ef636d8c3cd57e4154d5aca388a8bf"
+        },
+        {
+          "path": "Videos/P08/P08-20240614-184945.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P08/P08-20240614-184945.mp4",
+          "expected_md5": "c80f40455931658019c3c99b9fe52791"
+        },
+        {
+          "path": "Videos/P08/P08-20240622-141902_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P08/P08-20240622-141902_vrs_to_mp4_log.json",
+          "expected_md5": "ff1d8b15cc42d384130e24d410f58f28"
+        },
+        {
+          "path": "Videos/P08/P08-20240617-130401_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P08/P08-20240617-130401_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "96c8a4e87cc4a9a4e2329b8d9af640bb"
+        },
+        {
+          "path": "Videos/P08/P08-20240613-123547_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P08/P08-20240613-123547_vrs_to_mp4_log.json",
+          "expected_md5": "9b6643586525dd5229fe028b34ab670a"
+        },
+        {
+          "path": "Videos/P08/P08-20240614-085000_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P08/P08-20240614-085000_vrs_to_mp4_log.json",
+          "expected_md5": "2ac8f25b8f8139f31d425c98f5485179"
+        },
+        {
+          "path": "Videos/P08/P08-20240618-171546_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P08/P08-20240618-171546_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "2984dbb8204aac34ff550881323f9302"
+        },
+        {
+          "path": "Videos/P08/P08-20240618-163547.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P08/P08-20240618-163547.mp4",
+          "expected_md5": "a8462a4ee599e8f85abab942fafc4ce5"
+        },
+        {
+          "path": "Videos/P08/P08-20240617-184909_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P08/P08-20240617-184909_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "ad703466a4351465b8814bb02ee0d979"
+        },
+        {
+          "path": "Videos/P08/P08-20240620-180825.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P08/P08-20240620-180825.mp4",
+          "expected_md5": "b9bf532e119a859e30939d13d6cde1f3"
+        },
+        {
+          "path": "Videos/P08/P08-20240614-132938.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P08/P08-20240614-132938.mp4",
+          "expected_md5": "b5c9fa20adea8897fe54258f2ee4e2c7"
+        },
+        {
+          "path": "Videos/P04/P04-20240414-172534.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P04/P04-20240414-172534.mp4",
+          "expected_md5": "2c26103b98aacc0d5cab29aa3d7f22be"
+        },
+        {
+          "path": "Videos/P04/P04-20240413-151722_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P04/P04-20240413-151722_vrs_to_mp4_log.json",
+          "expected_md5": "4038b76f5b5a4347565abab174b3aa38"
+        },
+        {
+          "path": "Videos/P04/P04-20240414-072251_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P04/P04-20240414-072251_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "ae0d25a4b12a4a9b72dd366bd59004ab"
+        },
+        {
+          "path": "Videos/P04/P04-20240414-172534_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P04/P04-20240414-172534_vrs_to_mp4_log.json",
+          "expected_md5": "1840cb8f4a42c0126f205783c99cb2fc"
+        },
+        {
+          "path": "Videos/P04/P04-20240413-142619_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P04/P04-20240413-142619_vrs_to_mp4_log.json",
+          "expected_md5": "c6416732950d885a759b87b18da93aca"
+        },
+        {
+          "path": "Videos/P04/P04-20240413-145245.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P04/P04-20240413-145245.mp4",
+          "expected_md5": "ce5d1edeeadc58f8cb937e750a78b60b"
+        },
+        {
+          "path": "Videos/P04/P04-20240414-170520_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P04/P04-20240414-170520_vrs_to_mp4_log.json",
+          "expected_md5": "f4468a15d1890d019a5ea5238143f24a"
+        },
+        {
+          "path": "Videos/P04/P04-20240414-181030_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P04/P04-20240414-181030_vrs_to_mp4_log.json",
+          "expected_md5": "d2bd484cc0f9889aee1bc978df7772fc"
+        },
+        {
+          "path": "Videos/P04/P04-20240414-162750_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P04/P04-20240414-162750_vrs_to_mp4_log.json",
+          "expected_md5": "d60e26488bc8aed868d64a0ee98a270f"
+        },
+        {
+          "path": "Videos/P04/P04-20240414-173337.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P04/P04-20240414-173337.mp4",
+          "expected_md5": "5cc23cfadd1cef04684b5e464683ca18"
+        },
+        {
+          "path": "Videos/P04/P04-20240415-184003_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P04/P04-20240415-184003_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "9e2380a9189eff2a66364ebb0ed5e407"
+        },
+        {
+          "path": "Videos/P04/P04-20240414-181030_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P04/P04-20240414-181030_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "24dacb23ed15f4aa69f6301878e335ae"
+        },
+        {
+          "path": "Videos/P04/P04-20240414-175337_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P04/P04-20240414-175337_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "e98839a52897c5fede01485f18620d3c"
+        },
+        {
+          "path": "Videos/P04/P04-20240414-175337_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P04/P04-20240414-175337_vrs_to_mp4_log.json",
+          "expected_md5": "8a02705dbc9d70a128675e465306fab0"
+        },
+        {
+          "path": "Videos/P04/P04-20240415-184003.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P04/P04-20240415-184003.mp4",
+          "expected_md5": "4f2bd7fb5686dcc3a091e3f256bccd50"
+        },
+        {
+          "path": "Videos/P04/P04-20240415-181212_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P04/P04-20240415-181212_vrs_to_mp4_log.json",
+          "expected_md5": "96126ea94f56056cf92d7a0028fd7611"
+        },
+        {
+          "path": "Videos/P04/P04-20240414-072251_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P04/P04-20240414-072251_vrs_to_mp4_log.json",
+          "expected_md5": "d8a7b4db674b1105210cef275800e550"
+        },
+        {
+          "path": "Videos/P04/P04-20240414-064514.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P04/P04-20240414-064514.mp4",
+          "expected_md5": "98e3c32d14a5105687f668253887abfc"
+        },
+        {
+          "path": "Videos/P04/P04-20240413-145245_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P04/P04-20240413-145245_vrs_to_mp4_log.json",
+          "expected_md5": "7a8cefdae488786b6aee37aef2463683"
+        },
+        {
+          "path": "Videos/P04/P04-20240414-165333_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P04/P04-20240414-165333_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "e5f8ed77745da7976fff9d8a62f9a32a"
+        },
+        {
+          "path": "Videos/P04/P04-20240414-065311_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P04/P04-20240414-065311_vrs_to_mp4_log.json",
+          "expected_md5": "97d9fa93d2dd78bb7cd14d60e08bcbe2"
+        },
+        {
+          "path": "Videos/P04/P04-20240415-175615.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P04/P04-20240415-175615.mp4",
+          "expected_md5": "b92019b99ea03ce3908fd5540adaabc4"
+        },
+        {
+          "path": "Videos/P04/durations.txt",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P04/durations.txt",
+          "expected_md5": "697ecb4183dd64cbbad660c8c2510d26"
+        },
+        {
+          "path": "Videos/P04/P04-20240415-184003_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P04/P04-20240415-184003_vrs_to_mp4_log.json",
+          "expected_md5": "bc4b3e9149b5b15fcf980b8296fcef01"
+        },
+        {
+          "path": "Videos/P04/P04-20240414-170520.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P04/P04-20240414-170520.mp4",
+          "expected_md5": "f3951f1e860c8bc1ada41b94f8f885c4"
+        },
+        {
+          "path": "Videos/P04/P04-20240414-064514_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P04/P04-20240414-064514_vrs_to_mp4_log.json",
+          "expected_md5": "b783c8c0a93c250daed3de08296f1007"
+        },
+        {
+          "path": "Videos/P04/P04-20240414-164751_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P04/P04-20240414-164751_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "f22e6ba71d01cf5b5dc51a63acabbed4"
+        },
+        {
+          "path": "Videos/P04/P04-20240413-151722_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P04/P04-20240413-151722_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "8521b8f5cf583b4e314256e450df6e4f"
+        },
+        {
+          "path": "Videos/P04/P04-20240415-181212.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P04/P04-20240415-181212.mp4",
+          "expected_md5": "0bed1a296a16b6d806cc92ac0cefedb6"
+        },
+        {
+          "path": "Videos/P04/P04-20240414-164751.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P04/P04-20240414-164751.mp4",
+          "expected_md5": "dedb5cc755e8b85762c00902cc852c54"
+        },
+        {
+          "path": "Videos/P04/P04-20240414-170520_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P04/P04-20240414-170520_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "5ecfdd51b98e805c5a87005c2a45c9fe"
+        },
+        {
+          "path": "Videos/P04/P04-20240414-181030.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P04/P04-20240414-181030.mp4",
+          "expected_md5": "fba1695d1d012a5dbe8ac71cd6dedf48"
+        },
+        {
+          "path": "Videos/P04/P04-20240414-165333.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P04/P04-20240414-165333.mp4",
+          "expected_md5": "d86290ca2a8ee9c099047991e6397a73"
+        },
+        {
+          "path": "Videos/P04/P04-20240415-175615_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P04/P04-20240415-175615_vrs_to_mp4_log.json",
+          "expected_md5": "bb148ab865fecbefc30bfe6d8479bc49"
+        },
+        {
+          "path": "Videos/P04/P04-20240413-142619.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P04/P04-20240413-142619.mp4",
+          "expected_md5": "805f252aebe971540a94fc098f785c08"
+        },
+        {
+          "path": "Videos/P04/P04-20240414-175337.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P04/P04-20240414-175337.mp4",
+          "expected_md5": "5e4fd1ca2fb9a75732a2f7fe32051f22"
+        },
+        {
+          "path": "Videos/P04/P04-20240414-162242_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P04/P04-20240414-162242_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "bde4acdf3cdf1949359bacb66aa38fe9"
+        },
+        {
+          "path": "Videos/P04/P04-20240414-165333_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P04/P04-20240414-165333_vrs_to_mp4_log.json",
+          "expected_md5": "7718f46d09f725995ac67d70818fda06"
+        },
+        {
+          "path": "Videos/P04/P04-20240415-181212_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P04/P04-20240415-181212_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "4ba9bc04a9cd92a54bdbaff402b4a97a"
+        },
+        {
+          "path": "Videos/P04/frames.txt",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P04/frames.txt",
+          "expected_md5": "6e671e6de36717278b707bdd7309b7b6"
+        },
+        {
+          "path": "Videos/P04/P04-20240414-172534_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P04/P04-20240414-172534_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "62dca4341f4b5dab3ab4b1263ad88028"
+        },
+        {
+          "path": "Videos/P04/P04-20240413-145245_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P04/P04-20240413-145245_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "01ad6ff0fd097fc4a0c68977671a3ab5"
+        },
+        {
+          "path": "Videos/P04/P04-20240414-173337_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P04/P04-20240414-173337_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "d259b0bc74df652364bf142852dbc2d5"
+        },
+        {
+          "path": "Videos/P04/P04-20240413-142619_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P04/P04-20240413-142619_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "24a8957a3936660bd3d49d6e0fbbf2b4"
+        },
+        {
+          "path": "Videos/P04/P04-20240414-072251.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P04/P04-20240414-072251.mp4",
+          "expected_md5": "e0b2c4d9cdee740334cb7a82eb1ad749"
+        },
+        {
+          "path": "Videos/P04/P04-20240414-164751_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P04/P04-20240414-164751_vrs_to_mp4_log.json",
+          "expected_md5": "fa9fc215ed6fd119a2a275dbec74486f"
+        },
+        {
+          "path": "Videos/P04/P04-20240414-173337_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P04/P04-20240414-173337_vrs_to_mp4_log.json",
+          "expected_md5": "1cb44ef8ec6cbc72721b4aae50dc7a23"
+        },
+        {
+          "path": "Videos/P04/P04-20240414-065311_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P04/P04-20240414-065311_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "07d4c1005a4aeba5b7ad03f2394564f3"
+        },
+        {
+          "path": "Videos/P04/P04-20240414-162242_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P04/P04-20240414-162242_vrs_to_mp4_log.json",
+          "expected_md5": "afb99a0ac44c473bbd049070ebc5ae0a"
+        },
+        {
+          "path": "Videos/P04/P04-20240414-162242.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P04/P04-20240414-162242.mp4",
+          "expected_md5": "ec58898eb70d713fbdf58bc39eb5cce0"
+        },
+        {
+          "path": "Videos/P04/P04-20240414-065311.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P04/P04-20240414-065311.mp4",
+          "expected_md5": "3d03b63a51f9dc5c661fa81468927ff7"
+        },
+        {
+          "path": "Videos/P04/P04-20240414-064514_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P04/P04-20240414-064514_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "264707b5630c30e9f321fda95ffa2dd8"
+        },
+        {
+          "path": "Videos/P04/P04-20240414-162750.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P04/P04-20240414-162750.mp4",
+          "expected_md5": "3aacc4526879e2a6e5af22dac5dbe932"
+        },
+        {
+          "path": "Videos/P04/P04-20240415-175615_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P04/P04-20240415-175615_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "9eefab8c7c83aac20663b70fd40b2646"
+        },
+        {
+          "path": "Videos/P04/P04-20240414-162750_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P04/P04-20240414-162750_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "9469bb969f1e68127a54de8a3d36bca3"
+        },
+        {
+          "path": "Videos/P04/P04-20240413-151722.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P04/P04-20240413-151722.mp4",
+          "expected_md5": "328c57ba782502e29d550ba9dc7554d4"
+        },
+        {
+          "path": "Videos/P09/P09-20240622-194642_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P09/P09-20240622-194642_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "3a3d1db36fb1d8ac87c3d5b86277fb7a"
+        },
+        {
+          "path": "Videos/P09/P09-20240622-150155_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P09/P09-20240622-150155_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "2188ac4919bae7ba9f104d4a843b6a8b"
+        },
+        {
+          "path": "Videos/P09/P09-20240622-194642_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P09/P09-20240622-194642_vrs_to_mp4_log.json",
+          "expected_md5": "1d50a3bc22913da2532b8b8c2fe10f7e"
+        },
+        {
+          "path": "Videos/P09/P09-20240622-154652_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P09/P09-20240622-154652_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "597f6bb7dbf091337bf05651eb8faf54"
+        },
+        {
+          "path": "Videos/P09/P09-20240623-153748_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P09/P09-20240623-153748_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "0dd576acc86e06295e48837e1438b8e9"
+        },
+        {
+          "path": "Videos/P09/P09-20240624-160737_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P09/P09-20240624-160737_vrs_to_mp4_log.json",
+          "expected_md5": "77815e035aad4658f75c4455766dc4ee"
+        },
+        {
+          "path": "Videos/P09/P09-20240623-153748.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P09/P09-20240623-153748.mp4",
+          "expected_md5": "5d98e43b8974d4d1922f01faac7080f2"
+        },
+        {
+          "path": "Videos/P09/P09-20240622-150155.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P09/P09-20240622-150155.mp4",
+          "expected_md5": "aba27996eb838a4eeb59f43c38613f32"
+        },
+        {
+          "path": "Videos/P09/P09-20240623-153253_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P09/P09-20240623-153253_vrs_to_mp4_log.json",
+          "expected_md5": "88e3a7af86f5177662bc1b229f88f794"
+        },
+        {
+          "path": "Videos/P09/P09-20240623-120359_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P09/P09-20240623-120359_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "586d1fb0cddeff8e8e8211b50e47938c"
+        },
+        {
+          "path": "Videos/P09/P09-20240621-153208.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P09/P09-20240621-153208.mp4",
+          "expected_md5": "b5617d395536e892e8fde9f8fab6d4f0"
+        },
+        {
+          "path": "Videos/P09/P09-20240622-154652_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P09/P09-20240622-154652_vrs_to_mp4_log.json",
+          "expected_md5": "1f39e8f680da1731450fec0b724c171e"
+        },
+        {
+          "path": "Videos/P09/P09-20240623-154547.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P09/P09-20240623-154547.mp4",
+          "expected_md5": "94d712460b1d195abfd31358e6f3565b"
+        },
+        {
+          "path": "Videos/P09/P09-20240624-160737.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P09/P09-20240624-160737.mp4",
+          "expected_md5": "d230ca01db21fe06fdbe4ab9a06da357"
+        },
+        {
+          "path": "Videos/P09/P09-20240624-165332_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P09/P09-20240624-165332_vrs_to_mp4_log.json",
+          "expected_md5": "fae689bdcaa0ba9085f001133dc21e91"
+        },
+        {
+          "path": "Videos/P09/P09-20240622-150155_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P09/P09-20240622-150155_vrs_to_mp4_log.json",
+          "expected_md5": "245708d93d18075475bf0fa1d671f8c2"
+        },
+        {
+          "path": "Videos/P09/P09-20240625-103827.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P09/P09-20240625-103827.mp4",
+          "expected_md5": "beab2c97dc6b750e9b50540d73f7e70a"
+        },
+        {
+          "path": "Videos/P09/durations.txt",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P09/durations.txt",
+          "expected_md5": "7c71aefbc187d702fbf5883a4f79231a"
+        },
+        {
+          "path": "Videos/P09/P09-20240623-153253.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P09/P09-20240623-153253.mp4",
+          "expected_md5": "6ef26ca48baab671b033dce57a5dda93"
+        },
+        {
+          "path": "Videos/P09/P09-20240625-103827_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P09/P09-20240625-103827_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "63e86b7e9e48a9cbb32c84f3a782416f"
+        },
+        {
+          "path": "Videos/P09/P09-20240622-162302_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P09/P09-20240622-162302_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "ae9a1f43e3d6eae468ea34c92402cd43"
+        },
+        {
+          "path": "Videos/P09/P09-20240623-153748_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P09/P09-20240623-153748_vrs_to_mp4_log.json",
+          "expected_md5": "c5d46f1392cd59768e9af1b0252a4386"
+        },
+        {
+          "path": "Videos/P09/P09-20240625-103827_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P09/P09-20240625-103827_vrs_to_mp4_log.json",
+          "expected_md5": "755d96388415277d0f85fbe0803aa035"
+        },
+        {
+          "path": "Videos/P09/P09-20240622-194642.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P09/P09-20240622-194642.mp4",
+          "expected_md5": "7472dbb4f26a35d78892c4662e1e56dd"
+        },
+        {
+          "path": "Videos/P09/P09-20240624-160737_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P09/P09-20240624-160737_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "fe5ad961410ed4e50b180d841e31ee10"
+        },
+        {
+          "path": "Videos/P09/P09-20240621-093545_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P09/P09-20240621-093545_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "d4662b54904a9028c25a23d9f6b3ef52"
+        },
+        {
+          "path": "Videos/P09/P09-20240622-162302_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P09/P09-20240622-162302_vrs_to_mp4_log.json",
+          "expected_md5": "49e26c909e938b2fb8741fb141a9a7d4"
+        },
+        {
+          "path": "Videos/P09/P09-20240624-165332.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P09/P09-20240624-165332.mp4",
+          "expected_md5": "efeada846cf2ed29a861f024ab77e660"
+        },
+        {
+          "path": "Videos/P09/P09-20240622-154652.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P09/P09-20240622-154652.mp4",
+          "expected_md5": "1327582573a631a46df72c090a532922"
+        },
+        {
+          "path": "Videos/P09/P09-20240621-153208_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P09/P09-20240621-153208_vrs_to_mp4_log.json",
+          "expected_md5": "34e8f93cd3ab2a400cc447a6e4d0369f"
+        },
+        {
+          "path": "Videos/P09/frames.txt",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P09/frames.txt",
+          "expected_md5": "e8c86bbc204b283be33d6d6d007dd1ad"
+        },
+        {
+          "path": "Videos/P09/P09-20240623-120359.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P09/P09-20240623-120359.mp4",
+          "expected_md5": "fe174866a267269cc6f6a2b2997abe50"
+        },
+        {
+          "path": "Videos/P09/P09-20240623-154547_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P09/P09-20240623-154547_vrs_to_mp4_log.json",
+          "expected_md5": "8042eae9249380721f836c04ee6cf36c"
+        },
+        {
+          "path": "Videos/P09/P09-20240623-153253_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P09/P09-20240623-153253_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "925895dac7393c2129f7b220cc778e26"
+        },
+        {
+          "path": "Videos/P09/P09-20240621-093545.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P09/P09-20240621-093545.mp4",
+          "expected_md5": "678fbb33f7b3d1cd4272b58669d6057c"
+        },
+        {
+          "path": "Videos/P09/P09-20240621-093545_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P09/P09-20240621-093545_vrs_to_mp4_log.json",
+          "expected_md5": "e7c822acb604194b27a36a9c21923535"
+        },
+        {
+          "path": "Videos/P09/P09-20240621-153208_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P09/P09-20240621-153208_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "82bd46bce1ac1b456cb991a82872f798"
+        },
+        {
+          "path": "Videos/P09/P09-20240623-154547_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P09/P09-20240623-154547_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "9a3e5908753dd5a4169b632b92dbfb37"
+        },
+        {
+          "path": "Videos/P09/P09-20240622-162302.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P09/P09-20240622-162302.mp4",
+          "expected_md5": "04d347cea5c4287a66e3dd55fd1a5568"
+        },
+        {
+          "path": "Videos/P09/P09-20240624-165332_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P09/P09-20240624-165332_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "f8d9bbb02fe09f122c8d86c0c4c317bc"
+        },
+        {
+          "path": "Videos/P09/P09-20240623-120359_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P09/P09-20240623-120359_vrs_to_mp4_log.json",
+          "expected_md5": "e9df21dd061b81e33c67575b893fdde2"
+        },
+        {
+          "path": "Videos/P05/P05-20240423-180529_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P05/P05-20240423-180529_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "67c0fabc2acc5e281d4a53d36e3b9764"
+        },
+        {
+          "path": "Videos/P05/P05-20240425-173353.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P05/P05-20240425-173353.mp4",
+          "expected_md5": "91ac8b2483dbbb5b9bf601cc5e16f69d"
+        },
+        {
+          "path": "Videos/P05/P05-20240427-150402.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P05/P05-20240427-150402.mp4",
+          "expected_md5": "3c79f54907c85bbfc686a23bc717e277"
+        },
+        {
+          "path": "Videos/P05/P05-20240425-171455_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P05/P05-20240425-171455_vrs_to_mp4_log.json",
+          "expected_md5": "9c40a0f0bf0878765b7f4afe23d4fd69"
+        },
+        {
+          "path": "Videos/P05/P05-20240426-091011_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P05/P05-20240426-091011_vrs_to_mp4_log.json",
+          "expected_md5": "b877b8120891d140fa58d19c3372edc3"
+        },
+        {
+          "path": "Videos/P05/P05-20240425-201444_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P05/P05-20240425-201444_vrs_to_mp4_log.json",
+          "expected_md5": "b08310b635606e32eddc070d4b122943"
+        },
+        {
+          "path": "Videos/P05/P05-20240423-180529.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P05/P05-20240423-180529.mp4",
+          "expected_md5": "0c3bb74e90222459e7d23230d7f97184"
+        },
+        {
+          "path": "Videos/P05/P05-20240426-091011_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P05/P05-20240426-091011_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "1566db995b688ab945b82a6261ae19b7"
+        },
+        {
+          "path": "Videos/P05/P05-20240424-085204_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P05/P05-20240424-085204_vrs_to_mp4_log.json",
+          "expected_md5": "d9660c85a1994e0828dcb4998706a8c0"
+        },
+        {
+          "path": "Videos/P05/P05-20240425-082420_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P05/P05-20240425-082420_vrs_to_mp4_log.json",
+          "expected_md5": "aed7f0ca3413a15a2f24c8af4bd78637"
+        },
+        {
+          "path": "Videos/P05/P05-20240425-125459_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P05/P05-20240425-125459_vrs_to_mp4_log.json",
+          "expected_md5": "ca2edfe9dd026fe2291a649892362277"
+        },
+        {
+          "path": "Videos/P05/P05-20240426-092000_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P05/P05-20240426-092000_vrs_to_mp4_log.json",
+          "expected_md5": "743fffd2833dba0f5df5f9fb4cf4c347"
+        },
+        {
+          "path": "Videos/P05/P05-20240425-171455.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P05/P05-20240425-171455.mp4",
+          "expected_md5": "8bee5cb0820fec6d4f7e32bd7240b9f7"
+        },
+        {
+          "path": "Videos/P05/P05-20240423-172243.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P05/P05-20240423-172243.mp4",
+          "expected_md5": "43edbf3169df77597d6c74ff0c2afdb9"
+        },
+        {
+          "path": "Videos/P05/P05-20240425-124420_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P05/P05-20240425-124420_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "a3c156cc9751c59e3b1c71b4c6063bee"
+        },
+        {
+          "path": "Videos/P05/P05-20240423-175745.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P05/P05-20240423-175745.mp4",
+          "expected_md5": "75d02c18bd8f1f544150dc1af3ce1655"
+        },
+        {
+          "path": "Videos/P05/P05-20240425-171455_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P05/P05-20240425-171455_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "b2afe0ccd79f9afaab07cbafbad2ae89"
+        },
+        {
+          "path": "Videos/P05/P05-20240425-180658_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P05/P05-20240425-180658_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "72e584c3f41c577b2c167b8244d6f9bd"
+        },
+        {
+          "path": "Videos/P05/P05-20240424-171038_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P05/P05-20240424-171038_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "e2367388af75077b5e9d2daadc92370c"
+        },
+        {
+          "path": "Videos/P05/P05-20240425-124420_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P05/P05-20240425-124420_vrs_to_mp4_log.json",
+          "expected_md5": "c30f2525cacd6d3ed2b9d0d03d278fc8"
+        },
+        {
+          "path": "Videos/P05/P05-20240424-090812.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P05/P05-20240424-090812.mp4",
+          "expected_md5": "48202151e823d863f5e5c361915736f9"
+        },
+        {
+          "path": "Videos/P05/P05-20240424-130119.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P05/P05-20240424-130119.mp4",
+          "expected_md5": "d9bd771667797bf0f06a95d7e7bc088f"
+        },
+        {
+          "path": "Videos/P05/P05-20240424-171038_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P05/P05-20240424-171038_vrs_to_mp4_log.json",
+          "expected_md5": "3ffd0377b719583e4286dca25150c917"
+        },
+        {
+          "path": "Videos/P05/P05-20240424-090812_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P05/P05-20240424-090812_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "4bacb18190bbcd89c32a7038475ddb08"
+        },
+        {
+          "path": "Videos/P05/P05-20240423-183358_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P05/P05-20240423-183358_vrs_to_mp4_log.json",
+          "expected_md5": "c469e8a8cc758b988c79f4c440e386e6"
+        },
+        {
+          "path": "Videos/P05/P05-20240424-131231.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P05/P05-20240424-131231.mp4",
+          "expected_md5": "2816501f24ab025defb6291ae9669e95"
+        },
+        {
+          "path": "Videos/P05/P05-20240424-130119_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P05/P05-20240424-130119_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "8f5c7c4fdf931af6fa088578e4f00a4e"
+        },
+        {
+          "path": "Videos/P05/P05-20240423-175745_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P05/P05-20240423-175745_vrs_to_mp4_log.json",
+          "expected_md5": "c4c43ffdf38fdaee4550a51879b46c07"
+        },
+        {
+          "path": "Videos/P05/P05-20240427-145526.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P05/P05-20240427-145526.mp4",
+          "expected_md5": "8f2be33909a51f48923ad509906379b2"
+        },
+        {
+          "path": "Videos/P05/P05-20240426-092000_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P05/P05-20240426-092000_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "703ca4fa2ce30c34033fcfc6cb72886e"
+        },
+        {
+          "path": "Videos/P05/P05-20240427-145526_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P05/P05-20240427-145526_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "fe16fa11a4010b9881b3b7ea5965e8e9"
+        },
+        {
+          "path": "Videos/P05/P05-20240427-145526_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P05/P05-20240427-145526_vrs_to_mp4_log.json",
+          "expected_md5": "7ce0751417fea041a43180b6a2db51d7"
+        },
+        {
+          "path": "Videos/P05/P05-20240425-083515_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P05/P05-20240425-083515_vrs_to_mp4_log.json",
+          "expected_md5": "ad3ac25aeb6381de775bc9864b5d0aed"
+        },
+        {
+          "path": "Videos/P05/P05-20240425-125459_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P05/P05-20240425-125459_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "ebaf252b3eb17aa93c62407ec86255f0"
+        },
+        {
+          "path": "Videos/P05/P05-20240425-083515_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P05/P05-20240425-083515_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "97411fe2812c8165e55e3898d5ecde00"
+        },
+        {
+          "path": "Videos/P05/durations.txt",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P05/durations.txt",
+          "expected_md5": "ad709422f3c20d2537476626dd3120a3"
+        },
+        {
+          "path": "Videos/P05/P05-20240424-090812_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P05/P05-20240424-090812_vrs_to_mp4_log.json",
+          "expected_md5": "7f4c7057971fa430297f5ef124609dc4"
+        },
+        {
+          "path": "Videos/P05/P05-20240425-201444.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P05/P05-20240425-201444.mp4",
+          "expected_md5": "0055bd7980efbd9b105c83ab758b7499"
+        },
+        {
+          "path": "Videos/P05/P05-20240423-170021.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P05/P05-20240423-170021.mp4",
+          "expected_md5": "2bcbd8907ebd848cf14c141ece99cfb9"
+        },
+        {
+          "path": "Videos/P05/P05-20240427-150402_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P05/P05-20240427-150402_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "0a1295ce9ce2720c59cc5ddc3cdfa92e"
+        },
+        {
+          "path": "Videos/P05/P05-20240425-201444_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P05/P05-20240425-201444_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "a6b29bfb4da0cce0ee9ab59efa9fabd9"
+        },
+        {
+          "path": "Videos/P05/P05-20240427-151808.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P05/P05-20240427-151808.mp4",
+          "expected_md5": "df426d8b9f38d8da7754f005e25a56ec"
+        },
+        {
+          "path": "Videos/P05/P05-20240424-085204_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P05/P05-20240424-085204_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "6333b8f4919137d20e9824e8f2cfa1bb"
+        },
+        {
+          "path": "Videos/P05/P05-20240427-143353.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P05/P05-20240427-143353.mp4",
+          "expected_md5": "7874cc1b1db59005bb0eea0e465b989c"
+        },
+        {
+          "path": "Videos/P05/P05-20240426-085333.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P05/P05-20240426-085333.mp4",
+          "expected_md5": "a421f920ffcaa368b7081651f7ccf883"
+        },
+        {
+          "path": "Videos/P05/P05-20240427-143353_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P05/P05-20240427-143353_vrs_to_mp4_log.json",
+          "expected_md5": "14433fba4846b91bb40f8c80303bdf17"
+        },
+        {
+          "path": "Videos/P05/P05-20240423-172243_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P05/P05-20240423-172243_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "a036b2f0b58aebdd2b0a8dfe9c2f31eb"
+        },
+        {
+          "path": "Videos/P05/P05-20240426-092000.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P05/P05-20240426-092000.mp4",
+          "expected_md5": "0e667d571936923b35637ce509c401cb"
+        },
+        {
+          "path": "Videos/P05/P05-20240425-124420.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P05/P05-20240425-124420.mp4",
+          "expected_md5": "7b6787d7dc43862ff37f221c765d086c"
+        },
+        {
+          "path": "Videos/P05/P05-20240425-173353_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P05/P05-20240425-173353_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "f3ffd63e4ff71564c909b80d7763821b"
+        },
+        {
+          "path": "Videos/P05/P05-20240423-170021_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P05/P05-20240423-170021_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "599b1b73ee1881115b4868cf8029c43d"
+        },
+        {
+          "path": "Videos/P05/P05-20240424-175101.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P05/P05-20240424-175101.mp4",
+          "expected_md5": "de214b67e68d373e996674dace9482f6"
+        },
+        {
+          "path": "Videos/P05/P05-20240424-131231_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P05/P05-20240424-131231_vrs_to_mp4_log.json",
+          "expected_md5": "2747ee259c0cf96fb501ed3a97525d66"
+        },
+        {
+          "path": "Videos/P05/P05-20240423-180529_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P05/P05-20240423-180529_vrs_to_mp4_log.json",
+          "expected_md5": "17112f477102ee7c641bd927d0be7b4b"
+        },
+        {
+          "path": "Videos/P05/P05-20240423-172243_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P05/P05-20240423-172243_vrs_to_mp4_log.json",
+          "expected_md5": "88dc866d24e43bd53a600e4c8cf3aaab"
+        },
+        {
+          "path": "Videos/P05/P05-20240424-130119_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P05/P05-20240424-130119_vrs_to_mp4_log.json",
+          "expected_md5": "0420a52745d45e191eb4e0e8a0f6ffa0"
+        },
+        {
+          "path": "Videos/P05/P05-20240426-085333_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P05/P05-20240426-085333_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "065efc81a6e0141c05133427f85990eb"
+        },
+        {
+          "path": "Videos/P05/P05-20240425-173353_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P05/P05-20240425-173353_vrs_to_mp4_log.json",
+          "expected_md5": "3d54c849a8e3ab4c3d51b762427940ab"
+        },
+        {
+          "path": "Videos/P05/frames.txt",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P05/frames.txt",
+          "expected_md5": "a71ecc2b0b61f0f8c44da2928b71d5dc"
+        },
+        {
+          "path": "Videos/P05/P05-20240423-170021_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P05/P05-20240423-170021_vrs_to_mp4_log.json",
+          "expected_md5": "26025e26d250286910a22731d046f18a"
+        },
+        {
+          "path": "Videos/P05/P05-20240426-091011.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P05/P05-20240426-091011.mp4",
+          "expected_md5": "ca187659b26c062a77edcd3866cae576"
+        },
+        {
+          "path": "Videos/P05/P05-20240426-085333_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P05/P05-20240426-085333_vrs_to_mp4_log.json",
+          "expected_md5": "a8ce01db10822c3675e298fb176c3ad7"
+        },
+        {
+          "path": "Videos/P05/P05-20240425-125459.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P05/P05-20240425-125459.mp4",
+          "expected_md5": "f3ff9adb4048d245a3e4a268bdfa6dca"
+        },
+        {
+          "path": "Videos/P05/P05-20240425-082420_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P05/P05-20240425-082420_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "ebc31ee75eccc1c5a485e8f34f5fb9d4"
+        },
+        {
+          "path": "Videos/P05/P05-20240423-175745_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P05/P05-20240423-175745_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "74575e99c4cd243e3a8951b422ec368d"
+        },
+        {
+          "path": "Videos/P05/P05-20240425-082420.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P05/P05-20240425-082420.mp4",
+          "expected_md5": "ad127622d6392224a09c11e612f0736e"
+        },
+        {
+          "path": "Videos/P05/P05-20240427-143353_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P05/P05-20240427-143353_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "d50e3249888749be630385331839126f"
+        },
+        {
+          "path": "Videos/P05/P05-20240424-131231_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P05/P05-20240424-131231_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "56e2508631512dc3f8207497787595ff"
+        },
+        {
+          "path": "Videos/P05/P05-20240427-151808_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P05/P05-20240427-151808_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "74a2c341a1d97c600a0b3fd694218580"
+        },
+        {
+          "path": "Videos/P05/P05-20240424-175101_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P05/P05-20240424-175101_vrs_to_mp4_log.json",
+          "expected_md5": "115b919c14a5fa61939e6a7d5422c00d"
+        },
+        {
+          "path": "Videos/P05/P05-20240427-151808_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P05/P05-20240427-151808_vrs_to_mp4_log.json",
+          "expected_md5": "95b8e307948f457de31ca4f0e3183c7a"
+        },
+        {
+          "path": "Videos/P05/P05-20240424-085204.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P05/P05-20240424-085204.mp4",
+          "expected_md5": "375e9bc2be04a4af7418dc0c6484d310"
+        },
+        {
+          "path": "Videos/P05/P05-20240425-180658.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P05/P05-20240425-180658.mp4",
+          "expected_md5": "4fb52741de3baa7c601902cabe09cc26"
+        },
+        {
+          "path": "Videos/P05/P05-20240424-175101_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P05/P05-20240424-175101_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "481e2278bd6abec4b63f56ea4605bc13"
+        },
+        {
+          "path": "Videos/P05/P05-20240425-180658_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P05/P05-20240425-180658_vrs_to_mp4_log.json",
+          "expected_md5": "f0621227f7fa60a3cfda9bf6f087f388"
+        },
+        {
+          "path": "Videos/P05/P05-20240423-183358.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P05/P05-20240423-183358.mp4",
+          "expected_md5": "df0ee975ed6823afe34c818844985009"
+        },
+        {
+          "path": "Videos/P05/P05-20240423-183358_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P05/P05-20240423-183358_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "9cf2ddcb6a89f849e49e156461b63265"
+        },
+        {
+          "path": "Videos/P05/P05-20240425-083515.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P05/P05-20240425-083515.mp4",
+          "expected_md5": "5fc9d278c5659fcfe1dd2d9784a3a256"
+        },
+        {
+          "path": "Videos/P05/P05-20240424-171038.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P05/P05-20240424-171038.mp4",
+          "expected_md5": "8ab67931a9ea82f5667cce034d8bccc3"
+        },
+        {
+          "path": "Videos/P05/P05-20240427-150402_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P05/P05-20240427-150402_vrs_to_mp4_log.json",
+          "expected_md5": "802ac8ffbc71f06a87948d8220b7b26e"
+        },
+        {
+          "path": "Videos/P06/P06-20240510-135423_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P06/P06-20240510-135423_vrs_to_mp4_log.json",
+          "expected_md5": "c7f1c3b24a13ae2e35ca312cfdbf736d"
+        },
+        {
+          "path": "Videos/P06/P06-20240511-121048_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P06/P06-20240511-121048_vrs_to_mp4_log.json",
+          "expected_md5": "1ba2050cd78171ba71c36ecd70ea9cf3"
+        },
+        {
+          "path": "Videos/P06/P06-20240510-135423.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P06/P06-20240510-135423.mp4",
+          "expected_md5": "feac9fed47de7b7af9f119c1f0aa3de5"
+        },
+        {
+          "path": "Videos/P06/P06-20240510-104642_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P06/P06-20240510-104642_vrs_to_mp4_log.json",
+          "expected_md5": "69da59b3ac4702195d42bd1b89796239"
+        },
+        {
+          "path": "Videos/P06/P06-20240510-100047.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P06/P06-20240510-100047.mp4",
+          "expected_md5": "e1f2efca58aa5462f2fc4eb5599784bb"
+        },
+        {
+          "path": "Videos/P06/P06-20240510-090328_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P06/P06-20240510-090328_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "f8e87e92b5e97d46f93de66c33541a2e"
+        },
+        {
+          "path": "Videos/P06/P06-20240510-121619_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P06/P06-20240510-121619_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "f08b179b8c1c2fdcb4a2ac5f9c324106"
+        },
+        {
+          "path": "Videos/P06/P06-20240510-104642.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P06/P06-20240510-104642.mp4",
+          "expected_md5": "5fcaa2a7355c5b01ddc0b69f4ffb5a56"
+        },
+        {
+          "path": "Videos/P06/durations.txt",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P06/durations.txt",
+          "expected_md5": "b838a534ebc55d414cc3c2c135dcc024"
+        },
+        {
+          "path": "Videos/P06/P06-20240510-115307_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P06/P06-20240510-115307_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "297191070892205a3e80378293c1a77d"
+        },
+        {
+          "path": "Videos/P06/P06-20240511-122221_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P06/P06-20240511-122221_vrs_to_mp4_log.json",
+          "expected_md5": "463deb46db64c4a0c882e334fde67460"
+        },
+        {
+          "path": "Videos/P06/P06-20240510-140459_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P06/P06-20240510-140459_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "ae189f9bcc0c42bb49e8752641a9a08f"
+        },
+        {
+          "path": "Videos/P06/P06-20240510-140459.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P06/P06-20240510-140459.mp4",
+          "expected_md5": "d417ae46e51dfdb6960c2f5be0954169"
+        },
+        {
+          "path": "Videos/P06/P06-20240510-100047_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P06/P06-20240510-100047_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "fc8361920bdc02a2e6145bafa0b20c0f"
+        },
+        {
+          "path": "Videos/P06/P06-20240510-094438_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P06/P06-20240510-094438_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "44c351494c474ae65f4ea6c2eaa50e8c"
+        },
+        {
+          "path": "Videos/P06/P06-20240510-094438_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P06/P06-20240510-094438_vrs_to_mp4_log.json",
+          "expected_md5": "50a293f463d08068e8306b46b6640972"
+        },
+        {
+          "path": "Videos/P06/P06-20240510-115307_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P06/P06-20240510-115307_vrs_to_mp4_log.json",
+          "expected_md5": "6d7d16b07f6fede9feee912c6e780c79"
+        },
+        {
+          "path": "Videos/P06/P06-20240510-090328_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P06/P06-20240510-090328_vrs_to_mp4_log.json",
+          "expected_md5": "7cd8ec9f13938cff3fbb518aa01405a2"
+        },
+        {
+          "path": "Videos/P06/P06-20240510-094438.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P06/P06-20240510-094438.mp4",
+          "expected_md5": "3d160f36d24798490c3e57ec55f9d909"
+        },
+        {
+          "path": "Videos/P06/P06-20240511-122221.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P06/P06-20240511-122221.mp4",
+          "expected_md5": "9dff0f38449c81cd48ff5b9ac235aa62"
+        },
+        {
+          "path": "Videos/P06/frames.txt",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P06/frames.txt",
+          "expected_md5": "fc130c8622c21d62e142856579618645"
+        },
+        {
+          "path": "Videos/P06/P06-20240510-104642_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P06/P06-20240510-104642_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "c5ea2171ca022b6cadab364299cb9c9d"
+        },
+        {
+          "path": "Videos/P06/P06-20240510-115307.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P06/P06-20240510-115307.mp4",
+          "expected_md5": "b30b947985af1b5f0c8a324ca88d9f2e"
+        },
+        {
+          "path": "Videos/P06/P06-20240510-140459_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P06/P06-20240510-140459_vrs_to_mp4_log.json",
+          "expected_md5": "4044c8487c73f9c28275ac78763d6397"
+        },
+        {
+          "path": "Videos/P06/P06-20240510-100047_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P06/P06-20240510-100047_vrs_to_mp4_log.json",
+          "expected_md5": "1f0fc2d862f9a4453914f38ba845c2c0"
+        },
+        {
+          "path": "Videos/P06/P06-20240511-102207.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P06/P06-20240511-102207.mp4",
+          "expected_md5": "d4744f5f1e35a8a375412f3d9710e6d3"
+        },
+        {
+          "path": "Videos/P06/P06-20240510-090328.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P06/P06-20240510-090328.mp4",
+          "expected_md5": "897d9d5607afb645a6f9071bf564d828"
+        },
+        {
+          "path": "Videos/P06/P06-20240511-121048.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P06/P06-20240511-121048.mp4",
+          "expected_md5": "7d4fc5fb22c8a3d8b9d7f52b8e872a56"
+        },
+        {
+          "path": "Videos/P06/P06-20240511-102207_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P06/P06-20240511-102207_vrs_to_mp4_log.json",
+          "expected_md5": "13ecf1759d163050654704ee8c752cb9"
+        },
+        {
+          "path": "Videos/P06/P06-20240510-121619.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P06/P06-20240510-121619.mp4",
+          "expected_md5": "bac8a20e034610a509f82b667355614b"
+        },
+        {
+          "path": "Videos/P06/P06-20240511-121048_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P06/P06-20240511-121048_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "dcabf2693a3dc15dac9b56a7aafc7ee9"
+        },
+        {
+          "path": "Videos/P06/P06-20240511-102207_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P06/P06-20240511-102207_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "28b8b19e9b074d94ed9d47b06ae82db1"
+        },
+        {
+          "path": "Videos/P06/P06-20240511-122221_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P06/P06-20240511-122221_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "f333ea6f12f169a83fa5f1891597bf7a"
+        },
+        {
+          "path": "Videos/P06/P06-20240510-121619_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P06/P06-20240510-121619_vrs_to_mp4_log.json",
+          "expected_md5": "f9c894fa897cca24c25de5e0f120c0e1"
+        },
+        {
+          "path": "Videos/P06/P06-20240510-135423_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P06/P06-20240510-135423_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "2bb5fb9acdc945a1e12b07ec00c595d9"
+        },
+        {
+          "path": "Videos/P07/P07-20240530-111344.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P07/P07-20240530-111344.mp4",
+          "expected_md5": "b169b652b0eb253c3e39409d003509bd"
+        },
+        {
+          "path": "Videos/P07/P07-20240529-131737.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P07/P07-20240529-131737.mp4",
+          "expected_md5": "d75dfc005215e4d18516e69ba0466b97"
+        },
+        {
+          "path": "Videos/P07/P07-20240530-102543_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P07/P07-20240530-102543_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "ad95884c0c86cce21b4be0b8f5f187a5"
+        },
+        {
+          "path": "Videos/P07/P07-20240529-131737_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P07/P07-20240529-131737_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "cc5bccafd4f63093b53c14c26f69b8e1"
+        },
+        {
+          "path": "Videos/P07/P07-20240530-111344_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P07/P07-20240530-111344_vrs_to_mp4_log.json",
+          "expected_md5": "0c0f907141124f0115ccb6a832b9e89d"
+        },
+        {
+          "path": "Videos/P07/P07-20240530-102543.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P07/P07-20240530-102543.mp4",
+          "expected_md5": "6ec8ff25669fb0a2d2c7e62d59ae91aa"
+        },
+        {
+          "path": "Videos/P07/P07-20240529-191007.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P07/P07-20240529-191007.mp4",
+          "expected_md5": "153ac810f8d2ec71b95f745989d08448"
+        },
+        {
+          "path": "Videos/P07/P07-20240529-194518_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P07/P07-20240529-194518_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "1fd8d4bbbf314df004f67d8755a5e17b"
+        },
+        {
+          "path": "Videos/P07/P07-20240529-194518_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P07/P07-20240529-194518_vrs_to_mp4_log.json",
+          "expected_md5": "9dc450f040039d0af57a1e693f4bb8e9"
+        },
+        {
+          "path": "Videos/P07/P07-20240531-101357_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P07/P07-20240531-101357_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "9b8dbc5eaabfd9447c8040c128f7ec12"
+        },
+        {
+          "path": "Videos/P07/P07-20240529-134410_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P07/P07-20240529-134410_vrs_to_mp4_log.json",
+          "expected_md5": "452cc592dc7c51ed69d9da11f327097f"
+        },
+        {
+          "path": "Videos/P07/P07-20240531-201703_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P07/P07-20240531-201703_vrs_to_mp4_log.json",
+          "expected_md5": "4b3a115a1e34de256b6f20c8cc015a52"
+        },
+        {
+          "path": "Videos/P07/P07-20240530-111344_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P07/P07-20240530-111344_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "1a15567733833615046664096b58fddb"
+        },
+        {
+          "path": "Videos/P07/durations.txt",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P07/durations.txt",
+          "expected_md5": "8bd2266f4f39e1b8ac6a8761a0ec756f"
+        },
+        {
+          "path": "Videos/P07/P07-20240529-134410_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P07/P07-20240529-134410_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "e12b6b11b4265aec3c91c89f71d5c8e9"
+        },
+        {
+          "path": "Videos/P07/P07-20240529-194518.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P07/P07-20240529-194518.mp4",
+          "expected_md5": "788e279ca81d4ebb3bfa32713cc0c592"
+        },
+        {
+          "path": "Videos/P07/P07-20240529-102652.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P07/P07-20240529-102652.mp4",
+          "expected_md5": "aecba89a3ecff926563e8d66ea0d8ddc"
+        },
+        {
+          "path": "Videos/P07/P07-20240529-191007_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P07/P07-20240529-191007_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "a0b8972ab7fc9571e563eddf37580b05"
+        },
+        {
+          "path": "Videos/P07/frames.txt",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P07/frames.txt",
+          "expected_md5": "a18f5757ffe91e66d77ca9ec8ee98409"
+        },
+        {
+          "path": "Videos/P07/P07-20240529-191007_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P07/P07-20240529-191007_vrs_to_mp4_log.json",
+          "expected_md5": "de2afa9272cd49a1d2f9664f85e16fec"
+        },
+        {
+          "path": "Videos/P07/P07-20240529-134410.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P07/P07-20240529-134410.mp4",
+          "expected_md5": "78eda329bf486eacd6b3f9944712b8c6"
+        },
+        {
+          "path": "Videos/P07/P07-20240531-201703_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P07/P07-20240531-201703_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "9294747068990a8213bef22a20301ef6"
+        },
+        {
+          "path": "Videos/P07/P07-20240531-101357_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P07/P07-20240531-101357_vrs_to_mp4_log.json",
+          "expected_md5": "dc267ecbc92c9e76431483995330323c"
+        },
+        {
+          "path": "Videos/P07/P07-20240529-131737_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P07/P07-20240529-131737_vrs_to_mp4_log.json",
+          "expected_md5": "390d9eeca7079911972c55ac91a5cdb6"
+        },
+        {
+          "path": "Videos/P07/P07-20240531-201703.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P07/P07-20240531-201703.mp4",
+          "expected_md5": "aa376a14fa7f600214b72879081d6a2d"
+        },
+        {
+          "path": "Videos/P07/P07-20240529-102652_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P07/P07-20240529-102652_vrs_to_mp4_log.json",
+          "expected_md5": "3c1e921863bc3687e9771c4e05ab08ef"
+        },
+        {
+          "path": "Videos/P07/P07-20240529-102652_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P07/P07-20240529-102652_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "b9a88e516ded7027627f0a1bf5a1fe58"
+        },
+        {
+          "path": "Videos/P07/P07-20240530-102543_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P07/P07-20240530-102543_vrs_to_mp4_log.json",
+          "expected_md5": "005f6da6fd417e1672cb4934854cb303"
+        },
+        {
+          "path": "Videos/P07/P07-20240531-101357.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P07/P07-20240531-101357.mp4",
+          "expected_md5": "04d4270ac9ca96eb4ed310f39d3ee085"
+        },
+        {
+          "path": "Videos/P01/P01-20240204-120411_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240204-120411_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "b8ec3426d2819367668d75ad9560cbbf"
+        },
+        {
+          "path": "Videos/P01/P01-20240204-142301_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240204-142301_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "e9a98efd4380317ac2ee22cb2320c77b"
+        },
+        {
+          "path": "Videos/P01/P01-20240203-093333.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240203-093333.mp4",
+          "expected_md5": "b04706c8763216f98207eef121627eb2"
+        },
+        {
+          "path": "Videos/P01/P01-20240203-121517_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240203-121517_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "6ca6c98ff67fa6c47015f7845b71cfe9"
+        },
+        {
+          "path": "Videos/P01/P01-20240204-130448.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240204-130448.mp4",
+          "expected_md5": "0a33943cba292d44171da1f79b903cc2"
+        },
+        {
+          "path": "Videos/P01/P01-20240203-093333_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240203-093333_vrs_to_mp4_log.json",
+          "expected_md5": "c557fec132837252683de0cb17a91506"
+        },
+        {
+          "path": "Videos/P01/P01-20240204-124504_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240204-124504_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "8e9a3087916c2c35b35838a0baf99252"
+        },
+        {
+          "path": "Videos/P01/P01-20240203-150506_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240203-150506_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "c88a8bf13c85e0298166b0b430b6c632"
+        },
+        {
+          "path": "Videos/P01/P01-20240203-161757_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240203-161757_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "bb67e2ad63f6d71867fcfd8feb5f9992"
+        },
+        {
+          "path": "Videos/P01/P01-20240204-160230_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240204-160230_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "97e1ad1377a0ed2dd7e440835adfa8db"
+        },
+        {
+          "path": "Videos/P01/P01-20240202-161354_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240202-161354_vrs_to_mp4_log.json",
+          "expected_md5": "045c4a5d4a96057c983d28419175b967"
+        },
+        {
+          "path": "Videos/P01/P01-20240203-130505_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240203-130505_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "1c5a4afa8b637b13f5c87e946e5c50b0"
+        },
+        {
+          "path": "Videos/P01/P01-20240202-195538_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240202-195538_vrs_to_mp4_log.json",
+          "expected_md5": "91edcc2307225550f448b456760bf5ee"
+        },
+        {
+          "path": "Videos/P01/P01-20240204-124504_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240204-124504_vrs_to_mp4_log.json",
+          "expected_md5": "b5ae7cfbe922cf2617d09c00f079be36"
+        },
+        {
+          "path": "Videos/P01/P01-20240204-095114.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240204-095114.mp4",
+          "expected_md5": "86282cc1db0a576d91c1a6d694cd138d"
+        },
+        {
+          "path": "Videos/P01/P01-20240202-175627_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240202-175627_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "34dc1410d8a4de2165b9e09ed7986d97"
+        },
+        {
+          "path": "Videos/P01/P01-20240203-150506_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240203-150506_vrs_to_mp4_log.json",
+          "expected_md5": "04996e535ba4fbbe7fa98a0552e3401f"
+        },
+        {
+          "path": "Videos/P01/P01-20240202-161948_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240202-161948_vrs_to_mp4_log.json",
+          "expected_md5": "19ed1eabdb886d635d60c5b490584c37"
+        },
+        {
+          "path": "Videos/P01/P01-20240204-152537.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240204-152537.mp4",
+          "expected_md5": "a72e2494608f08fb89c6b830a0284604"
+        },
+        {
+          "path": "Videos/P01/P01-20240203-184214.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240203-184214.mp4",
+          "expected_md5": "beb49e4c10cee39c88853892b4623c64"
+        },
+        {
+          "path": "Videos/P01/P01-20240204-142301.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240204-142301.mp4",
+          "expected_md5": "67195d3b45421120d325e9ec35363bf5"
+        },
+        {
+          "path": "Videos/P01/P01-20240203-184045_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240203-184045_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "12fdad94804991cdcca6d22a1b3dfdd7"
+        },
+        {
+          "path": "Videos/P01/P01-20240203-161757.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240203-161757.mp4",
+          "expected_md5": "8e5cb82f23605df6ea65f509f0dd6057"
+        },
+        {
+          "path": "Videos/P01/P01-20240203-130505.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240203-130505.mp4",
+          "expected_md5": "f2401ec59f161bee658112811e5f2ab9"
+        },
+        {
+          "path": "Videos/P01/P01-20240204-145458_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240204-145458_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "c8b39368dc8f16d0ae1241d7e4d7c729"
+        },
+        {
+          "path": "Videos/P01/P01-20240204-120411.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240204-120411.mp4",
+          "expected_md5": "38dd0356bc05accc2027da2170bc7884"
+        },
+        {
+          "path": "Videos/P01/P01-20240202-161948.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240202-161948.mp4",
+          "expected_md5": "2188da10085eefb06728714964b22558"
+        },
+        {
+          "path": "Videos/P01/P01-20240204-095114_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240204-095114_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "49e99d49753a1625d577d9c6517dbdfe"
+        },
+        {
+          "path": "Videos/P01/P01-20240202-171220.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240202-171220.mp4",
+          "expected_md5": "30b134f5f0b410bfa18c06099e8a0914"
+        },
+        {
+          "path": "Videos/P01/P01-20240204-152537_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240204-152537_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "1c050ce35354d546e1be4c72aa2efd70"
+        },
+        {
+          "path": "Videos/P01/P01-20240204-145458_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240204-145458_vrs_to_mp4_log.json",
+          "expected_md5": "130f90906834ff76fbca92372a5d5da4"
+        },
+        {
+          "path": "Videos/P01/P01-20240203-135502.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240203-135502.mp4",
+          "expected_md5": "d8f291feffe7cca88f507398202e8fff"
+        },
+        {
+          "path": "Videos/P01/P01-20240203-152956_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240203-152956_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "bf2b3d7124dab615ad07fd2756cd8957"
+        },
+        {
+          "path": "Videos/P01/durations.txt",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/durations.txt",
+          "expected_md5": "55664b0b9884f9f7999942c7ca3829e8"
+        },
+        {
+          "path": "Videos/P01/P01-20240203-184045_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240203-184045_vrs_to_mp4_log.json",
+          "expected_md5": "cc25c8d8cb935b1293b5b02d94aea009"
+        },
+        {
+          "path": "Videos/P01/P01-20240202-161948_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240202-161948_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "2fc27335963b8ffd90c32685ca86f1cb"
+        },
+        {
+          "path": "Videos/P01/P01-20240204-121042_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240204-121042_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "6df0d90e15a8d2237cf4d6b47e3b5cf7"
+        },
+        {
+          "path": "Videos/P01/P01-20240203-121517_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240203-121517_vrs_to_mp4_log.json",
+          "expected_md5": "9965a4ff476924df6ca98b1db7cdf5c5"
+        },
+        {
+          "path": "Videos/P01/P01-20240204-130448_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240204-130448_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "bf2e7784a4779db5a84050776a780ac4"
+        },
+        {
+          "path": "Videos/P01/P01-20240203-135502_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240203-135502_vrs_to_mp4_log.json",
+          "expected_md5": "4a1addb2628111f2b422367c37a9f78d"
+        },
+        {
+          "path": "Videos/P01/P01-20240204-160230_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240204-160230_vrs_to_mp4_log.json",
+          "expected_md5": "a39ed70b077faf7b44f71f69f71a859c"
+        },
+        {
+          "path": "Videos/P01/P01-20240202-195538.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240202-195538.mp4",
+          "expected_md5": "83493f38ba7effd64c221df7a6388d7b"
+        },
+        {
+          "path": "Videos/P01/P01-20240202-171220_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240202-171220_vrs_to_mp4_log.json",
+          "expected_md5": "8d7ce7e38af9664880b5d6e8d6fe4c1f"
+        },
+        {
+          "path": "Videos/P01/P01-20240202-175627.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240202-175627.mp4",
+          "expected_md5": "f96e1dfc750ffb1c25e15fa51162f7be"
+        },
+        {
+          "path": "Videos/P01/P01-20240203-123350.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240203-123350.mp4",
+          "expected_md5": "bd3c95e17b16561fb336444eb25a5255"
+        },
+        {
+          "path": "Videos/P01/P01-20240202-110250_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240202-110250_vrs_to_mp4_log.json",
+          "expected_md5": "a12993684e460257366216aae1ab19ea"
+        },
+        {
+          "path": "Videos/P01/P01-20240203-184045.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240203-184045.mp4",
+          "expected_md5": "ad322e2a651638b1217da16909fc759d"
+        },
+        {
+          "path": "Videos/P01/P01-20240202-110250_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240202-110250_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "bb50063326f8420887fb60f914feb3b3"
+        },
+        {
+          "path": "Videos/P01/P01-20240204-120411_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240204-120411_vrs_to_mp4_log.json",
+          "expected_md5": "29659a16ea3267b43bf58fb6a569f5e1"
+        },
+        {
+          "path": "Videos/P01/P01-20240203-093333_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240203-093333_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "27e599e68d717ced2b8b35460311a0ca"
+        },
+        {
+          "path": "Videos/P01/P01-20240204-121042_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240204-121042_vrs_to_mp4_log.json",
+          "expected_md5": "a28673fca42ea890227f2380700980c6"
+        },
+        {
+          "path": "Videos/P01/P01-20240202-110250.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240202-110250.mp4",
+          "expected_md5": "c981eab775c96858da313acef769b014"
+        },
+        {
+          "path": "Videos/P01/P01-20240202-161354.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240202-161354.mp4",
+          "expected_md5": "a13e897ebcb918b2b22b79df2b89dc02"
+        },
+        {
+          "path": "Videos/P01/P01-20240204-145458.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240204-145458.mp4",
+          "expected_md5": "3d498fab336747cf6f689514c8d56634"
+        },
+        {
+          "path": "Videos/P01/P01-20240202-171220_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240202-171220_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "376d9f8fa327ec7e04f20b9ee3686f06"
+        },
+        {
+          "path": "Videos/P01/P01-20240203-184214_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240203-184214_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "6176a2fc8cc2381372b4523ae273c3b2"
+        },
+        {
+          "path": "Videos/P01/P01-20240203-152323.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240203-152323.mp4",
+          "expected_md5": "938ed663441235aaa669c61ae9153ae9"
+        },
+        {
+          "path": "Videos/P01/P01-20240203-161757_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240203-161757_vrs_to_mp4_log.json",
+          "expected_md5": "fbf9b4fd7a2d59f8b8a3e06bda235640"
+        },
+        {
+          "path": "Videos/P01/P01-20240203-135502_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240203-135502_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "eef052bf87e8e99b03ca355ddeb7f08b"
+        },
+        {
+          "path": "Videos/P01/P01-20240202-161354_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240202-161354_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "945519ec32718366642189f9cd6f78ad"
+        },
+        {
+          "path": "Videos/P01/P01-20240203-132119.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240203-132119.mp4",
+          "expected_md5": "19f79800a40d7d9efa804902fc366153"
+        },
+        {
+          "path": "Videos/P01/frames.txt",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/frames.txt",
+          "expected_md5": "46d6c51a0438c903a75b4c7d61738ae2"
+        },
+        {
+          "path": "Videos/P01/P01-20240203-132119_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240203-132119_vrs_to_mp4_log.json",
+          "expected_md5": "f96bdfd95061287c6efa022cb2df604c"
+        },
+        {
+          "path": "Videos/P01/P01-20240203-150506.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240203-150506.mp4",
+          "expected_md5": "9eac803f64cf96c9fe5bf61952ef8a41"
+        },
+        {
+          "path": "Videos/P01/P01-20240203-152956_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240203-152956_vrs_to_mp4_log.json",
+          "expected_md5": "c211d340796147acd7ae2f5a4d97a462"
+        },
+        {
+          "path": "Videos/P01/P01-20240204-152537_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240204-152537_vrs_to_mp4_log.json",
+          "expected_md5": "c69df275e96811e35f3c040e789c269f"
+        },
+        {
+          "path": "Videos/P01/P01-20240203-184214_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240203-184214_vrs_to_mp4_log.json",
+          "expected_md5": "ac8525f34208953595f5f64f82fc87ff"
+        },
+        {
+          "path": "Videos/P01/P01-20240204-121042.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240204-121042.mp4",
+          "expected_md5": "43cb3ca56c10f7c09f220913e6fe9702"
+        },
+        {
+          "path": "Videos/P01/P01-20240203-152956.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240203-152956.mp4",
+          "expected_md5": "1b097df6ac3ca69d8786db6e927b0115"
+        },
+        {
+          "path": "Videos/P01/P01-20240202-195538_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240202-195538_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "ba5e04e688f1caa1af74c792e95be18f"
+        },
+        {
+          "path": "Videos/P01/P01-20240204-160230.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240204-160230.mp4",
+          "expected_md5": "7ffe066ecde8f6feb3b9630de20a7b7e"
+        },
+        {
+          "path": "Videos/P01/P01-20240203-152323_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240203-152323_vrs_to_mp4_log.json",
+          "expected_md5": "0916047dac5ecf3e29860bcd9c7f733e"
+        },
+        {
+          "path": "Videos/P01/P01-20240203-152323_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240203-152323_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "747c8b21d11d39e0c9210c98729c506e"
+        },
+        {
+          "path": "Videos/P01/P01-20240203-123350_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240203-123350_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "fbb0660554134bc838f3c2f3e187ea0e"
+        },
+        {
+          "path": "Videos/P01/P01-20240202-175627_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240202-175627_vrs_to_mp4_log.json",
+          "expected_md5": "48f73fee485fcff423f73f91cbe517f3"
+        },
+        {
+          "path": "Videos/P01/P01-20240204-124504.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240204-124504.mp4",
+          "expected_md5": "0f67dc87609f0a24720cb7ff68d279bb"
+        },
+        {
+          "path": "Videos/P01/P01-20240204-142301_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240204-142301_vrs_to_mp4_log.json",
+          "expected_md5": "b5a3bc57d4426c77263e9bf8e5b127d9"
+        },
+        {
+          "path": "Videos/P01/P01-20240204-130448_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240204-130448_vrs_to_mp4_log.json",
+          "expected_md5": "e10fceca70f58365921ae47f339ed4c3"
+        },
+        {
+          "path": "Videos/P01/P01-20240204-095114_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240204-095114_vrs_to_mp4_log.json",
+          "expected_md5": "5046fb2ac24feca2eff7a79a3facde13"
+        },
+        {
+          "path": "Videos/P01/P01-20240203-123350_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240203-123350_vrs_to_mp4_log.json",
+          "expected_md5": "0232c6745b98007abf961f87005f5d9d"
+        },
+        {
+          "path": "Videos/P01/P01-20240203-130505_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240203-130505_vrs_to_mp4_log.json",
+          "expected_md5": "3626fd0d3e36a8fa2f4e9ebfadbea86a"
+        },
+        {
+          "path": "Videos/P01/P01-20240203-132119_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240203-132119_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "f42ed2e12b0bac9c6582bbefff01ef65"
+        },
+        {
+          "path": "Videos/P01/P01-20240203-121517.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240203-121517.mp4",
+          "expected_md5": "2eefaf6dfec5a7ed710645ba0c3382ea"
+        },
+        {
+          "path": "Videos/frames.txt",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/frames.txt",
+          "expected_md5": "3c0769d62427dd32864e5ce61b1b0e28"
+        },
+        {
+          "path": "Videos/P02/P02-20240209-194141_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P02/P02-20240209-194141_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "4bca27e3eefd0094f687db8e0df41775"
+        },
+        {
+          "path": "Videos/P02/P02-20240209-184316_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P02/P02-20240209-184316_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "fcdeb9cb6c14d70f4f0a0dc8c9a1ba22"
+        },
+        {
+          "path": "Videos/P02/P02-20240210-122334_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P02/P02-20240210-122334_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "e6c5a6611fc9f0e64c476dcc4552dc97"
+        },
+        {
+          "path": "Videos/P02/P02-20240210-100930_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P02/P02-20240210-100930_vrs_to_mp4_log.json",
+          "expected_md5": "77f1e4ddf1d37802efc8dd0f97489456"
+        },
+        {
+          "path": "Videos/P02/P02-20240210-100308_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P02/P02-20240210-100308_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "3bab5197ecf5c5d0f0c4e979b210d35d"
+        },
+        {
+          "path": "Videos/P02/P02-20240211-120927_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P02/P02-20240211-120927_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "2fd6b3e64ce88b9b3b50cb9408c75d06"
+        },
+        {
+          "path": "Videos/P02/P02-20240210-220650_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P02/P02-20240210-220650_vrs_to_mp4_log.json",
+          "expected_md5": "cca0dd62dfd23b1121b0cdf316df7b49"
+        },
+        {
+          "path": "Videos/P02/P02-20240211-100250.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P02/P02-20240211-100250.mp4",
+          "expected_md5": "d9873785a361d58d752723648c315540"
+        },
+        {
+          "path": "Videos/P02/P02-20240211-175138_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P02/P02-20240211-175138_vrs_to_mp4_log.json",
+          "expected_md5": "ba7644a62c47fc0a30a631a86c4ed37c"
+        },
+        {
+          "path": "Videos/P02/P02-20240211-104948.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P02/P02-20240211-104948.mp4",
+          "expected_md5": "3aac69b7ee1a71c8a517d5a006785da7"
+        },
+        {
+          "path": "Videos/P02/P02-20240211-111822.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P02/P02-20240211-111822.mp4",
+          "expected_md5": "74d285bb81078116350ee2046c512edc"
+        },
+        {
+          "path": "Videos/P02/P02-20240211-115653.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P02/P02-20240211-115653.mp4",
+          "expected_md5": "b96fbcd21bd465ff0d389e5c4e115182"
+        },
+        {
+          "path": "Videos/P02/P02-20240211-182630.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P02/P02-20240211-182630.mp4",
+          "expected_md5": "b270a5e7ae73c161bb654fd99168ab28"
+        },
+        {
+          "path": "Videos/P02/P02-20240211-175138_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P02/P02-20240211-175138_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "96d015ed66e8ba7fe380495b96c92a01"
+        },
+        {
+          "path": "Videos/P02/P02-20240211-111219.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P02/P02-20240211-111219.mp4",
+          "expected_md5": "323e3828e3593ecb818d7236dd744f76"
+        },
+        {
+          "path": "Videos/P02/P02-20240211-182630_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P02/P02-20240211-182630_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "5cc4fdefab62b4597b718fa05b624fd7"
+        },
+        {
+          "path": "Videos/P02/P02-20240209-231412.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P02/P02-20240209-231412.mp4",
+          "expected_md5": "138b34ead5ea64a57ad4658d907ef14b"
+        },
+        {
+          "path": "Videos/P02/P02-20240210-100930.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P02/P02-20240210-100930.mp4",
+          "expected_md5": "904769b3a7417f46ca60a8f011e5ad6c"
+        },
+        {
+          "path": "Videos/P02/durations.txt",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P02/durations.txt",
+          "expected_md5": "dccbd2c4297abcc436f5eae4db2a6140"
+        },
+        {
+          "path": "Videos/P02/P02-20240211-141313.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P02/P02-20240211-141313.mp4",
+          "expected_md5": "9775748833373a35e1fffead968828bc"
+        },
+        {
+          "path": "Videos/P02/P02-20240211-141313_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P02/P02-20240211-141313_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "5c47fa8c1e13ebe51dfa308f51fd983d"
+        },
+        {
+          "path": "Videos/P02/P02-20240210-122334_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P02/P02-20240210-122334_vrs_to_mp4_log.json",
+          "expected_md5": "45cbf61d39086ace55ec0cd41cd37268"
+        },
+        {
+          "path": "Videos/P02/P02-20240211-111219_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P02/P02-20240211-111219_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "87fdef571d7178b5ecf70876a400a256"
+        },
+        {
+          "path": "Videos/P02/P02-20240211-141313_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P02/P02-20240211-141313_vrs_to_mp4_log.json",
+          "expected_md5": "d5ffacfe35cd72d988f6babda643c708"
+        },
+        {
+          "path": "Videos/P02/P02-20240209-184316.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P02/P02-20240209-184316.mp4",
+          "expected_md5": "6f6bac80805510bdad3cc1046eca076e"
+        },
+        {
+          "path": "Videos/P02/P02-20240210-100930_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P02/P02-20240210-100930_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "d0e40f39a017663c3bda9169e191254f"
+        },
+        {
+          "path": "Videos/P02/P02-20240210-092616.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P02/P02-20240210-092616.mp4",
+          "expected_md5": "e86c0eb846f70f2b10c1aeaddf3bbd51"
+        },
+        {
+          "path": "Videos/P02/P02-20240210-113925_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P02/P02-20240210-113925_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "234fee7454226a86d32ffe66dc565875"
+        },
+        {
+          "path": "Videos/P02/P02-20240210-220650.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P02/P02-20240210-220650.mp4",
+          "expected_md5": "58b326b308783cfcdf328af9bc8f5aa5"
+        },
+        {
+          "path": "Videos/P02/P02-20240211-115653_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P02/P02-20240211-115653_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "edc4ab1ca8924ad948b77cbc441f3f41"
+        },
+        {
+          "path": "Videos/P02/P02-20240210-195833_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P02/P02-20240210-195833_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "0b24439ffa42be2866262909768dfb75"
+        },
+        {
+          "path": "Videos/P02/P02-20240211-182630_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P02/P02-20240211-182630_vrs_to_mp4_log.json",
+          "expected_md5": "804bb9431940813707f305b328b2399d"
+        },
+        {
+          "path": "Videos/P02/P02-20240209-194141.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P02/P02-20240209-194141.mp4",
+          "expected_md5": "19ae25134147e5df644b24acea6bc854"
+        },
+        {
+          "path": "Videos/P02/P02-20240211-120927_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P02/P02-20240211-120927_vrs_to_mp4_log.json",
+          "expected_md5": "0e6df8dece9e05a5d92014a2b24aac53"
+        },
+        {
+          "path": "Videos/P02/P02-20240210-100308_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P02/P02-20240210-100308_vrs_to_mp4_log.json",
+          "expected_md5": "f51fcbe85e628e36b27b12564ee27d44"
+        },
+        {
+          "path": "Videos/P02/P02-20240210-113925_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P02/P02-20240210-113925_vrs_to_mp4_log.json",
+          "expected_md5": "d8e706f54a098c11e105e7c4dc1e116e"
+        },
+        {
+          "path": "Videos/P02/P02-20240209-231412_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P02/P02-20240209-231412_vrs_to_mp4_log.json",
+          "expected_md5": "02fe9961be01538adf20b3625d417380"
+        },
+        {
+          "path": "Videos/P02/P02-20240209-231412_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P02/P02-20240209-231412_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "229ad628efa03f1a419ecf26943a2f11"
+        },
+        {
+          "path": "Videos/P02/frames.txt",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P02/frames.txt",
+          "expected_md5": "b2d5c8bdb2c96f2806ac64c2a4c7ba09"
+        },
+        {
+          "path": "Videos/P02/P02-20240210-100308.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P02/P02-20240210-100308.mp4",
+          "expected_md5": "2550e53e4487a2209d7d9e069dd47fec"
+        },
+        {
+          "path": "Videos/P02/P02-20240211-120927.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P02/P02-20240211-120927.mp4",
+          "expected_md5": "ccdcad080f0a69b159f540bb6b64cfca"
+        },
+        {
+          "path": "Videos/P02/P02-20240210-122334.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P02/P02-20240210-122334.mp4",
+          "expected_md5": "cd3c1f9a4d4b5ca4b42b52f421dbf91a"
+        },
+        {
+          "path": "Videos/P02/P02-20240209-194141_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P02/P02-20240209-194141_vrs_to_mp4_log.json",
+          "expected_md5": "448a90050087afbeea9bcfcd4d459327"
+        },
+        {
+          "path": "Videos/P02/P02-20240211-175138.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P02/P02-20240211-175138.mp4",
+          "expected_md5": "6be373b5ed8298c3f359536e48179dcf"
+        },
+        {
+          "path": "Videos/P02/P02-20240210-195833_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P02/P02-20240210-195833_vrs_to_mp4_log.json",
+          "expected_md5": "b5efb52d5e07a81634be06bf5496ff05"
+        },
+        {
+          "path": "Videos/P02/P02-20240211-100250_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P02/P02-20240211-100250_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "02a25d713cbf1af71d5dddc74dac92c0"
+        },
+        {
+          "path": "Videos/P02/P02-20240211-111822_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P02/P02-20240211-111822_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "b2f72fee3ab63936aa25c66d9cb87f89"
+        },
+        {
+          "path": "Videos/P02/P02-20240209-184316_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P02/P02-20240209-184316_vrs_to_mp4_log.json",
+          "expected_md5": "59d33be96c948dafe98d71d51cdefa07"
+        },
+        {
+          "path": "Videos/P02/P02-20240210-092616_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P02/P02-20240210-092616_vrs_to_mp4_log.json",
+          "expected_md5": "0148c679e9ce7a9e97cdc1c79197573a"
+        },
+        {
+          "path": "Videos/P02/P02-20240211-104948_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P02/P02-20240211-104948_vrs_to_mp4_log.json",
+          "expected_md5": "9b30a807fa19552189c8bbd98ec20b20"
+        },
+        {
+          "path": "Videos/P02/P02-20240211-111822_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P02/P02-20240211-111822_vrs_to_mp4_log.json",
+          "expected_md5": "8846ab44e32f16e9987dd6d1eccf7991"
+        },
+        {
+          "path": "Videos/P02/P02-20240210-220650_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P02/P02-20240210-220650_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "892e40468695b0341aea15fc61432c9c"
+        },
+        {
+          "path": "Videos/P02/P02-20240210-092616_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P02/P02-20240210-092616_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "1e7569a56edddc42f80da53edff18ee2"
+        },
+        {
+          "path": "Videos/P02/P02-20240210-195833.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P02/P02-20240210-195833.mp4",
+          "expected_md5": "2125500b251b64bb3f815735b9b6af31"
+        },
+        {
+          "path": "Videos/P02/P02-20240210-113925.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P02/P02-20240210-113925.mp4",
+          "expected_md5": "6c5db8fc4c8b625f31313f1377286a23"
+        },
+        {
+          "path": "Videos/P02/P02-20240211-111219_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P02/P02-20240211-111219_vrs_to_mp4_log.json",
+          "expected_md5": "a38fed8197eda8a3fc2ea3925d47e29a"
+        },
+        {
+          "path": "Videos/P02/P02-20240211-104948_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P02/P02-20240211-104948_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "bdee774a529968f5a96c4b18fc1491a7"
+        },
+        {
+          "path": "Videos/P02/P02-20240211-100250_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P02/P02-20240211-100250_vrs_to_mp4_log.json",
+          "expected_md5": "bbca4688d7bbd2986d07c59cb8a5deb8"
+        },
+        {
+          "path": "Videos/P02/P02-20240211-115653_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P02/P02-20240211-115653_vrs_to_mp4_log.json",
+          "expected_md5": "8a8233816c520cba5cc377d6e14fee18"
+        },
+        {
+          "path": "Videos/P03/P03-20240217-131219.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P03/P03-20240217-131219.mp4",
+          "expected_md5": "c5b2eec913c434153b7140533a8b7007"
+        },
+        {
+          "path": "Videos/P03/P03-20240216-084005.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P03/P03-20240216-084005.mp4",
+          "expected_md5": "98ff8ae07f35781c407a6bdc8f9fcefb"
+        },
+        {
+          "path": "Videos/P03/P03-20240217-091657_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P03/P03-20240217-091657_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "5368f3af28b1e8d1fbbfc8fd4d7a3fd8"
+        },
+        {
+          "path": "Videos/P03/P03-20240216-090759_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P03/P03-20240216-090759_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "8232d5011925c2be027a6482733d52d7"
+        },
+        {
+          "path": "Videos/P03/P03-20240217-210958_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P03/P03-20240217-210958_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "56b0a2c0de105addb371573b19e4704f"
+        },
+        {
+          "path": "Videos/P03/P03-20240217-130208_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P03/P03-20240217-130208_vrs_to_mp4_log.json",
+          "expected_md5": "591c255cfdb0d2530fa65164e1a396d4"
+        },
+        {
+          "path": "Videos/P03/P03-20240218-202148_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P03/P03-20240218-202148_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "07d58949842f3f15cd8f8cdff5e2d178"
+        },
+        {
+          "path": "Videos/P03/P03-20240218-140054_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P03/P03-20240218-140054_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "c662efb912be9abb5a8bf9e90619615f"
+        },
+        {
+          "path": "Videos/P03/P03-20240216-223126.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P03/P03-20240216-223126.mp4",
+          "expected_md5": "3df303a1fe48078465ce3ea37285f440"
+        },
+        {
+          "path": "Videos/P03/P03-20240218-144430_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P03/P03-20240218-144430_vrs_to_mp4_log.json",
+          "expected_md5": "3ae9fda4ae76bbb41f7f1ff7d1ad8487"
+        },
+        {
+          "path": "Videos/P03/P03-20240216-185832_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P03/P03-20240216-185832_vrs_to_mp4_log.json",
+          "expected_md5": "455913d817b38ec6038408eb1c37920c"
+        },
+        {
+          "path": "Videos/P03/P03-20240217-094713_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P03/P03-20240217-094713_vrs_to_mp4_log.json",
+          "expected_md5": "0d34992513b00962fc97b32b9ab29b26"
+        },
+        {
+          "path": "Videos/P03/P03-20240217-210958_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P03/P03-20240217-210958_vrs_to_mp4_log.json",
+          "expected_md5": "d4cbc36cb7ddc69a298f4e98d5eeab01"
+        },
+        {
+          "path": "Videos/P03/P03-20240218-190556_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P03/P03-20240218-190556_vrs_to_mp4_log.json",
+          "expected_md5": "e217eb1c8d54a5e485b12200d97c0cdd"
+        },
+        {
+          "path": "Videos/P03/P03-20240217-192543_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P03/P03-20240217-192543_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "84454756877d5d3b674114aa0a3518b8"
+        },
+        {
+          "path": "Videos/P03/P03-20240218-202148_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P03/P03-20240218-202148_vrs_to_mp4_log.json",
+          "expected_md5": "50b331e93ffd33d01562c9633daf6d68"
+        },
+        {
+          "path": "Videos/P03/P03-20240217-100448.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P03/P03-20240217-100448.mp4",
+          "expected_md5": "47b86604c4e66c34f484a44fe71770cb"
+        },
+        {
+          "path": "Videos/P03/P03-20240216-090759.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P03/P03-20240216-090759.mp4",
+          "expected_md5": "f54f338f51f40b6919f6a376f8531624"
+        },
+        {
+          "path": "Videos/P03/P03-20240218-140054_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P03/P03-20240218-140054_vrs_to_mp4_log.json",
+          "expected_md5": "cb0214a4a0d8239584e4876c6d514735"
+        },
+        {
+          "path": "Videos/P03/P03-20240217-091657.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P03/P03-20240217-091657.mp4",
+          "expected_md5": "dd9c66a309e34c44c4fb90e0e3312611"
+        },
+        {
+          "path": "Videos/P03/P03-20240216-205923_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P03/P03-20240216-205923_vrs_to_mp4_log.json",
+          "expected_md5": "2e23d76fe68315c516bdea638e9b5290"
+        },
+        {
+          "path": "Videos/P03/P03-20240217-091657_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P03/P03-20240217-091657_vrs_to_mp4_log.json",
+          "expected_md5": "5a8d5e7bce07d6e38190fb64bf104f36"
+        },
+        {
+          "path": "Videos/P03/P03-20240216-084005_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P03/P03-20240216-084005_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "4e3f9f46dd57fb2765da9600e055fd77"
+        },
+        {
+          "path": "Videos/P03/P03-20240217-152152_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P03/P03-20240217-152152_vrs_to_mp4_log.json",
+          "expected_md5": "ae5dd808a37eb4f2c7a7a091b5ed3761"
+        },
+        {
+          "path": "Videos/P03/P03-20240217-192543.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P03/P03-20240217-192543.mp4",
+          "expected_md5": "a83a14ef7a50eedba6ae41cf95ddbb63"
+        },
+        {
+          "path": "Videos/P03/durations.txt",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P03/durations.txt",
+          "expected_md5": "6f33531141823dff93280c4cf08a1117"
+        },
+        {
+          "path": "Videos/P03/P03-20240217-131219_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P03/P03-20240217-131219_vrs_to_mp4_log.json",
+          "expected_md5": "dcaa78db1f939218ffe6c9d3cfea655e"
+        },
+        {
+          "path": "Videos/P03/P03-20240218-094452_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P03/P03-20240218-094452_vrs_to_mp4_log.json",
+          "expected_md5": "d81014de4331779a45476b0eeabca7e9"
+        },
+        {
+          "path": "Videos/P03/P03-20240216-223126_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P03/P03-20240216-223126_vrs_to_mp4_log.json",
+          "expected_md5": "0f1e04a86db12b71fe67a60c2210a2d4"
+        },
+        {
+          "path": "Videos/P03/P03-20240217-130208_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P03/P03-20240217-130208_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "55068aa50e1e976af11857a35ccbf52f"
+        },
+        {
+          "path": "Videos/P03/P03-20240218-144430_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P03/P03-20240218-144430_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "26f638f43c872048c3ed28cfc854e2f8"
+        },
+        {
+          "path": "Videos/P03/P03-20240217-210126_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P03/P03-20240217-210126_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "4f7359831fb4677bcd664e75dd22e887"
+        },
+        {
+          "path": "Videos/P03/P03-20240216-223126_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P03/P03-20240216-223126_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "7a20d99bec94cf4358b8b0c2644d5ee3"
+        },
+        {
+          "path": "Videos/P03/P03-20240217-150310.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P03/P03-20240217-150310.mp4",
+          "expected_md5": "5759a88fb90a9d68f80200b5e55de870"
+        },
+        {
+          "path": "Videos/P03/P03-20240217-210126_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P03/P03-20240217-210126_vrs_to_mp4_log.json",
+          "expected_md5": "45e22c39a2e57a4c4c9c6d99e123fd8b"
+        },
+        {
+          "path": "Videos/P03/P03-20240216-090759_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P03/P03-20240216-090759_vrs_to_mp4_log.json",
+          "expected_md5": "bbb4b78a77538f13180b928097451928"
+        },
+        {
+          "path": "Videos/P03/P03-20240218-101509_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P03/P03-20240218-101509_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "29a3b583ca085d0639d463bc95dfabc2"
+        },
+        {
+          "path": "Videos/P03/P03-20240218-094452.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P03/P03-20240218-094452.mp4",
+          "expected_md5": "b868f9b99eaad181b1ed540d08067552"
+        },
+        {
+          "path": "Videos/P03/P03-20240217-150310_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P03/P03-20240217-150310_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "c7ffc76e279236894ff2507428112dd2"
+        },
+        {
+          "path": "Videos/P03/P03-20240217-130208.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P03/P03-20240217-130208.mp4",
+          "expected_md5": "087ff870440b1253d7ae2615d5e0a57d"
+        },
+        {
+          "path": "Videos/P03/P03-20240216-205923_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P03/P03-20240216-205923_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "126f942f5604b480be8db117e1064c4b"
+        },
+        {
+          "path": "Videos/P03/P03-20240218-144430.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P03/P03-20240218-144430.mp4",
+          "expected_md5": "131f0d87ac8f42c46fad9f5882498961"
+        },
+        {
+          "path": "Videos/P03/P03-20240218-101509_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P03/P03-20240218-101509_vrs_to_mp4_log.json",
+          "expected_md5": "faff764495ce295ee7aa5eeab4748b1c"
+        },
+        {
+          "path": "Videos/P03/P03-20240218-094452_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P03/P03-20240218-094452_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "ed9c6f6268a8d3eb27bb6e0858935a1e"
+        },
+        {
+          "path": "Videos/P03/P03-20240218-190556_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P03/P03-20240218-190556_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "a2a09afb33f43546d062a231cc17b993"
+        },
+        {
+          "path": "Videos/P03/frames.txt",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P03/frames.txt",
+          "expected_md5": "1755a674036386b2db62aa77df75a427"
+        },
+        {
+          "path": "Videos/P03/P03-20240216-084005_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P03/P03-20240216-084005_vrs_to_mp4_log.json",
+          "expected_md5": "e5f2d7df6b11435f5f6cc139402eb937"
+        },
+        {
+          "path": "Videos/P03/P03-20240217-094713.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P03/P03-20240217-094713.mp4",
+          "expected_md5": "8a27b05ac810fc439d90aa043777008c"
+        },
+        {
+          "path": "Videos/P03/P03-20240218-140054.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P03/P03-20240218-140054.mp4",
+          "expected_md5": "a8fbce0d52b649c27f8d84ae865e4d20"
+        },
+        {
+          "path": "Videos/P03/P03-20240217-152152_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P03/P03-20240217-152152_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "2e00af61d07f6a9276b78f946625fddb"
+        },
+        {
+          "path": "Videos/P03/P03-20240217-150310_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P03/P03-20240217-150310_vrs_to_mp4_log.json",
+          "expected_md5": "739abf6e4438eb15ad6816f0d3820d1e"
+        },
+        {
+          "path": "Videos/P03/P03-20240217-131219_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P03/P03-20240217-131219_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "d9f863d792f974d4c106524bb69fb725"
+        },
+        {
+          "path": "Videos/P03/P03-20240217-094713_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P03/P03-20240217-094713_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "7124a18c6f03d1d6be48c86dccead189"
+        },
+        {
+          "path": "Videos/P03/P03-20240217-210958.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P03/P03-20240217-210958.mp4",
+          "expected_md5": "92b974e984520bbd7f5512469c10f592"
+        },
+        {
+          "path": "Videos/P03/P03-20240217-152152.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P03/P03-20240217-152152.mp4",
+          "expected_md5": "e95b0888e7f1257b6e1700d5402f658b"
+        },
+        {
+          "path": "Videos/P03/P03-20240216-185832_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P03/P03-20240216-185832_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "57212244c2d14312499dc88b1ac5ea27"
+        },
+        {
+          "path": "Videos/P03/P03-20240217-100448_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P03/P03-20240217-100448_vrs_to_mp4_log.json",
+          "expected_md5": "8b9fef8eb658f5efae8b208a5c50dcf0"
+        },
+        {
+          "path": "Videos/P03/P03-20240217-210126.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P03/P03-20240217-210126.mp4",
+          "expected_md5": "f32b46d2c7d7060d5a00e5a6c21b01ab"
+        },
+        {
+          "path": "Videos/P03/P03-20240218-101509.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P03/P03-20240218-101509.mp4",
+          "expected_md5": "b256f146fee3b572857f7292a6e68ec5"
+        },
+        {
+          "path": "Videos/P03/P03-20240216-185832.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P03/P03-20240216-185832.mp4",
+          "expected_md5": "b3b5b35bc03a466668e2055d674b3530"
+        },
+        {
+          "path": "Videos/P03/P03-20240217-100448_mp4_to_vrs_time_ns.csv",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P03/P03-20240217-100448_mp4_to_vrs_time_ns.csv",
+          "expected_md5": "461e629d655a334b4ad0bedb2a9bd7c2"
+        },
+        {
+          "path": "Videos/P03/P03-20240216-205923.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P03/P03-20240216-205923.mp4",
+          "expected_md5": "4f52fe4293a37bb1a254592c91d5faae"
+        },
+        {
+          "path": "Videos/P03/P03-20240217-192543_vrs_to_mp4_log.json",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P03/P03-20240217-192543_vrs_to_mp4_log.json",
+          "expected_md5": "59dc5e4dcdc1b11ef7022a692b185bcc"
+        },
+        {
+          "path": "Videos/P03/P03-20240218-202148.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P03/P03-20240218-202148.mp4",
+          "expected_md5": "5fe486f2b1bf2a05fa08243a64fd95b9"
+        },
+        {
+          "path": "Videos/P03/P03-20240218-190556.mp4",
+          "url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P03/P03-20240218-190556.mp4",
+          "expected_md5": "62bc09df844c729e988d9ba7bb0f7e49"
+        }
+      ],
+      "note": "独立评测保留，不进入主训练混合。核验官方 Videos/ 完整子目录：156 个 MP4 及时间映射/转换日志；不含 VRS、SLAM、数字孪生或独立 GitHub 标注。文件列表来自官方 downloader 的 md5 清单；MD5 为发布者记录，本次未读取视频验证内容哈希。按作者定位作为高密度状态/对象运动诊断，不因 HF 镜像称 train 就用作训练。",
+      "source_urls": [
+        "https://hd-epic.github.io/site/",
+        "https://github.com/hd-epic/hd-epic-downloader",
+        "https://github.com/hd-epic/hd-epic-annotations",
+        "https://arxiv.org/abs/2502.04144"
+      ],
+      "publisher_manifest_git_blob": "c1cae6ebe87bde65325a2198fc755f1afaaafae8"
     }
   ]
 }

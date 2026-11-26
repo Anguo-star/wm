@@ -1,12 +1,22 @@
 # WorldModel 技术调研与数据规划
 
-`index.html` 是独立可打开的中文报告，保留技术调研、通用世界模型设计、29 项数据目录、16 组训练配方及专项探索。
+`index.html` 是独立可打开的中文报告，保留技术调研、通用世界模型设计、34 项数据目录、16 组训练配方及专项探索。
 
-2026-11-25 已完成本轮可访问范围的容量核验，**未读取或保存训练文件正文**。本轮查询文件树、发布清单、DOI 登记和 HTTP 响应头。
+2026-11-26 新版 Predictor 方案已写入 HTML：目录收录按监督适配、采用证据和可用性判断，区分默认训练、增量、专项与评测。新增 Gen-HumanEgo、EgoMimic、HoloAssist、HD-EPIC、Open-HumanWAM-50K，并保存 10 组采用证据与选型决定。
+
+- 默认 S1：Gen-HumanEgo 35%、EgoDex 15%、DROID 20%、Bridge 10%、EPIC 5%、SSv2 5%、LIBERO 5%、RoboCasa 5%。按有效单视角时序窗口采样。
+- S2：真实机器人 60%、人类交互 20%、受控仿真 15%、操作语义 5%；历史分支生成后单独替换配额。
+- 通用视频、图文/编辑和导航默认不占首轮主训练配额，分别做增量或专项。HD-EPIC 保留独立评测。
+- `tools/data/predictor_plan.json` 是待验证训练配置；`reports/predictor-data-review.json` 记录采用证据。**本轮未执行训练。**
+- Gen-HumanEgo 的完整远端范围为 **62,035,012,405,416 bytes / 44,636 文件**。用户表示已下载，但未提供本地目录，本轮没有将远端容量冒充本地容量。
+- Open-HumanWAM 全库查询触发 429，改为完成全部分规模索引的核验：**1,538,777,125 bytes / 10 文件**。发布仍在上传，这不是 50K 小时视频的精确容量。
+- 下方“首批”是既有容量选择口径，与新版默认训练来源和采样概率分开。
+
+截至 2026-11-26 已完成本轮可访问范围的容量核验，**未读取或保存训练文件正文**。本轮查询文件树、发布清单、DOI 登记和 HTTP 响应头。
 
 | 核验结果 | 项目与范围 |
 | --- | --- |
-| 23 项逐文件容量 | 16 项已选文件 + 7 项完整指定扩展范围；每项保留范围、版本、逐文件字节和证据 |
+| 27 项逐文件容量 | 16 项已选文件 + 11 项完整指定范围；每项保留范围、版本、逐文件字节和证据 |
 | 首批精确选择 | **13 项、2,631 个文件、1,653,563,899,540 bytes（1.653564 TB）** |
 | 扩展精确选择 | Human-1M 完整批次、Kinetics-700 train、OXE 三个 train 子集；另计 903,193,743,103 bytes |
 | SCAND | 官方 DataCite 登记 v5.2 的 284 个容量值合计 **344,324,920,157 bytes**；没有路径映射，不充当下载清单 |
@@ -36,6 +46,7 @@ python tools/data/wm_data.py plan --config tools/data/datasets.lock.json --all-d
 # 返回码 2 表示有条目不能直接组成下载清单；不把已核验的扩展范围视为失败
 
 # 从本地快照同步 HTML，不访问网络
+python scripts/update_predictor_plan.py
 python scripts/update_capacity_assets.py
 python -m pytest -q tests/
 ```

@@ -98,7 +98,7 @@
     $('cap-selected-total').textContent = starterOK ? tb(starterSum) : '待清单';
     $('cap-selected-detail').textContent = '首批 ' + starterOK + ' 项精确选择；所选扩展项 ' + tb(sum - starterSum) + '；其他范围与登记/索引容量单列';
     const count = status => [...map.values()].filter(x => x.status === status).length;
-    $('cap-import-status').textContent = (builtin ? '内置核验快照 ' : '已导入 ') + String(report.created_at || '').slice(0,25) + '：' + (selected + inventories) + ' 项完整指定范围已核验；' + count('partial') + ' 项登记/索引已核验；' + count('published') + ' 项发布值已核对；' + count('blocked') + ' 项清单访问受限；' + count('not_generated') + ' 项尚未生成。选中文件 ' + files + ' 个，预计传输 ' + tb(report.transfer_bytes) + '；未下载训练数据。';
+    $('cap-import-status').textContent = (builtin ? '内置核验快照 ' : '已导入 ') + String(report.created_at || '').slice(0,25) + '：' + (selected + inventories) + ' 项完整指定范围已核验；' + count('partial') + ' 项登记/索引已核验；' + count('published') + ' 项发布值已核对；' + count('blocked') + ' 项清单访问受限；' + count('not_generated') + ' 项尚未生成。选中文件 ' + files + ' 个，预计传输 ' + tb(report.transfer_bytes) + '；远端元数据不代表已下载。';
   }
   $('cap-report').addEventListener('change',async event => {
     const file = event.target.files[0]; if (!file) return;

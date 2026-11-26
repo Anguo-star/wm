@@ -1,4 +1,6 @@
 """Run with Playwright installed; optionally set WM_CHROMIUM_EXECUTABLE."""
+import csv as csv_module
+import io
 import json
 import os
 from pathlib import Path
@@ -29,7 +31,7 @@ def run():
         assert '公开发布容量已核对' in page.locator('[data-cap-id="howto100m"]').inner_text()
         assert '尚未生成' in page.locator('[data-cap-id="selfsim"]').inner_text()
         assert '无法核验' in page.locator('[data-cap-id="ego4d"]').inner_text()
-        assert '23 项完整指定范围已核验' in page.locator('#cap-import-status').inner_text()
+        assert '27 项完整指定范围已核验' in page.locator('#cap-import-status').inner_text()
         assert page.locator('#cap-import-status').inner_text().startswith('内置核验快照')
         page.screenshot(path='/tmp/wm-capacity-desktop.png')
         page.evaluate("location.hash = 'data-download-workflow'")
@@ -68,10 +70,29 @@ def run():
         assert Path(download.value.path()).stat().st_size > 100000
 
         page.evaluate("location.hash = 'dataset-catalog'")
+        assert page.locator('#dataset-table tbody tr:visible').count() == 34
+        page.locator('#start-only').check()
+        assert page.locator('#dataset-table tbody tr:visible').count() == 8
+        assert page.locator('#d-genhumanego').is_visible()
+        assert not page.locator('#d-hdepic').is_visible()
+        page.locator('#start-only').uncheck()
+        page.locator('#dataset-search').fill('Gen-HumanEgo')
+        assert page.locator('#d-genhumanego').is_visible()
+        page.locator('#dataset-search').fill('')
         with page.expect_download() as download:
             page.locator('#download-data').click()
         csv = Path(download.value.path()).read_text(encoding='utf-8-sig')
         assert '核验仓库范围字节' in csv and '414709277264' in csv
+        exported = list(csv_module.DictReader(io.StringIO(csv)))
+        assert len(exported) == 34
+        assert sum(float(row['S1 默认采样百分比']) for row in exported) == 100
+        assert next(row for row in exported if row['数据'] == 'Gen-HumanEgo')['S1 默认采样百分比'] == '35'
+
+        page.evaluate("location.hash = 'predictor-data-mix'")
+        with page.expect_download() as download:
+            page.locator('#download-predictor-plan').click()
+        assert json.loads(Path(download.value.path()).read_text()) == json.loads((ROOT/'tools/data/predictor_plan.json').read_text())
+        assert 'S0 / S1' in page.locator('#own-data-plan').inner_text()
 
         page.evaluate("location.hash = 'latent-storage-estimator'")
         page.locator('#lc-hours').fill('1');page.locator('#lc-fps').fill('1')
@@ -84,12 +105,16 @@ def run():
         assert page.locator('#cap-selected-total').inner_text() == '1.654 TB'
         assert page.evaluate('document.documentElement.scrollWidth <= innerWidth')
         page.screenshot(path='/tmp/wm-capacity-mobile.png')
+        page.evaluate("location.hash = 'predictor-data-mix'")
+        assert page.locator('#download-predictor-plan').is_visible()
+        assert page.evaluate('document.documentElement.scrollWidth <= innerWidth')
+        page.screenshot(path='/tmp/wm-predictor-mobile.png')
         assert not errors, errors
         no_js = browser.new_page(java_script_enabled=False)
         no_js.goto((ROOT/'index.html').as_uri()+'#data-capacity-summary')
         assert no_js.locator('#cap-selected-total').inner_text() == '1.654 TB'
         browser.close()
-        print('Browser checks passed: embedded report, partial/invalid imports, reset, escaping, downloads, CSV, calculator, mobile, no-JS.')
+        print('Browser checks passed: report imports/reset, escaping, 34-entry catalog, 8-source filter, plan/CSV downloads, calculator, mobile, no-JS.')
 
 
 if __name__ == '__main__': run()

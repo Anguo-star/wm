@@ -1,0 +1,13 @@
+{
+  "id": "genhumanego",
+  "checked_at": "2026-11-26T02:06:27.061073+00:00",
+  "source_urls": [
+    "https://huggingface.co/datasets/genrobot2025/Gen-HumanEgo",
+    "https://www.genrobot.ai/blog/gen-human-ego"
+  ],
+  "scope_note": "新版主训练候选；用户表示已下载，未提供本地路径，因此本次核验远端固定版本完整文件树。六视角 MCAP、手部重建、深度与分层语义用于被动/语义未来预测；DFM 派生标注按质量 mask 使用，不当作机器人控制或全量人工真值。训练先取一个主视角，完整 episode 分组隔离，多视角作增强。",
+  "metadata_only": true,
+  "training_file_body_bytes_read": 0,
+  "local_availability": "User reports downloaded; local path and exact local contents not supplied.",
+  "adoption_source": "https://arxiv.org/html/2611.06817v3#S2"
+}

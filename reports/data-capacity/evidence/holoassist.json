@@ -1,0 +1,11 @@
+{
+  "id": "holoassist",
+  "checked_at": "2026-11-26T02:10:22.524883+00:00",
+  "source_urls": [
+    "https://holoassist.github.io/",
+    "https://arxiv.org/abs/2309.17024"
+  ],
+  "scope_note": "高质量补充候选：完整压缩视频、手部/头部/注视、相机配套包及 trainval 标签/官方划分；不含深度和 IMU。包内按官方 split 过滤，仅 train 用于训练；val/test 保留错误检测、干预与手部预测评测。不是机器人命令数据。",
+  "metadata_only": true,
+  "training_file_body_bytes_read": 0
+}
