@@ -1,5 +1,9 @@
 # WorldModel 技术调研与数据规划
 
+## 专项实验路线图
+
+- [nanoAstra × FineART：Language-First Embodied Learning 实验路线图](reports/nanoastra_fineart_semantic_world_model_roadmap.html)：阶段一比较 LeRobot/FineART 的数据处理与 SFT，阶段二验证语言未来状态预测和闭环动作选择；[网页预览](https://htmlpreview.github.io/?https://github.com/Anguo-star/wm/blob/main/reports/nanoastra_fineart_semantic_world_model_roadmap.html)。
+
 `index.html` 是独立可打开的中文报告，保留技术调研、通用世界模型设计、34 项数据目录、16 组训练配方及专项探索。
 
 2026-11-26 新版 Predictor 方案已写入 HTML：目录收录按监督适配、采用证据和可用性判断，区分默认训练、增量、专项与评测。新增 Gen-HumanEgo、EgoMimic、HoloAssist、HD-EPIC、Open-HumanWAM-50K，并保存 10 组采用证据与选型决定。
